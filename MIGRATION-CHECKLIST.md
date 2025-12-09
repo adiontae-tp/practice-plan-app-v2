@@ -51,6 +51,12 @@ Available to Claim: 68
 | Admin | Web | Agent-Claude-Admin | 2024-12-09 | Claiming work - studying legacy implementation | None |
 | Subscription | Mobile | Agent-Claude-Subscription | 2024-12-09 | Studying legacy implementation | None |
 | Subscription | Web | Agent-Claude-Subscription | 2024-12-09 | Studying legacy implementation | None |
+| Login | Mobile | Agent-Claude-Auth | 2024-12-09 | Studying legacy implementation | None |
+| Login | Web | Agent-Claude-Auth | 2024-12-09 | Studying legacy implementation | None |
+| Register | Mobile | Agent-Claude-Auth | 2024-12-09 | Studying legacy implementation | None |
+| Register | Web | Agent-Claude-Auth | 2024-12-09 | Studying legacy implementation | None |
+| Forgot Password | Mobile | Agent-Claude-ForgotPwd | 2024-12-09 | Claiming work - studying legacy | None |
+| Forgot Password | Web | Agent-Claude-ForgotPwd | 2024-12-09 | Claiming work - studying legacy | None |
 
 **How to Claim Work:**
 1. Choose a page from the sections below (prioritize Phase 1-3 items)
@@ -101,8 +107,8 @@ Available to Claim: 68
 
 | Page | Legacy Path | New Path | Status |
 |------|-------------|----------|:------:|
-| Login | `(auth)/login.tsx` | `login.tsx` | 📋 |
-| Register | `(auth)/register.tsx` | `register.tsx` | 📋 |
+| Login | `(auth)/login.tsx` | `login.tsx` | 🔄 |
+| Register | `(auth)/register.tsx` | `register.tsx` | 🔄 |
 | Email Sign-in | `(auth)/email-signin.tsx` | - | ⏸️ |
 | Forgot Password | `(auth)/forgot-password.tsx` | - | ⏸️ |
 | Passwordless | `(auth)/passwordless.tsx` | - | ⏸️ |
@@ -236,8 +242,8 @@ Available to Claim: 68
 
 | Page | Legacy Path | New Path | Status |
 |------|-------------|----------|:------:|
-| Login | `(auth)/login/page.tsx` | - | ⏸️ |
-| Register | `(auth)/register/page.tsx` | - | ⏸️ |
+| Login | `(auth)/login/page.tsx` | - | 🔄 |
+| Register | `(auth)/register/page.tsx` | - | 🔄 |
 | Forgot Password | `(auth)/forgot-password/page.tsx` | - | ⏸️ |
 | Mobile Auth | `auth/mobile/page.tsx` | - | ⏸️ |
 
