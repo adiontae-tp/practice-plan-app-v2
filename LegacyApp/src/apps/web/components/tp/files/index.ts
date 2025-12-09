@@ -1,0 +1,16 @@
+export { FilesTable } from './FilesTable';
+export { FilesDesktopView } from './FilesDesktopView';
+export { FilesMobileView } from './FilesMobileView';
+export { FilesEmptyState } from './FilesEmptyState';
+export { FileUploadModal } from './FileUploadModal';
+export { FileDetailModal } from './FileDetailModal';
+export { FileDeleteDialog } from './FileDeleteDialog';
+export { FilesPageSkeleton } from './FilesPageSkeleton';
+export { FileCategoryBadge } from './FileCategoryBadge';
+export { FolderBreadcrumb } from './FolderBreadcrumb';
+export { NewFolderModal } from './NewFolderModal';
+export { StorageUsageMeter } from './StorageUsageMeter';
+export { FileSelectionBar } from './FileSelectionBar';
+export { MoveFilesModal } from './MoveFilesModal';
+export { FileVersionsModal } from './FileVersionsModal';
+export { FileShareModal } from './FileShareModal';

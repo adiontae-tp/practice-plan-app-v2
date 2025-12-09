@@ -1,0 +1,37 @@
+appId: com.teamparcee.practiceplan
+---
+- launchApp:
+    clearState: true
+
+- assertVisible: "Templates"
+- tapOn: "Templates"
+
+- takeScreenshot: "templates_list"
+
+- tapOn: "Add Template"
+- inputText:
+    id: "template-name-input"
+    text: "Test Template"
+- tapOn: "Save"
+- assertVisible: "Test Template"
+- takeScreenshot: "template_created"
+
+- tapOn: "Test Template"
+- assertVisible: "Test Template"
+- takeScreenshot: "template_read"
+
+- tapOn: "Edit"
+- clearInput:
+    id: "template-name-input"
+- inputText:
+    id: "template-name-input"
+    text: "Updated Template"
+- tapOn: "Save"
+- assertVisible: "Updated Template"
+- takeScreenshot: "template_updated"
+
+- longPressOn: "Updated Template"
+- tapOn: "Delete"
+- tapOn: "Confirm"
+- assertNotVisible: "Updated Template"
+- takeScreenshot: "template_deleted"

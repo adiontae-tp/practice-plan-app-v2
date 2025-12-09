@@ -1,0 +1,333 @@
+================================================================================
+EDIT/VIEW PRACTICE PLAN - MOBILE MODAL WIREFRAME
+================================================================================
+Route: /(modals)/plan/[id].tsx
+Component: PlanDetailMobile (view/edit mode)
+Description: Modal for viewing and editing an existing practice plan
+================================================================================
+
+
+VIEW MODE (Default)
+================================================================================
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  bg: #356793  |  text: #ffffff           |
+|  [X]      March 15, 2024          [Edit] |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  2:00 PM - 3:30 PM                   | |
+| |  (1h 30min)                          | |
+| |                                      | |
+| |  [*] Active Practice                 | | Green dot (if active)
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  ACTIVITIES (4)                      | |
+| +--------------------------------------+ |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | Warm-up                          | | |
+| | | 2:00 PM - 2:15 PM       15 min   | | |
+| | | [Conditioning]                   | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | Drills                           | | |
+| | | 2:15 PM - 2:45 PM       30 min   | | |
+| | | [Skills] [Defense]               | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | Scrimmage                        | | |
+| | | 2:45 PM - 3:20 PM       35 min   | | |
+| | | [Game]                           | | |
+| | | Notes: Focus on transitions      | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | Cool-down                        | | |
+| | | 3:20 PM - 3:30 PM       10 min   | | |
+| | | [Recovery]                       | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="view" | cancelLabel="Close"       |
+|  [Close]                      [Edit]     |
++------------------------------------------+
+|  [PDF]  [Share]               [Delete]   | Action buttons (above footer)
++------------------------------------------+
+
+
+EDIT MODE
+================================================================================
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  bg: #356793  |  text: #ffffff           |
+|  [Cancel]   March 15, 2024        [Save] |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  2:00 PM - 3:30 PM            [Edit] | | Tap to change time
+| |  (1h 30min)                          | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  ACTIVITIES (4)                [Add] | |
+| +--------------------------------------+ |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [=] Warm-up                      | | | Drag handle shown
+| | |     2:00 PM - 2:15 PM   15 min   | | |
+| | |     [Conditioning]               | | |
+| | |                         [^][v][X]| | | Reorder/delete
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [=] Drills                       | | |
+| | |     2:15 PM - 2:45 PM   30 min   | | |
+| | |     [Skills] [Defense]           | | |
+| | |     [- 30 +]            [^][v][X]| | | Duration adjust
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [=] Scrimmage                    | | |
+| | |     2:45 PM - 3:20 PM   35 min   | | |
+| | |     [Game]                       | | |
+| | |     [- 35 +]            [^][v][X]| | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [=] Cool-down                    | | |
+| | |     3:20 PM - 3:30 PM   10 min   | | |
+| | |     [Recovery]                   | | |
+| | |     [- 10 +]            [^][v][X]| | |
+| | +----------------------------------+ | |
+| |                                      | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Save"          |
+|  [Cancel]                     [Save]     |
++------------------------------------------+
+
+
+VIEW MODE HEADER
+================================================================================
+
++------------------------------------------+
+|  [X]      March 15, 2024          [Edit] |
++------------------------------------------+
+
+[X] = Close modal
+Date shown as title (formatted)
+[Edit] = Enter edit mode (if canEdit)
+
+
+EDIT MODE HEADER
+================================================================================
+
++------------------------------------------+
+|  [Cancel]   March 15, 2024        [Save] |
++------------------------------------------+
+
+[Cancel] = Discard changes, return to view mode
+[Save] = Save changes, return to view mode
+
+
+TIME DISPLAY
+================================================================================
+
+View Mode:
++--------------------------------------+
+|  2:00 PM - 3:30 PM                   |
+|  (1h 30min)                          |
++--------------------------------------+
+
+Edit Mode (tap to change):
++--------------------------------------+
+|  2:00 PM - 3:30 PM            [Edit] |
+|  (1h 30min)                          |
++--------------------------------------+
+
+Tap [Edit] or time -> Opens time picker
+
+
+ACTIVE PRACTICE INDICATOR
+================================================================================
+
++--------------------------------------+
+|  [*] Active Practice                 |  Green dot + text
++--------------------------------------+
+
+Shown when:
+- Current time is between start and end time
+- Practice is "in progress"
+
+
+ACTIVITY CARD - VIEW MODE
+================================================================================
+
++--------------------------------------+
+| Activity Name                        |
+| HH:MM AM - HH:MM PM       XX min     |
+| [Tag1] [Tag2]                        |
+| Notes: Note text here...             |  (if notes exist)
++--------------------------------------+
+
+Tap -> Opens activity detail view
+
+
+ACTIVITY CARD - EDIT MODE
+================================================================================
+
++--------------------------------------+
+| [=] Activity Name                    |  Drag handle
+|     HH:MM AM - HH:MM PM   XX min     |
+|     [Tag1] [Tag2]                    |
+|     [- XX +]              [^][v][X]  |  Duration adjust + actions
++--------------------------------------+
+
+[=] = Drag handle for reordering
+[- XX +] = Decrease/increase duration
+[^] = Move activity up
+[v] = Move activity down
+[X] = Delete activity
+
+Tap card body -> Opens activity-instance-edit modal
+
+
+DURATION ADJUSTMENT
+================================================================================
+
+[- 30 +]
+
+[-] = Decrease by 5 minutes (min: 5 min)
+[+] = Increase by 5 minutes
+Number shows current duration
+
+
+VIEW MODE FOOTER (TPFooterButtons)
+================================================================================
+
+Uses: TPFooterButtons component from @/components/tp
+
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="view" | cancelLabel="Close"       |
+|  [Close]                      [Edit]     |
++------------------------------------------+
+
+Props:
+- mode="view"
+- onCancel={handleClose}
+- onEdit={handleEdit}
+- cancelLabel="Close"
+- canEdit={canEdit}
+
+Additional action row (above TPFooterButtons):
++------------------------------------------+
+|  [PDF]  [Share]               [Delete]   |
++------------------------------------------+
+
+[PDF] = Generate and view/download PDF
+[Share] = Open share sheet
+[Delete] = Delete practice (with confirmation)
+
+
+EDIT MODE FOOTER (TPFooterButtons)
+================================================================================
+
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Save"          |
+|  [Cancel]                     [Save]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleCancelEdit}
+- onSave={handleSave}
+- saveLabel="Save"
+- loading={isSaving}
+- saveDisabled={!hasChanges}
+
+
+DELETE CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|  +------------------------------------+  |
+|  |      Delete Practice?              |  |
+|  |                                    |  |
+|  |  Are you sure you want to delete   |  |
+|  |  this practice plan?               |  |
+|  |                                    |  |
+|  |  March 15, 2024                    |  |
+|  |  2:00 PM - 3:30 PM                 |  |
+|  |                                    |  |
+|  |  This cannot be undone.            |  |
+|  |                                    |  |
+|  |  [Cancel]           [Delete]       |  |
+|  +------------------------------------+  |
++------------------------------------------+
+
+
+ADD ACTIVITIES (Edit Mode)
+================================================================================
+
+Tap [Add] button:
++---------------------------+
+| Add from Periods          |
++---------------------------+
+| Add Custom Activity       |
++---------------------------+
+| Cancel                    |
++---------------------------+
+
+
+INTERACTIONS
+================================================================================
+
+View Mode:
+1. Tap [X] -> Close modal
+2. Tap [Edit] -> Enter edit mode
+3. Tap activity card -> View activity details
+4. Tap [PDF] -> Generate/download PDF
+5. Tap [Share] -> Open share sheet
+6. Tap [Delete] -> Show delete confirmation
+
+Edit Mode:
+1. Tap [Cancel] -> Discard changes, return to view
+2. Tap [Save] -> Save changes, return to view
+3. Tap time [Edit] -> Open time picker
+4. Tap [Add] -> Show add options
+5. Drag activity -> Reorder
+6. Tap [-/+] -> Adjust duration
+7. Tap [^/v] -> Move activity up/down
+8. Tap [X] on activity -> Remove activity
+9. Tap activity card -> Edit activity details
+
+
+PERMISSIONS
+================================================================================
+
+canEdit = true:
+- Show [Edit] button in header
+- Can enter edit mode
+- Show [Delete] button
+
+canEdit = false:
+- Hide [Edit] button
+- View-only mode
+- Hide [Delete] button
+- Can still [PDF] and [Share]
+
+
+================================================================================

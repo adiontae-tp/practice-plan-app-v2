@@ -1,0 +1,99 @@
+{
+  "expo": {
+    "name": "Practice Plan",
+    "slug": "practice-plan-app",
+    "version": "80.0.5",
+    "owner": "adiontae",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "practiceplan",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.parcee.practiceplan",
+      "buildNumber": "137",
+      "usesAppleSignIn": true,
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "associatedDomains": [
+        "applinks:practiceplan.app",
+        "applinks:ppa-tp.firebaseapp.com",
+        "webcredentials:practiceplan.app",
+        "webcredentials:ppa-tp.firebaseapp.com"
+      ],
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSMicrophoneUsageDescription": "Record audio notes for practice activities",
+        "NSCameraUsageDescription": "Record drill videos and capture photos",
+        "NSContactsUsageDescription": "PracticePlan needs access to your contacts to help you quickly add team members.",
+        "NSCalendarsUsageDescription": "PracticePlan needs calendar access to sync your practice schedule.",
+        "NSRemindersUsageDescription": "PracticePlan can set reminders for your practices.",
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.49133175250-dhovocrbbcpj83k0h0te88ahfgbe6flr"
+            ]
+          }
+        ]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.parcee.practiceplan",
+      "googleServicesFile": "./google-services.json",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA",
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_CONTACTS",
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR"
+      ]
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/notification-icon.png",
+          "color": "#356793",
+          "mode": "production"
+        }
+      ],
+      "expo-web-browser",
+      "expo-font",
+      "expo-apple-authentication"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "updates": {
+      "url": "https://u.expo.dev/9e5ae8b0-12df-4be2-927c-dfcd9e1b4a82"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9e5ae8b0-12df-4be2-927c-dfcd9e1b4a82"
+      }
+    }
+  }
+}

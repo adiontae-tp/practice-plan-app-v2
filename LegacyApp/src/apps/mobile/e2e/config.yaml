@@ -1,0 +1,4 @@
+appId: com.teamparcee.practiceplan
+---
+- launchApp:
+    clearState: true

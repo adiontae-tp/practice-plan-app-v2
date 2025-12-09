@@ -1,0 +1,37 @@
+appId: com.teamparcee.practiceplan
+---
+- launchApp:
+    clearState: true
+
+- assertVisible: "Plans"
+- tapOn: "Plans"
+
+- takeScreenshot: "plans_list"
+
+- tapOn: "Add Plan"
+- inputText:
+    id: "plan-name-input"
+    text: "Test Plan"
+- tapOn: "Save"
+- assertVisible: "Test Plan"
+- takeScreenshot: "plan_created"
+
+- tapOn: "Test Plan"
+- assertVisible: "Test Plan"
+- takeScreenshot: "plan_read"
+
+- tapOn: "Edit"
+- clearInput:
+    id: "plan-name-input"
+- inputText:
+    id: "plan-name-input"
+    text: "Updated Plan"
+- tapOn: "Save"
+- assertVisible: "Updated Plan"
+- takeScreenshot: "plan_updated"
+
+- longPressOn: "Updated Plan"
+- tapOn: "Delete"
+- tapOn: "Confirm"
+- assertNotVisible: "Updated Plan"
+- takeScreenshot: "plan_deleted"

@@ -1,0 +1,271 @@
+================================================================================
+PRACTICE TEMPLATES - MOBILE WIREFRAME
+================================================================================
+Route: /(main)/(menu)/templates.tsx
+Component: TemplatesMobile
+Description: List of reusable practice plan templates
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [<] Menu     Practice Templates         |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | [Search icon] Search by name or tag..| | Search bar
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| | +----------------------------------+ | |
+| | | Monday Practice            [N]   | | | [N] = has activities
+| | | 90 min  •  6 activities          | | |
+| | | [Conditioning] [Skills] [Game]   | | |
+| | |                             [X]  | | | [X] = delete
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | Quick Skills Session             | | |
+| | | 45 min  •  3 activities          | | |
+| | | [Skills] [Drills]                | | |
+| | |                             [X]  | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | Game Day Prep               [N]  | | |
+| | | 60 min  •  4 activities          | | |
+| | | [Warm-up] [Review]               | | |
+| | |                             [X]  | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | Light Recovery                   | | |
+| | | 30 min  •  2 activities          | | |
+| | | [Recovery] [Stretch]             | | |
+| | |                             [X]  | | |
+| | +----------------------------------+ | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|                            +----------+  |
+|                            |    +     |  | FAB
+|                            +----------+  |
++------------------------------------------+
+
+
+EMPTY STATE
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  [<] Menu     Practice Templates         |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | [Search icon] Search by name or tag..| |
+| +--------------------------------------+ |
+|                                          |
+|                                          |
+|              +--------+                  |
+|              |   []   |                  |
+|              | [    ] |  Clipboard Icon  |
+|              +--------+                  |
+|                                          |
+|       No practice templates yet          |
+|                                          |
+|   Create your first template to get      |
+|              started!                    |
+|                                          |
+|         [Create Template]                |
+|                                          |
++------------------------------------------+
+|                            +----------+  |
+|                            |    +     |  | FAB
+|                            +----------+  |
++------------------------------------------+
+
+
+TEMPLATE CARD DETAIL
+================================================================================
+
++--------------------------------------+
+| Template Name                  [N]   |  [N] = FileText icon
+| XX min  •  X activities              |  Duration + count
+| [Tag1] [Tag2] [Tag3]                 |  Tags
+|                               [X]    |  [X] = Trash delete
++--------------------------------------+
+
+Card styling:
+- Background: white
+- Border radius: 8px
+- Shadow: subtle drop shadow
+- Padding: 16px
+- Margin bottom: 12px
+
+Icons:
+- [N] FileText icon: shown if template has activities
+- [X] Trash icon: delete button (red on tap)
+
+
+TEMPLATE INFO LINE
+================================================================================
+
+"90 min  •  6 activities"
+
+Format: {total_duration} min  •  {activity_count} activities
+
+- Duration: Sum of all activity durations
+- Count: Number of activities in template
+- Separator: bullet point (•)
+
+
+TAG DISPLAY
+================================================================================
+
+Tags shown inline (max 3 visible):
+[Tag1] [Tag2] [Tag3]
+
+If more than 3:
+[Tag1] [Tag2] [+2]
+
+Tag styling:
+- Background: light themed color
+- Text: darker matching color
+- Border radius: pill shape
+- Padding: 4px 8px
+
+
+SEARCH FUNCTIONALITY
+================================================================================
+
++--------------------------------------+
+| [O] Search by name or tag...         |
++--------------------------------------+
+
+- Real-time filtering
+- Searches: template name, tags
+
+
+DELETE CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|                                          |
+|  +------------------------------------+  |
+|  |       Delete Template?             |  |
+|  |                                    |  |
+|  |  Are you sure you want to delete   |  |
+|  |  "Monday Practice"?                |  |
+|  |  This cannot be undone.            |  |
+|  |                                    |  |
+|  |  [Cancel]           [Delete]       |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+
+
+CREATE TEMPLATE MODAL (FAB Action)
+================================================================================
+
+Tap FAB (+) -> Opens template modal (Expo Router modal):
+
+Route: /(modals)/template/new.tsx
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]        Create Template              |
++------------------------------------------+
+|                                          |
+|  Template Name                           |
+|  +------------------------------------+  |
+|  |                                    |  |
+|  +------------------------------------+  |
+|                                          |
+|  ACTIVITIES                        [Add] |
+|  +------------------------------------+  |
+|  | (Empty - add activities)           |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Create"        |
+|  [Cancel]                   [Create]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleClose}
+- onSave={handleCreate}
+- saveLabel="Create"
+- saveDisabled={!name.trim()}
+- loading={isCreating}
+
+
+EDIT TEMPLATE MODAL (Tap Card)
+================================================================================
+
+Tap template card -> Opens template modal for editing:
+
+Route: /(modals)/template/[id].tsx
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]         Edit Template               |
++------------------------------------------+
+|                                          |
+|  Template Name                           |
+|  +------------------------------------+  |
+|  | Monday Practice                    |  |
+|  +------------------------------------+  |
+|                                          |
+|  ACTIVITIES (6)                    [Add] |
+|  +------------------------------------+  |
+|  | [=] Warm-up              15 min    |  |
+|  | [=] Drills               30 min    |  |
+|  | ...                                |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Save"          |
+|  [Cancel]                     [Save]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleClose}
+- onSave={handleSave}
+- saveLabel="Save"
+- saveDisabled={!hasChanges}
+- loading={isSaving}
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap template card -> Opens template/[id] modal for viewing/editing
+2. Tap [X] delete -> Shows delete confirmation dialog (TPAlert)
+3. Tap FAB (+) -> Opens template/new modal for creating
+4. Type in search -> Filters list in real-time
+5. Tap [<] back -> Returns to Menu tab
+
+
+PERMISSIONS
+================================================================================
+
+canEdit = true:
+- Show FAB button
+- Show delete buttons
+- Allow creating/editing templates
+
+canEdit = false:
+- Hide FAB button
+- Hide delete buttons
+- View-only mode
+
+
+================================================================================

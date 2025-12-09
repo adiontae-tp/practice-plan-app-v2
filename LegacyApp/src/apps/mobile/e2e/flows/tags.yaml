@@ -1,0 +1,37 @@
+appId: com.teamparcee.practiceplan
+---
+- launchApp:
+    clearState: true
+
+- assertVisible: "Tags"
+- tapOn: "Tags"
+
+- takeScreenshot: "tags_list"
+
+- tapOn: "Add Tag"
+- inputText:
+    id: "tag-name-input"
+    text: "Test Tag"
+- tapOn: "Save"
+- assertVisible: "Test Tag"
+- takeScreenshot: "tag_created"
+
+- tapOn: "Test Tag"
+- assertVisible: "Test Tag"
+- takeScreenshot: "tag_read"
+
+- tapOn: "Edit"
+- clearInput:
+    id: "tag-name-input"
+- inputText:
+    id: "tag-name-input"
+    text: "Updated Tag"
+- tapOn: "Save"
+- assertVisible: "Updated Tag"
+- takeScreenshot: "tag_updated"
+
+- longPressOn: "Updated Tag"
+- tapOn: "Delete"
+- tapOn: "Confirm"
+- assertNotVisible: "Updated Tag"
+- takeScreenshot: "tag_deleted"

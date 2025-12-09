@@ -1,0 +1,37 @@
+appId: com.teamparcee.practiceplan
+---
+- launchApp:
+    clearState: true
+
+- assertVisible: "Announcements"
+- tapOn: "Announcements"
+
+- takeScreenshot: "announcements_list"
+
+- tapOn: "Add Announcement"
+- inputText:
+    id: "announcement-title-input"
+    text: "Test Announcement"
+- tapOn: "Save"
+- assertVisible: "Test Announcement"
+- takeScreenshot: "announcement_created"
+
+- tapOn: "Test Announcement"
+- assertVisible: "Test Announcement"
+- takeScreenshot: "announcement_read"
+
+- tapOn: "Edit"
+- clearInput:
+    id: "announcement-title-input"
+- inputText:
+    id: "announcement-title-input"
+    text: "Updated Announcement"
+- tapOn: "Save"
+- assertVisible: "Updated Announcement"
+- takeScreenshot: "announcement_updated"
+
+- longPressOn: "Updated Announcement"
+- tapOn: "Delete"
+- tapOn: "Confirm"
+- assertNotVisible: "Updated Announcement"
+- takeScreenshot: "announcement_deleted"

@@ -1,0 +1,287 @@
+================================================================================
+SUBSCRIPTION - MOBILE WIREFRAME
+================================================================================
+Route: /(main)/(menu)/subscription.tsx
+Component: SubscriptionMobile
+Description: Subscription plans and billing management
+================================================================================
+
+
+MAIN LAYOUT (With Active Subscription)
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [<] Menu         Subscription           |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  ////////////////////////////////// | | Gradient blue background
+| |  //      ACTIVE PLAN              // | |
+| |  //                               // | |
+| |  //         [Shield]              // | | Shield icon
+| |  //                               // | |
+| |  //           PRO                 // | | Plan name (large)
+| |  //                               // | |
+| |  ////////////////////////////////// | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  SUBSCRIPTION PLANS                  | |
+| |  Choose the plan that fits your needs| |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| | [                              ]     | |
+| | |         FREE                 |     | |
+| | |                              |     | | Gray border
+| | |        $0/month              |     | |
+| | |                              |     | |
+| | |  Basic features for small    |     | |
+| | |  teams getting started       |     | |
+| | |                              |     | |
+| | |      View details  [>]       |     | |
+| | [                              ]     | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| | [================================]   | | Blue border (popular)
+| | |  /// MOST POPULAR ///        |   | | Gradient banner
+| | |                              |   | |
+| | |         PRO            [*]   |   | | [*] = Current badge
+| | |                              |   | |
+| | |       $9.99/month            |   | |
+| | |                              |   | |
+| | |  Full features for serious   |   | |
+| | |  coaches and teams           |   | |
+| | |                              |   | |
+| | |      View details  [>]       |   | |
+| | [================================]   | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| | [                              ]     | |
+| | |        TEAM                  |     | |
+| | |                              |     | | Gray border
+| | |      $24.99/month            |     | |
+| | |                              |     | |
+| | |  Advanced features for       |     | |
+| | |  organizations               |     | |
+| | |                              |     | |
+| | |      View details  [>]       |     | |
+| | [                              ]     | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |         [Restore Purchases]          | | Link style
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |        [Manage Subscription]         | | Shows if subscribed
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+
+
+LAYOUT WITHOUT SUBSCRIPTION
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  [<] Menu         Subscription           |
++------------------------------------------+
+|                                          |
+| (No Active Plan banner)                  |
+|                                          |
+| +--------------------------------------+ |
+| |  SUBSCRIPTION PLANS                  | |
+| |  Choose the plan that fits your needs| |
+| +--------------------------------------+ |
+|                                          |
+| (Plan cards as shown above)              |
+| (No "Current" badge on any plan)         |
+|                                          |
+| +--------------------------------------+ |
+| |         [Restore Purchases]          | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+
+
+ACTIVE PLAN BANNER
+================================================================================
+
++--------------------------------------+
+|  ////////////////////////////////// |  Gradient: #356793 to #4a90c2
+|  //                               // |
+|  //         [Shield]              // |  Shield icon (white)
+|  //                               // |
+|  //       Active Plan             // |  Label (white, small)
+|  //           PRO                 // |  Plan name (white, large, bold)
+|  //                               // |
+|  ////////////////////////////////// |
++--------------------------------------+
+
+
+PLAN CARD DETAIL
+================================================================================
+
+Standard Plan:
++--------------------------------------+
+|                                      |
+|           PLAN NAME                  |
+|                                      |
+|         $XX.XX/month                 |  Price
+|              or                      |
+|            Free                      |
+|                                      |
+|  Short description of plan           |  2-3 lines
+|  features and target users           |
+|                                      |
+|        View details  [>]             |  Chevron link
+|                                      |
++--------------------------------------+
+
+Current Plan (with badge):
++--------------------------------------+
+|                              [Curr.] |  Green "Current" badge
+|           PLAN NAME                  |
+|                                      |
+|         $XX.XX/month                 |
+|                                      |
+|  Description...                      |
+|                                      |
+|        View details  [>]             |
++--------------------------------------+
+
+Most Popular (with banner):
++======================================+  Blue border
+|  /// MOST POPULAR ///                |  Gradient banner
+|                                      |
+|           PRO                        |
+|                                      |
+|         $9.99/month                  |
+|                                      |
+|  Description...                      |
+|                                      |
+|        View details  [>]             |
++======================================+
+
+
+PLAN DETAIL MODAL (On "View details" tap)
+================================================================================
+
++------------------------------------------+
+|  [X]            PRO                      |
++------------------------------------------+
+|                                          |
+|              $9.99/month                 |  Large price
+|                                          |
+|  Full features for serious coaches       |
+|  and teams who want to get the most      |
+|  out of their practice planning.         |
+|                                          |
+| +--------------------------------------+ |
+| |  WHAT'S INCLUDED                     | |
+| +--------------------------------------+ |
+| |                                      | |
+| |  [✓] Unlimited practice plans        | | Green check
+| |  [✓] Unlimited templates             | |
+| |  [✓] Unlimited periods               | |
+| |  [✓] Team calendar                   | |
+| |  [✓] PDF export                      | |
+| |  [✓] Share practices                 | |
+| |  [✓] Activity timer                  | |
+| |  [✓] Up to 5 coaches                 | |
+| |  [✓] Priority support                | |
+| |                                      | |
+| |  [✗] Unlimited coaches               | | Gray X (not included)
+| |  [✗] Custom branding                 | |
+| |  [✗] API access                      | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |         [Upgrade to Pro]             | | Blue button
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+
+Button variations:
+- Non-subscriber: "Subscribe to [Plan]"
+- Lower tier: "Upgrade to [Plan]"
+- Higher tier: "Switch to [Plan]"
+- Current plan: "Current Plan" (disabled/gray)
+
+
+REVENUECAT STATUS BANNER
+================================================================================
+
+Initializing:
++--------------------------------------+
+| [spinner] Initializing purchases...  |
++--------------------------------------+
+
+Error state:
++--------------------------------------+
+| [!] Unable to load subscription info |
+|     Tap to retry                     |
++--------------------------------------+
+
+
+RESTORE PURCHASES
+================================================================================
+
+[Restore Purchases] link behavior:
+1. Shows loading indicator
+2. Checks app store for purchases
+3. Success: "Purchases restored!"
+4. No purchases: "No purchases found"
+5. Error: "Unable to restore. Try again."
+
+
+MANAGE SUBSCRIPTION
+================================================================================
+
+[Manage Subscription] button:
+- Opens device's subscription management
+  - iOS: App Store subscription settings
+  - Android: Google Play subscription settings
+- Only shown for active subscribers
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap "View details [>]" -> Opens plan-detail modal
+2. Tap [Restore Purchases] -> Restores previous purchases
+3. Tap [Manage Subscription] -> Opens native subscription manager
+4. Tap [Upgrade/Subscribe] in modal -> Initiates purchase flow
+5. Tap [<] back -> Returns to Menu
+
+
+PLAN TIERS SUMMARY
+================================================================================
+
+FREE ($0/month):
+- Limited practice plans (3)
+- Limited templates (2)
+- Basic features
+- 1 coach
+
+PRO ($9.99/month):
+- Unlimited practice plans
+- Unlimited templates
+- All features
+- Up to 5 coaches
+- Priority support
+
+TEAM ($24.99/month):
+- Everything in Pro
+- Unlimited coaches
+- Custom branding
+- API access
+- Dedicated support
+
+
+================================================================================

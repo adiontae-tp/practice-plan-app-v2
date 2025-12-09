@@ -1,0 +1,289 @@
+================================================================================
+COACHES - MOBILE WIREFRAME
+================================================================================
+Route: /(main)/(menu)/coaches.tsx
+Component: CoachesMobile
+Description: Manage team coaches and their permissions
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [<] Menu           Coaches              |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | [Search] Search by email/permission..| | Search bar
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| | +----------------------------------+ | |
+| | | [mail]  John Smith               | | |
+| | |         john@example.com         | | |
+| | |         [Admin]         [Active] | | | Permission + Status
+| | |                             [X]  | | | Delete (if canEdit)
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [mail]  Jane Doe                 | | |
+| | |         jane@example.com         | | |
+| | |         [Edit]          [Active] | | |
+| | |                             [X]  | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [mail]  Mike Johnson             | | |
+| | |         mike@example.com         | | |
+| | |         [View]         [Invited] | | | Pending invitation
+| | |                             [X]  | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [mail]  Sarah Wilson             | | |
+| | |         sarah@example.com        | | |
+| | |         [Edit]        [Inactive] | | | Inactive status
+| | |                             [X]  | | |
+| | +----------------------------------+ | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|                            +----------+  |
+|                            |    +     |  | FAB (invite)
+|                            +----------+  |
++------------------------------------------+
+
+
+EMPTY STATE
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  [<] Menu           Coaches              |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | [Search] Search by email/permission..| |
+| +--------------------------------------+ |
+|                                          |
+|                                          |
+|              +--------+                  |
+|              |   []   |                  |
+|              | [    ] |  Users Icon      |
+|              +--------+                  |
+|                                          |
+|           No coaches yet                 |
+|                                          |
+|       Invite coaches to help manage      |
+|            your team                     |
+|                                          |
+|                                          |
++------------------------------------------+
+|                            +----------+  |
+|                            |    +     |  | FAB
+|                            +----------+  |
++------------------------------------------+
+
+
+COACH CARD DETAIL
+================================================================================
+
++--------------------------------------+
+| [mail]  Coach Display Name           |  Mail icon + derived name
+|         coach@email.com              |  Email address
+|         [Permission]        [Status] |  Badges
+|                                 [X]  |  Delete button
++--------------------------------------+
+
+Display name derived from email:
+- "john.smith@email.com" -> "John Smith"
+- Uses first part before @ and capitalizes
+
+
+PERMISSION BADGES
+================================================================================
+
+[Admin] = Blue background (#356793), white text
+          Full access - can manage team, coaches, all features
+
+[Edit]  = Green background (#22c55e), white text
+          Can create/edit practices, periods, templates
+
+[View]  = Gray background (#9ca3af), white text
+          Read-only access to team content
+
+Badge styling:
+- Border radius: 4px
+- Padding: 2px 8px
+- Font size: 11px
+- Font weight: 600
+
+
+STATUS BADGES
+================================================================================
+
+[Active]   = Green outline, green text
+             Coach has accepted and is active
+
+[Invited]  = Yellow/orange outline, yellow text
+             Invitation sent, awaiting acceptance
+
+[Inactive] = Gray outline, gray text
+             Account inactive/disabled
+
+Badge styling:
+- Border: 1px solid
+- Border radius: 4px
+- Padding: 2px 8px
+- Font size: 11px
+
+
+SEARCH FUNCTIONALITY
+================================================================================
+
++--------------------------------------+
+| [O] Search by email or permission... |
++--------------------------------------+
+
+Searches:
+- Email address
+- Permission level (admin, edit, view)
+- Status (active, invited, inactive)
+
+
+INVITE COACH MODAL (FAB Action)
+================================================================================
+
+Tap FAB (+) -> Opens coach modal (Expo Router modal):
+
+Route: /(modals)/coach/new.tsx
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]          Invite Coach               |
++------------------------------------------+
+|                                          |
+|  Email Address                           |
+|  +------------------------------------+  |
+|  | coach@email.com                    |  |
+|  +------------------------------------+  |
+|                                          |
+|  Permission Level                        |
+|  +------------------------------------+  |
+|  | [Admin] [Edit] [View]              |  |  Toggle group
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Send Invite"   |
+|  [Cancel]                [Send Invite]   |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleClose}
+- onSave={handleSendInvite}
+- saveLabel="Send Invite"
+- saveDisabled={!isValidEmail}
+- loading={isSending}
+
+
+DELETE/REMOVE CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|                                          |
+|  +------------------------------------+  |
+|  |        Remove Coach?               |  |
+|  |                                    |  |
+|  |  Are you sure you want to remove   |  |
+|  |  john@example.com from the team?   |  |
+|  |                                    |  |
+|  |  They will lose access to all      |  |
+|  |  team content.                     |  |
+|  |                                    |  |
+|  |  [Cancel]           [Remove]       |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+
+
+EDIT COACH MODAL (Tap Card)
+================================================================================
+
+Tap coach card -> Opens coach modal for editing (Expo Router modal):
+
+Route: /(modals)/coach/[id].tsx
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]           Edit Coach                |
++------------------------------------------+
+|                                          |
+|  john@example.com                        |  (Read-only)
+|                                          |
+|  Permission Level                        |
+|  +------------------------------------+  |
+|  | [Admin] [Edit] [View]              |  |
+|  +------------------------------------+  |
+|                                          |
+|  Status                                  |
+|  +------------------------------------+  |
+|  | [Active] [Inactive]                |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Save"          |
+|  [Cancel]                     [Save]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleClose}
+- onSave={handleSave}
+- saveLabel="Save"
+- saveDisabled={!hasChanges}
+- loading={isSaving}
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap coach card -> Opens coach modal for editing
+2. Tap [X] delete -> Shows remove confirmation
+3. Tap FAB (+) -> Opens coach modal for inviting
+4. Type in search -> Filters list
+5. Tap [<] back -> Returns to Menu
+
+
+PERMISSIONS
+================================================================================
+
+Admin users only can access this screen:
+- Show FAB button
+- Show delete buttons
+- Can invite/edit/remove coaches
+
+Non-admin users:
+- Screen not accessible (hidden in menu)
+- Or shows "Admin Only" message
+
+
+RESEND INVITATION (For Invited Status)
+================================================================================
+
+For coaches with [Invited] status, card may show:
+
++--------------------------------------+
+| [mail]  Pending Coach                |
+|         pending@email.com            |
+|         [Edit]            [Invited]  |
+|         [Resend Invite]         [X]  |  Resend link
++--------------------------------------+
+
+
+================================================================================

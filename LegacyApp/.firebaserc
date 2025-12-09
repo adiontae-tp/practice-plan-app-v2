@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ppa-tp"
+  },
+  "targets": {},
+  "etags": {
+    "ppa-tp": {
+      "extensionInstances": {
+        "firestore-revenuecat-purchases": "08f377c7a28fe15cf4d75a8a531024760d881edd1ed8068ae46cf615e10d4c6f",
+        "firestore-send-email": "1460a554094214fdaf386f867ae3ba5a29139a08e98d86e4f77e342f0d3d39be"
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+appId: com.teamparcee.practiceplan
+---
+- launchApp:
+    clearState: true
+
+- assertVisible: "Periods"
+- tapOn: "Periods"
+
+- takeScreenshot: "periods_list"
+
+- tapOn: "Add Period"
+- inputText:
+    id: "period-name-input"
+    text: "Test Period"
+- tapOn: "Save"
+- assertVisible: "Test Period"
+- takeScreenshot: "period_created"
+
+- tapOn: "Test Period"
+- assertVisible: "Test Period"
+- takeScreenshot: "period_read"
+
+- tapOn: "Edit"
+- clearInput:
+    id: "period-name-input"
+- inputText:
+    id: "period-name-input"
+    text: "Updated Period"
+- tapOn: "Save"
+- assertVisible: "Updated Period"
+- takeScreenshot: "period_updated"
+
+- longPressOn: "Updated Period"
+- tapOn: "Delete"
+- tapOn: "Confirm"
+- assertNotVisible: "Updated Period"
+- takeScreenshot: "period_deleted"

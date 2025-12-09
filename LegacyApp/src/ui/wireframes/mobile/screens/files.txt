@@ -1,0 +1,273 @@
+================================================================================
+FILES - MOBILE WIREFRAME
+================================================================================
+Route: /(main)/(menu)/files.tsx
+Component: FilesMobile
+Description: Team files and document management
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [<] Menu            Files               |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | [Search icon] Search files...        | | Search bar
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| | +----------------------------------+ | |
+| | | [PDF]  Practice Playbook.pdf     | | | File type icon
+| | |        2.4 MB • Mar 15, 2024     | | | Size and date
+| | |                             [X]  | | | Delete button
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [IMG]  Team Photo.jpg            | | |
+| | |        1.2 MB • Mar 10, 2024     | | |
+| | |                             [X]  | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [DOC]  Training Schedule.docx    | | |
+| | |        156 KB • Mar 8, 2024      | | |
+| | |                             [X]  | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [XLS]  Player Stats.xlsx         | | |
+| | |        89 KB • Mar 5, 2024       | | |
+| | |                             [X]  | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [VID]  Game Highlights.mp4       | | |
+| | |        45.6 MB • Mar 1, 2024     | | |
+| | |                             [X]  | | |
+| | +----------------------------------+ | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|                            +----------+  |
+|                            |    +     |  | FAB (upload)
+|                            +----------+  |
++------------------------------------------+
+
+
+EMPTY STATE
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  [<] Menu            Files               |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | [Search icon] Search files...        | |
+| +--------------------------------------+ |
+|                                          |
+|                                          |
+|              +--------+                  |
+|              |   []   |                  |
+|              | [    ] |  Folder Icon     |
+|              +--------+                  |
+|                                          |
+|            No files yet                  |
+|                                          |
+|      Upload your first file to get       |
+|              started!                    |
+|                                          |
+|                                          |
++------------------------------------------+
+|                            +----------+  |
+|                            |    +     |  | FAB
+|                            +----------+  |
++------------------------------------------+
+
+
+FILE CARD DETAIL
+================================================================================
+
++--------------------------------------+
+| [ICON]  Filename.ext                 |  File type icon + name
+|         XX MB • MMM DD, YYYY         |  Size + upload date
+|                                 [X]  |  Delete button
++--------------------------------------+
+
+
+FILE TYPE ICONS
+================================================================================
+
+[PDF] = Red icon - PDF documents
+[IMG] = Green icon - Images (jpg, png, gif, etc.)
+[DOC] = Blue icon - Word documents (doc, docx)
+[XLS] = Green icon - Excel spreadsheets (xls, xlsx)
+[VID] = Purple icon - Videos (mp4, mov, etc.)
+[AUD] = Orange icon - Audio files (mp3, wav, etc.)
+[ZIP] = Yellow icon - Archives (zip, rar, etc.)
+[TXT] = Gray icon - Text files
+[???] = Gray icon - Unknown/other types
+
+
+FILE SIZE FORMAT
+================================================================================
+
+< 1 KB      -> "X B"
+< 1 MB      -> "X.X KB"
+< 1 GB      -> "X.X MB"
+>= 1 GB     -> "X.X GB"
+
+
+DATE FORMAT
+================================================================================
+
+Format: "MMM DD, YYYY"
+Example: "Mar 15, 2024"
+
+
+SEARCH FUNCTIONALITY
+================================================================================
+
++--------------------------------------+
+| [O] Search files...                  |
++--------------------------------------+
+
+- Searches file names
+- Real-time filtering
+
+
+FAB UPLOAD ACTION
+================================================================================
+
+Tap FAB (+) to upload:
+
++------------------------------------------+
+|                                          |
+|  +------------------------------------+  |
+|  |         Upload File                |  |
+|  |                                    |  |
+|  |  [Camera]   Take Photo             |  |
+|  |                                    |  |
+|  |  [Gallery]  Choose from Gallery    |  |
+|  |                                    |  |
+|  |  [File]     Browse Files           |  |
+|  |                                    |  |
+|  |  [Cancel]                          |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+
+
+DELETE CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|                                          |
+|  +------------------------------------+  |
+|  |         Delete File?               |  |
+|  |                                    |  |
+|  |  Are you sure you want to delete   |  |
+|  |  "Practice Playbook.pdf"?          |  |
+|  |  This cannot be undone.            |  |
+|  |                                    |  |
+|  |  [Cancel]           [Delete]       |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+
+
+FILE UPLOAD MODAL
+================================================================================
+
+After selecting a file to upload via FAB action sheet:
+
+Route: /(modals)/file/upload.tsx (optional - may use inline upload)
+
+If using a modal for file details/naming:
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]          Upload File                |
++------------------------------------------+
+|                                          |
+|  [FILE PREVIEW/ICON]                     |
+|  Practice Playbook.pdf                   |
+|  2.4 MB                                  |
+|                                          |
+|  Display Name (optional)                 |
+|  +------------------------------------+  |
+|  | Practice Playbook                  |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Upload"        |
+|  [Cancel]                   [Upload]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleClose}
+- onSave={handleUpload}
+- saveLabel="Upload"
+- loading={isUploading}
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap file card -> Opens/downloads file or shows file modal
+2. Tap [X] delete -> Shows delete confirmation (TPAlert)
+3. Tap FAB (+) -> Shows upload options action sheet
+4. Type in search -> Filters list
+5. Tap [<] back -> Returns to Menu
+
+
+FILE PREVIEW/ACTIONS
+================================================================================
+
+On tap, depending on file type:
+
+Images: Open in full-screen viewer
+PDFs: Open in PDF viewer or download
+Videos: Play in video player
+Others: Download file
+
+Or show file detail modal:
++------------------------------------------+
+| [X]       File Details                   |
++------------------------------------------+
+|                                          |
+| [ICON]                                   |
+|                                          |
+| Filename.ext                             |
+|                                          |
+| Size: 2.4 MB                             |
+| Uploaded: March 15, 2024                 |
+| Type: PDF Document                       |
+|                                          |
+| [Open]  [Share]  [Download]  [Delete]    |
+|                                          |
++------------------------------------------+
+
+
+PERMISSIONS
+================================================================================
+
+canEdit = true:
+- Show FAB button
+- Show delete buttons
+- Can upload files
+
+canEdit = false:
+- Hide FAB button
+- Hide delete buttons
+- Can view/download only
+
+
+================================================================================

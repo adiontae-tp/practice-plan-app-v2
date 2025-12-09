@@ -1,0 +1,195 @@
+================================================================================
+ANNOUNCEMENTS - MOBILE WIREFRAME
+================================================================================
+Route: /(main)/(menu)/announcements.tsx
+Component: AnnouncementsMobile
+Description: Team announcements and messages
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [<] Menu        Announcements    [New]  | [New] = admin only
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | +----------------------------------+ | |
+| | |[*] Server Maintenance Tonight    | | | [*] = unread dot
+| | |                                  | | |
+| | | The system will be down for      | | | Preview (2 lines)
+| | | scheduled maintenance from...    | | |
+| | |                                  | | |
+| | | John Smith • 2h ago        [HIGH]| | | Author, time, priority
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | |    Practice Schedule Update      | | | No dot = read
+| | |                                  | | |
+| | | Please note that Thursday's      | | |
+| | | practice has been moved to...    | | |
+| | |                                  | | |
+| | | Jane Doe • 1d ago           [MED]| | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | |    Welcome New Team Members!     | | |
+| | |                                  | | |
+| | | We're excited to welcome three   | | |
+| | | new members to our team...       | | |
+| | |                                  | | |
+| | | John Smith • 3d ago         [LOW]| | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | |    Equipment Reminder            | | |
+| | |                                  | | |
+| | | Don't forget to bring your...    | | |
+| | |                                  | | |
+| | | Coach Mike • 1w ago         [LOW]| | |
+| | +----------------------------------+ | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+
+
+EMPTY STATE
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  [<] Menu        Announcements    [New]  |
++------------------------------------------+
+|                                          |
+|                                          |
+|              +--------+                  |
+|              |   []   |                  |
+|              | [    ] |  Megaphone Icon  |
+|              +--------+                  |
+|                                          |
+|         No announcements yet             |
+|                                          |
+|       Create one to get started          |  (Admin only text)
+|                                          |
+|                                          |
++------------------------------------------+
+
+
+ANNOUNCEMENT CARD DETAIL
+================================================================================
+
+Unread Announcement:
++--------------------------------------+
+|[*] Announcement Title (Bold)         |  [*] = blue dot
+|                                      |
+| Preview text of the announcement     |  2 lines max
+| message that gets truncated...       |
+|                                      |
+| Author Name • 2h ago          [HIGH] |  Priority badge
++--------------------------------------+
+
+Read Announcement:
++--------------------------------------+
+|    Announcement Title (Normal)       |  No dot, normal weight
+|                                      |
+| Preview text of the announcement     |
+| message that gets truncated...       |
+|                                      |
+| Author Name • 1d ago           [MED] |
++--------------------------------------+
+
+
+UNREAD INDICATOR
+================================================================================
+
+[*] = Blue dot
+
+Position: Left of title
+Size: 8px diameter
+Color: #356793 (primary blue)
+
+
+PRIORITY BADGES
+================================================================================
+
+[HIGH] = Red background (#ef4444), white text
+[MED]  = Pink background (#ef7b8f), white text
+[LOW]  = Gray background (#9ca3af), white text
+
+Badge styling:
+- Border radius: 4px
+- Padding: 2px 8px
+- Font size: 10px
+- Font weight: 600
+- Uppercase text
+
+
+TIMESTAMP FORMAT
+================================================================================
+
+Just now       -> "just now"
+< 1 hour       -> "Xm ago"
+< 24 hours     -> "Xh ago"
+< 7 days       -> "Xd ago"
+< 4 weeks      -> "Xw ago"
+> 4 weeks      -> "MMM D"
+
+
+HEADER WITH NEW BUTTON
+================================================================================
+
++------------------------------------------+
+|  [<] Menu        Announcements    [New]  |
++------------------------------------------+
+
+[New] button:
+- Only visible for admin users
+- Text: "New" or "+" icon
+- On tap: Opens announcement-create modal
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap announcement card -> Opens announcement-detail modal
+   - Marks announcement as read (if unread)
+2. Tap [New] button -> Opens announcement-create modal (admin)
+3. Tap [<] back -> Returns to Menu tab
+
+
+PERMISSIONS
+================================================================================
+
+Admin users:
+- See [New] button in header
+- Can create announcements
+- Can edit/delete announcements
+
+Non-admin users:
+- No [New] button
+- View-only access
+- Can mark as read
+
+
+CARD STATES
+================================================================================
+
+Unread:
+- Title: Bold font weight
+- Blue dot indicator
+- Slightly elevated appearance
+
+Read:
+- Title: Normal font weight
+- No dot indicator
+- Standard card appearance
+
+Touch state:
+- Background darkens slightly
+- Feedback on tap
+
+
+================================================================================

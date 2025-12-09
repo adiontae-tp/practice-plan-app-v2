@@ -1,0 +1,250 @@
+================================================================================
+PERIOD TEMPLATES - WEB/DESKTOP WIREFRAME
+================================================================================
+Route: /(main)/periods (via sidebar: Planning > Period Templates)
+Component: PeriodsDesktop
+Description: Table view of period templates with search and CRUD
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  PERIOD TEMPLATES                                      |
+| Planning|  3 period templates                                    |
+| Dashbrd |                                                        |
+| Calendar|  +----------------------------------------------------+|
+| [*]Per  |  | [Search by name, tag, notes...]    [+ New Period]  ||
+| Template|  +----------------------------------------------------+|
+|         |                                                        |
+| Commun. |  +----------------------------------------------------+|
+| Announce|  | #  | Name            | Duration | Tags    | Notes  ||
+|         |  +----+----------------------------------+------+------+|
+| Manage  |  | 1  | Warm-up         | 15 min   | Cond.   |  [N]   ||
+| Files   |  |    |                 |          | Stretch |        ||
+| Tags    |  +----+-----------------+----------+---------+--------+|
+| Coaches |  | 2  | Skill Drills    | 30 min   | Skills  |  -     ||
+| Reports |  |    |                 |          | Offense |        ||
+|         |  +----+-----------------+----------+---------+--------+|
+| Settings|  | 3  | Cool Down       | 10 min   | Recovery|  [N]   ||
+| Profile |  |    |                 |          |         |        ||
+| Team    |  +----+-----------------+----------+---------+--------+|
+| Subscr. |                                                        |
+|         |  GLOBAL LIBRARY                                        |
+|         |  +----------------------------------------------------+|
+|         |  | #  | Name            | Duration | Tags    | Notes  ||
+|         |  +----+-----------------+----------+---------+--------+|
+|         |  | 1  | Basic Warm-up   | 15 min   | Cond.   |  -     ||
+|         |  |    | [Global]        |          |         |        ||
+|         |  +----+-----------------+----------+---------+--------+|
+|         |  | 2  | Team Huddle     | 5 min    | Commun. |  -     ||
+|         |  |    | [Global]        |          |         |        ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+TABLE HEADER
+================================================================================
+
++----------------------------------------------------+
+| [Search by name, tag, notes...]    [+ New Period]  |
++----------------------------------------------------+
+
+- Search input with placeholder
+- Primary action button on right
+- Search filters both My Periods and Global Library
+
+
+TABLE STRUCTURE
+================================================================================
+
++------+------------------+----------+-----------+--------+--------+
+|  #   |      Name        | Duration |   Tags    | Notes  | Actions|
++------+------------------+----------+-----------+--------+--------+
+|  1   | Warm-up          |  15 min  | Cond.     |  [N]   |  [X]   |
+|      |                  |          | Stretch   |        |        |
++------+------------------+----------+-----------+--------+--------+
+
+Columns:
+- # : Row number (width: 40px)
+- Name: Period name (flex-1)
+- Duration: Formatted as "Xh Ym" or "X min" (width: 120px, center)
+- Tags: Comma-separated list (flex-1)
+- Notes: Icon indicator [N] or dash (width: 100px, center)
+- Actions: Delete button (width: 80px)
+
+
+COLUMN DETAILS
+================================================================================
+
+Duration format:
+- Under 60 min: "30 min"
+- 60+ min: "1h 30m"
+
+Tags display:
+- Comma-separated: "Conditioning, Stretch"
+- Truncate if too long with "..."
+
+Notes indicator:
+- [N] = FileText icon (has notes)
+- "-" = No notes
+
+
+SECTION HEADERS
+================================================================================
+
+MY PERIODS
++----------------------------------------------------+
+| Table content...                                   |
++----------------------------------------------------+
+
+GLOBAL LIBRARY
++----------------------------------------------------+
+| Table content...                                   |
++----------------------------------------------------+
+
+Global periods show [Global] badge under name
+Global periods have no delete action
+
+
+EMPTY STATE
+================================================================================
+
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  PERIOD TEMPLATES                                      |
+|         |  0 period templates                                    |
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  | [Search...]                        [+ New Period]  ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  |                                                    ||
+|         |  |                 +--------+                         ||
+|         |  |                 |   []   |                         ||
+|         |  |                 | [    ] |  Clipboard Icon         ||
+|         |  |                 +--------+                         ||
+|         |  |                                                    ||
+|         |  |           No period templates yet                  ||
+|         |  |                                                    ||
+|         |  |        Create your first period template           ||
+|         |  |            to get started!                         ||
+|         |  |                                                    ||
+|         |  |            [+ Create Period]                       ||
+|         |  |                                                    ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+ROW HOVER STATE
+================================================================================
+
++------+------------------+----------+-----------+--------+--------+
+|  1   | Warm-up          |  15 min  | Cond.     |  [N]   |  [X]   |
++------+------------------+----------+-----------+--------+--------+
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        Light blue background on hover, cursor pointer
+
+
+ROW CLICK ACTION
+================================================================================
+
+Clicking a row opens the Period modal for viewing/editing
+
+
+DELETE ACTION
+================================================================================
+
+[X] = Trash icon button
+- Red color on hover
+- Shows confirmation dialog before delete
+
+Delete Confirmation:
++------------------------------------------+
+|  +------------------------------------+  |
+|  |        Delete Period?              |  |
+|  |                                    |  |
+|  |  Are you sure you want to delete   |  |
+|  |  "Warm-up"?                        |  |
+|  |                                    |  |
+|  |  This cannot be undone.            |  |
+|  |                                    |  |
+|  |  [Cancel]           [Delete]       |  |
+|  +------------------------------------+  |
++------------------------------------------+
+
+
+SEARCH FUNCTIONALITY
+================================================================================
+
++------------------------------------------+
+| [O] Search by name, tag, or notes...     |
++------------------------------------------+
+
+- Real-time filtering
+- Searches: name, tags, notes content
+- Filters both sections simultaneously
+- Shows "No results" if no matches
+
+
+NEW PERIOD BUTTON
+================================================================================
+
+[+ New Period]
+
+- Primary blue button
+- Opens Period modal in create mode
+- Only visible if canEdit
+
+
+INTERACTIONS
+================================================================================
+
+1. Type in search -> Filter table rows
+2. Click row -> Open period modal for view/edit
+3. Click [X] delete -> Show confirmation, then delete
+4. Click [+ New Period] -> Open period modal for create
+5. Hover row -> Highlight row
+
+
+PERMISSIONS
+================================================================================
+
+canEdit = true:
+- Show [+ New Period] button
+- Show delete [X] buttons on user periods
+- Allow editing periods
+
+canEdit = false:
+- Hide [+ New Period] button
+- Hide delete buttons
+- View-only mode
+
+
+TABLE STYLING
+================================================================================
+
+Header row:
+- Background: Gradient (#356793 to #2d5578)
+- Text: White, bold
+- Height: 48px
+
+Body rows:
+- Background: White
+- Border-bottom: 1px solid #e5e7eb
+- Height: Auto (min 48px)
+- Hover: Light blue background
+
+Alternating rows (optional):
+- Even rows: White
+- Odd rows: Very light gray (#f9fafb)
+
+
+================================================================================

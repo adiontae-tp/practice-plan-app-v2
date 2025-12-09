@@ -1,0 +1,318 @@
+================================================================================
+TEAM SETTINGS - MOBILE WIREFRAME
+================================================================================
+Route: /(main)/(menu)/team.tsx
+Component: TeamMobile
+Description: Team configuration and settings (Admin only)
+================================================================================
+
+
+VIEW MODE (Default)
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [<] Menu        Team Settings           |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  SELECT TEAM                         | | (If user has multiple teams)
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  | Springfield Eagles          [v]|  | | Dropdown
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  TEAM INFORMATION                    | |
+| +--------------------------------------+ |
+| |                                      | |
+| |  Team Name                           | |
+| |  Springfield Eagles                  | |
+| |                                      | |
+| |  Sport                               | |
+| |  Basketball                          | |
+| |                                      | |
+| |  Team ID                             | |
+| |  team_abc123xyz              [Copy]  | |
+| |                                      | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |       [Edit Team Settings]           | | Admin only
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |         [Delete Team]                | | Red, admin only
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+
+
+EDIT MODE
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [X]        Edit Team Settings           |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  TEAM INFORMATION                    | |
+| +--------------------------------------+ |
+| |                                      | |
+| |  Team Name                           | |
+| |  +--------------------------------+  | |
+| |  | Springfield Eagles             |  | | Editable input
+| |  +--------------------------------+  | |
+| |                                      | |
+| |  Sport                               | |
+| |  +--------------------------------+  | |
+| |  | Basketball                  [v]|  | | Dropdown select
+| |  +--------------------------------+  | |
+| |                                      | |
+| |  Team ID                             | |
+| |  team_abc123xyz (read-only)          | |
+| |                                      | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Save"          |
+|  [Cancel]                     [Save]     |
++------------------------------------------+
+
+
+TEAM SELECTOR (Multiple Teams)
+================================================================================
+
++--------------------------------------+
+|  SELECT TEAM                         |
++--------------------------------------+
+|  +--------------------------------+  |
+|  | Springfield Eagles          [v]|  |
+|  +--------------------------------+  |
++--------------------------------------+
+
+Dropdown options:
++--------------------------------+
+| Springfield Eagles       [*]   |  Current selection
++--------------------------------+
+| Summer Camp Team               |
++--------------------------------+
+| Travel Team                    |
++--------------------------------+
+
+Selecting a team:
+- Loads that team's data
+- Updates all team-related state
+
+
+TEAM INFO CARD
+================================================================================
+
+View Mode:
++--------------------------------------+
+|  TEAM INFORMATION                    |
++--------------------------------------+
+|                                      |
+|  Team Name                           |  Label
+|  Springfield Eagles                  |  Value
+|                                      |
+|  Sport                               |
+|  Basketball                          |
+|                                      |
+|  Team ID                             |
+|  team_abc123xyz              [Copy]  |  Copy button
+|                                      |
++--------------------------------------+
+
+Edit Mode:
++--------------------------------------+
+|  TEAM INFORMATION                    |
++--------------------------------------+
+|                                      |
+|  Team Name                           |
+|  +--------------------------------+  |
+|  | Springfield Eagles             |  |
+|  +--------------------------------+  |
+|                                      |
+|  Sport                               |
+|  +--------------------------------+  |
+|  | Basketball                  [v]|  |
+|  +--------------------------------+  |
+|                                      |
++--------------------------------------+
+
+
+SPORT DROPDOWN OPTIONS
+================================================================================
+
++--------------------------------+
+| Basketball             [*]     |
++--------------------------------+
+| Soccer                         |
++--------------------------------+
+| Football                       |
++--------------------------------+
+| Baseball                       |
++--------------------------------+
+| Softball                       |
++--------------------------------+
+| Volleyball                     |
++--------------------------------+
+| Hockey                         |
++--------------------------------+
+| Lacrosse                       |
++--------------------------------+
+| Tennis                         |
++--------------------------------+
+| Track & Field                  |
++--------------------------------+
+| Cross Country                  |
++--------------------------------+
+| Swimming                       |
++--------------------------------+
+| Wrestling                      |
++--------------------------------+
+| Golf                           |
++--------------------------------+
+| Cheerleading                   |
++--------------------------------+
+| Dance                          |
++--------------------------------+
+| Other                          |
++--------------------------------+
+
+
+DELETE TEAM CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|                                          |
+|  +------------------------------------+  |
+|  |        Delete Team?                |  |
+|  |                                    |  |
+|  |  Are you sure you want to delete   |  |
+|  |  "Springfield Eagles"?             |  |
+|  |                                    |  |
+|  |  This will permanently delete:     |  |
+|  |  • All practice plans              |  |
+|  |  • All templates and periods       |  |
+|  |  • All team files                  |  |
+|  |  • All coach access                |  |
+|  |                                    |  |
+|  |  This action cannot be undone.     |  |
+|  |                                    |  |
+|  |  Type "DELETE" to confirm:         |  |
+|  |  +----------------------------+    |  |
+|  |  |                            |    |  |
+|  |  +----------------------------+    |  |
+|  |                                    |  |
+|  |  [Cancel]        [Delete Team]     |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+
+[Delete Team] button:
+- Disabled until user types "DELETE"
+- Red background when enabled
+
+
+NON-ADMIN VIEW
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  [<] Menu        Team Settings           |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  TEAM INFORMATION                    | |
+| +--------------------------------------+ |
+| |                                      | |
+| |  Team Name                           | |
+| |  Springfield Eagles                  | |
+| |                                      | |
+| |  Sport                               | |
+| |  Basketball                          | |
+| |                                      | |
+| |  Team ID                             | |
+| |  team_abc123xyz                      | |
+| |                                      | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  [!] Admin Access Required           | |
+| |                                      | |
+| |  Contact your team admin to make     | |
+| |  changes to team settings.           | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+
+
+EDIT MODE FOOTER (TPFooterButtons)
+================================================================================
+
+Uses: TPFooterButtons component from @/components/tp
+
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Save"          |
+|  [Cancel]                     [Save]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleCancelEdit}
+- onSave={handleSave}
+- saveLabel="Save"
+- saveDisabled={!hasChanges}
+- loading={isSaving}
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap team dropdown -> Shows team selection (if multiple)
+2. Tap [Edit Team Settings] -> Enters edit mode (opens as modal or inline edit)
+3. Tap [Save] in TPFooterButtons -> Saves changes, exits edit mode
+4. Tap [Cancel] in TPFooterButtons -> Discards changes, exits edit mode
+5. Tap sport dropdown -> Shows sport options
+6. Tap [Delete Team] -> Shows delete confirmation
+7. Tap [Copy] -> Copies Team ID to clipboard
+8. Tap [<] back -> Returns to Menu
+
+
+PERMISSIONS
+================================================================================
+
+Admin users:
+- Can edit team name
+- Can change sport
+- Can delete team
+- See all action buttons
+
+Non-admin users:
+- View-only mode
+- See "Admin Access Required" notice
+- No edit/delete buttons
+
+
+VALIDATION (Edit Mode)
+================================================================================
+
+Team Name:
+- Required
+- Min 1 character
+- Max 100 characters
+
+Sport:
+- Required
+- Must select from dropdown
+
+
+================================================================================

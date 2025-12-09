@@ -1,0 +1,478 @@
+================================================================================
+MOBILE ROOT LAYOUT WIREFRAME
+================================================================================
+Source: legacy/src/app/_layout.tsx
+        legacy/src/app/(main)/_layout.tsx
+        legacy/src/app/(main)/(tabs)/_layout.tsx
+Framework: Expo + React Native + Gluestack UI
+Navigation: Expo Router (Stack + Tabs)
+--------------------------------------------------------------------------------
+
+LOADING STATE (While auth/fonts initialize)
++------------------------------------------+
+|                                          |
+|                                          |
+|                                          |
+|              [SPINNER]                   |
+|           (ActivityIndicator)            |
+|            color: #356793                |
+|                                          |
+|                                          |
+|                                          |
++------------------------------------------+
+Background: #e0e0e0
+
+
+================================================================================
+ROOT LAYOUT STRUCTURE (app/_layout.tsx)
+================================================================================
+
++------------------------------------------+
+| GestureHandlerRootView (flex: 1)         |
+|  +--------------------------------------+|
+|  | GluestackUIProvider                  ||
+|  |  +----------------------------------+||
+|  |  | BottomSheetModalProvider         |||
+|  |  |  +------------------------------+|||
+|  |  |  | Stack Navigator              ||||
+|  |  |  |                              ||||
+|  |  |  | Routes:                      ||||
+|  |  |  | - index (router/redirect)    ||||
+|  |  |  | - (auth) [hidden header]     ||||
+|  |  |  | - (main) [hidden header]     ||||
+|  |  |  | - (modals) [modal present]   ||||
+|  |  |  +------------------------------+|||
+|  |  +----------------------------------+||
+|  +--------------------------------------+|
++------------------------------------------+
+
+
+================================================================================
+INDEX ROUTE LOGIC (app/index.tsx)
+================================================================================
+
+                    +-------------+
+                    |    START    |
+                    +------+------+
+                           |
+                    +------v------+
+                    | Auth Init?  |
+                    +------+------+
+                           |
+              +------------+------------+
+              | NO                      | YES
+              v                         v
+     +--------+--------+       +--------+--------+
+     | Show Loading    |       | Firebase User?  |
+     | Spinner         |       +--------+--------+
+     +-----------------+                |
+                              +---------+---------+
+                              | NO                | YES
+                              v                   v
+                     +--------+--------+ +--------+--------+
+                     | Redirect to     | | Has TeamRef?    |
+                     | /(auth)/login   | +--------+--------+
+                     +-----------------+          |
+                                        +---------+---------+
+                                        | NO                | YES
+                                        v                   v
+                               +--------+--------+ +--------+--------+
+                               | Redirect to     | | Redirect to     |
+                               | /onboarding/    | | /(main)/(tabs)  |
+                               | role-select     | +-----------------+
+                               +-----------------+
+
+
+================================================================================
+MAIN LAYOUT - MOBILE (app/(main)/_layout.tsx)
+================================================================================
+
+FULL SCREEN (flex-1)
++------------------------------------------+
+| UNREAD ANNOUNCEMENT BANNER               |
+| (Conditional - only if unread)           |
++------------------------------------------+
+|                                          |
+|          STACK NAVIGATOR                 |
+|                                          |
+|   Screen Options:                        |
+|   - headerStyle: bg #356793              |
+|   - headerTintColor: #ffffff             |
+|   - fontSize: 18, fontWeight: 600        |
+|                                          |
+|   Routes:                                |
+|   - (tabs) [headerShown: false]          |
+|   - (menu) [headerShown: false]          |
+|                                          |
++------------------------------------------+
+
+
+================================================================================
+TABS LAYOUT (app/(main)/(tabs)/_layout.tsx)
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  +---------+  +-----------------------+  |
+|  | [Menu]  |  |    [Screen Title]     |  |
+|  +---------+  +-----------------------+  |
++------------------------------------------+
+|                                          |
+|                                          |
+|                                          |
+|             SCREEN CONTENT               |
+|                                          |
+|            (Slot renders here)           |
+|                                          |
+|                                          |
+|                                          |
+|                                          |
++------------------------------------------+
+|              TAB BAR                     |
+|  +----------+----------+----------+      |
+|  |          |          |          |      |
+|  |  [icon]  |  [icon]  |  [icon]  |      |
+|  | Practice | Calendar |   Menu   |      |
+|  |          |          |          |      |
+|  +----------+----------+----------+      |
+|                                          |
+|  Active: #356793   Inactive: #999        |
+|  fontSize: 12, fontWeight: 600           |
++------------------------------------------+
+
+Tab Icons (Ionicons, size: 24):
+- Practice: clipboard / clipboard-outline
+- Calendar: calendar / calendar-outline
+- Menu: grid / grid-outline
+
+
+================================================================================
+MENU ROUTES (app/(main)/(menu)/_layout.tsx)
+================================================================================
+
+Stack Navigator with header:
+- headerStyle: bg #356793
+- headerTintColor: #ffffff
+- headerBackTitle: "Menu"
+
+Routes under (menu):
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  +---------+  +-----------------------+  |
+|  |  [<]    |  |    [Screen Title]     |  |
+|  |  Menu   |  |                       |  |
+|  +---------+  +-----------------------+  |
++------------------------------------------+
+|                                          |
+|             SCREEN CONTENT               |
+|                                          |
++------------------------------------------+
+
+Screen Titles:
+- periods.tsx        -> "Period Templates"
+- templates.tsx      -> "Practice Templates"
+- announcements.tsx  -> "Announcements"
+- files.tsx          -> "Files"
+- tags.tsx           -> "Tags"
+- coaches.tsx        -> "Coaches"
+- reports.tsx        -> "Reports"
+- profile.tsx        -> "Profile"
+- team.tsx           -> "Team"
+- subscription.tsx   -> "Subscription"
+
+
+================================================================================
+COLOR SCHEME
+================================================================================
+
+Primary Blue:     #356793  (headers, active tabs)
+Inactive Gray:    #999     (inactive tab icons/text)
+Background:       #e0e0e0  (page background)
+White:            #ffffff  (header text, content bg)
+Secondary Pink:   #ef7b8f  (accents)
+
+
+================================================================================
+TYPOGRAPHY
+================================================================================
+
+Font Family: Outfit
+- Regular: Outfit_400Regular
+- SemiBold: Outfit_600SemiBold
+- Bold: Outfit_700Bold
+
+Header Title: fontSize 18, fontWeight 600
+Tab Label: fontSize 12, fontWeight 600
+
+
+================================================================================
+NAVIGATION HIERARCHY (File Structure)
+================================================================================
+
+app/
+├── _layout.tsx (Root - providers, Stack)
+├── index.tsx (Auth router/redirect)
+├── (auth)/
+│   ├── _layout.tsx
+│   ├── login.tsx
+│   ├── register.tsx
+│   ├── forgot-password.tsx
+│   └── onboarding/
+│       ├── role-select.tsx
+│       ├── sport-select.tsx
+│       └── team-setup.tsx
+├── (main)/
+│   ├── _layout.tsx (announcement banner + Stack)
+│   ├── (tabs)/
+│   │   ├── _layout.tsx (Tabs navigator)
+│   │   ├── index.tsx (Practice)
+│   │   ├── calendar.tsx
+│   │   └── menu.tsx
+│   └── (menu)/
+│       ├── _layout.tsx (Stack with headers)
+│       ├── periods.tsx
+│       ├── templates.tsx
+│       ├── announcements.tsx
+│       ├── files.tsx
+│       ├── tags.tsx
+│       ├── coaches.tsx
+│       ├── reports.tsx
+│       ├── profile.tsx
+│       ├── team.tsx
+│       ├── contact.tsx
+│       └── subscription.tsx
+└── (modals)/
+    ├── _layout.tsx
+    ├── plan/
+    │   ├── new.tsx
+    │   └── [id].tsx
+    ├── template/
+    │   ├── new.tsx
+    │   └── [id].tsx
+    ├── period.tsx
+    ├── activity.tsx
+    ├── activity-instance-edit.tsx
+    ├── announcement-create.tsx
+    ├── announcement-detail.tsx
+    ├── announcement-edit.tsx
+    ├── tag.tsx
+    ├── coach.tsx
+    ├── file.tsx
+    ├── date-picker.tsx
+    ├── time-picker.tsx
+    ├── period-selector.tsx
+    ├── template-selector.tsx
+    └── plan-detail.tsx (subscription)
+
+
+================================================================================
+NAVIGATION FLOW DIAGRAM
+================================================================================
+
+                              +------------------+
+                              |   APP LAUNCH     |
+                              +--------+---------+
+                                       |
+                              +--------v---------+
+                              |  _layout.tsx     |
+                              |  (Root Stack)    |
+                              +--------+---------+
+                                       |
+                              +--------v---------+
+                              |   index.tsx      |
+                              |  (Auth Router)   |
+                              +--------+---------+
+                                       |
+           +---------------------------+---------------------------+
+           |                           |                           |
+           v                           v                           v
++----------+----------+    +-----------+-----------+    +----------+----------+
+|  No Firebase User   |    |  No Team (New User)   |    | Authenticated User  |
++----------+----------+    +-----------+-----------+    +----------+----------+
+           |                           |                           |
+           v                           v                           v
++----------+----------+    +-----------+-----------+    +----------+----------+
+|    (auth)/login     |    | (auth)/onboarding/    |    |   (main)/(tabs)     |
++---------------------+    |    role-select        |    +----------+----------+
+           |               +-----------+-----------+               |
+           |                           |                           |
+           v                           v                           |
++----------+----------+    +-----------+-----------+               |
+|  (auth)/register    |    | (auth)/onboarding/    |               |
++---------------------+    |    sport-select       |               |
+           |               +-----------+-----------+               |
+           v                           |                           |
++----------+----------+                v                           |
+|(auth)/forgot-password|   +-----------+-----------+               |
++---------------------+    | (auth)/onboarding/    |               |
+                           |    team-setup         |               |
+                           +-----------+-----------+               |
+                                       |                           |
+                                       +------------->-------------+
+
+
+================================================================================
+MAIN APP NAVIGATION DIAGRAM (Authenticated)
+================================================================================
+
++-----------------------------------------------------------------------------+
+|                           (main)/_layout.tsx                                |
+|  +-----------------------------------------------------------------------+  |
+|  |                  UNREAD ANNOUNCEMENT BANNER                           |  |
+|  +-----------------------------------------------------------------------+  |
+|                                    |                                        |
+|                         +----------v----------+                             |
+|                         |    Stack Navigator  |                             |
+|                         +----------+----------+                             |
+|                                    |                                        |
+|         +--------------------------+---------------------------+            |
+|         |                                                      |            |
+|         v                                                      v            |
+|  +------+-------+                                      +-------+------+     |
+|  | (tabs) group |                                      | (menu) group |     |
+|  +------+-------+                                      +-------+------+     |
+|         |                                                      |            |
+|         v                                                      v            |
+|  +------+-------+                               +--------------+-------+    |
+|  | Tab Navigator|                               |    Stack Navigator   |    |
+|  +------+-------+                               +--------------+-------+    |
+|         |                                                      |            |
+|    +----+----+----+                    +------------------------+           |
+|    |    |    |    |                    |    |    |    |    |    |           |
+|    v    v    v    v                    v    v    v    v    v    v           |
+| +--++ +--++ +--+  |              +-----++-----++-----++-----++-----+        |
+| |Pr|| |Ca|| |Me|  |              |perio||templ||annou||files||tags |        |
+| |ac|| |le|| |nu|  |              |ds   ||ates ||ncem.||     ||     |        |
+| |ti|| |nd|| |  |--+------------->+-----++-----++-----++-----++-----+        |
+| |ce|| |ar|| |  |  |              |coach||repor||profi||team ||subsc|        |
+| +--++ +--++ +--+  |              |es   ||ts   ||le   ||     ||ript.|        |
+|                   |              +-----++-----++-----++-----++-----+        |
+|                   |              |conta|                                    |
+|                   |              |ct   |                                    |
+|                   |              +-----+                                    |
++-------------------+------------------------------------------------------------+
+
+
+================================================================================
+TAB NAVIGATION DETAIL
+================================================================================
+
+                    +---------------------------+
+                    |      BOTTOM TAB BAR       |
+                    +---------------------------+
+                    |           |               |
+          +---------+     +-----+-----+     +---+-------+
+          |               |           |               |
+          v               v           v               v
+    +-----------+   +-----------+   +-----------+
+    | PRACTICE  |   | CALENDAR  |   |   MENU    |
+    | (index)   |   |           |   |           |
+    +-----------+   +-----------+   +-----------+
+          |               |               |
+          v               v               v
+    +-----------+   +-----------+   +-----------+
+    | View/Edit |   | Week View |   | Nav Links |
+    | Today's   |   | Practice  |   | to (menu) |
+    | Practice  |   | List      |   | screens   |
+    +-----------+   +-----------+   +-----------+
+          |               |
+          v               v
+    +-----------+   +-----------+
+    |  [MODAL]  |   |  [MODAL]  |
+    | plan/new  |   | plan/new  |
+    | plan/[id] |   | plan/[id] |
+    +-----------+   +-----------+
+
+
+================================================================================
+MODAL NAVIGATION DIAGRAM
+================================================================================
+
+Any screen can open modals (presentation: 'modal')
+
++------------------+     +------------------+     +------------------+
+|   PRACTICE TAB   |     |   CALENDAR TAB   |     |   MENU SCREENS   |
++--------+---------+     +--------+---------+     +--------+---------+
+         |                        |                        |
+         +------------------------+------------------------+
+                                  |
+                    +-------------v-------------+
+                    |     (modals) group        |
+                    |  presentation: 'modal'    |
+                    +-------------+-------------+
+                                  |
+    +-----------------------------+-----------------------------+
+    |         |         |         |         |         |         |
+    v         v         v         v         v         v         v
++-------+ +-------+ +-------+ +-------+ +-------+ +-------+ +-------+
+|plan/  | |templ/ | |period | |activi | |announ | |date-  | |time-  |
+|new    | |new    | |       | |ty     | |cement | |picker | |picker |
+|[id]   | |[id]   | |       | |inst.  | |create | |       | |       |
++-------+ +-------+ +-------+ +-------+ |detail | +-------+ +-------+
+                                        |edit   |
+                                        +-------+
+    +-----------------------------+-----------------------------+
+    |         |         |         |         |         |
+    v         v         v         v         v         v
++-------+ +-------+ +-------+ +-------+ +-------+ +-------+
+|tag    | |coach  | |file   | |period | |templ. | |plan-  |
+|       | |       | |       | |select | |select | |detail |
++-------+ +-------+ +-------+ +-------+ +-------+ |(subs) |
+                                                  +-------+
+
+
+================================================================================
+SCREEN REFERENCE INDEX
+================================================================================
+
+TAB SCREENS:
+  - practice.txt      Practice (Home) Tab
+  - calendar.txt      Calendar Tab
+  - menu.txt          Menu Tab (Navigation Hub)
+
+MENU SCREENS:
+  - periods.txt       Period Templates List
+  - templates.txt     Practice Templates List
+  - announcements.txt Announcements List
+  - files.txt         Files List
+  - tags.txt          Tags List
+  - coaches.txt       Coaches List
+  - reports.txt       Reports/Analytics
+  - profile.txt       User Profile
+  - team.txt          Team Settings
+  - subscription.txt  Subscription Plans
+  - contact.txt       Contact Developer
+
+AUTH SCREENS:
+  - login.txt         Login Form
+  - register.txt      Registration Form
+  - forgot-password.txt  Password Reset
+  - onboarding/
+    - role-select.txt    Role Selection
+    - sport-select.txt   Sport Selection
+    - team-setup.txt     Team Setup
+
+MODAL SCREENS:
+  - plan-new.txt           Create Practice Plan
+  - plan-edit.txt          Edit Practice Plan
+  - template-new.txt       Create Template
+  - template-edit.txt      Edit Template
+  - period.txt             Create/Edit Period
+  - activity.txt           Activity Form
+  - activity-instance.txt  Edit Activity in Plan
+  - announcement-create.txt  Create Announcement
+  - announcement-detail.txt  View Announcement
+  - announcement-edit.txt    Edit Announcement
+  - tag.txt                Create/Edit Tag
+  - coach.txt              Invite/Edit Coach
+  - file.txt               Upload/View File
+  - date-picker.txt        Date Selection
+  - time-picker.txt        Time Selection
+  - period-selector.txt    Select Periods
+  - template-selector.txt  Select Template
+  - subscription-detail.txt  Plan Details
+
+
+================================================================================

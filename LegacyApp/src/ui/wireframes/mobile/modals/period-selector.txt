@@ -1,0 +1,240 @@
+================================================================================
+PERIOD SELECTOR - MOBILE MODAL WIREFRAME
+================================================================================
+Route: /(modals)/period-selector.tsx
+Description: Modal for selecting periods to add to a plan or template
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]        Select Periods        [Add]  |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | [Search] Search periods...           | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  Selected: 0                         | | Selection count
+| +--------------------------------------+ |
+|                                          |
+| MY PERIODS                               |
+| +--------------------------------------+ |
+| | +----------------------------------+ | |
+| | | [ ] Warm-up                      | | | Checkbox
+| | |     15 min                       | | |
+| | |     [Conditioning]               | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [X] Skill Drills                 | | | Selected
+| | |     30 min                       | | |
+| | |     [Skills] [Offense]           | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [ ] Scrimmage                    | | |
+| | |     20 min                       | | |
+| | |     [Game]                       | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [X] Cool-down                    | | | Selected
+| | |     10 min                       | | |
+| | |     [Recovery]                   | | |
+| | +----------------------------------+ | |
+| +--------------------------------------+ |
+|                                          |
+| GLOBAL LIBRARY                           |
+| +--------------------------------------+ |
+| | +----------------------------------+ | |
+| | | [ ] Basic Warm-up       [Global] | | |
+| | |     15 min                       | | |
+| | |     [Conditioning]               | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [ ] Team Huddle         [Global] | | |
+| | |     5 min                        | | |
+| | |     [Communication]              | | |
+| | +----------------------------------+ | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|                    [Add 2 Periods]       | Footer with count
++------------------------------------------+
+
+
+WITH SELECTIONS
+================================================================================
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]        Select Periods        [Add]  |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | [Search] Search periods...           | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  Selected: 2                         | | Shows count
+| |  Skill Drills (30 min)               | | Selected items
+| |  Cool-down (10 min)                  | |
+| |  Total: 40 min                       | | Total duration
+| +--------------------------------------+ |
+|                                          |
+| (Period list continues below)            |
+|                                          |
++------------------------------------------+
+|                    [Add 2 Periods]       |
++------------------------------------------+
+
+
+HEADER
+================================================================================
+
++------------------------------------------+
+|  [X]        Select Periods        [Add]  |
++------------------------------------------+
+
+[X] = Close modal without adding
+[Add] = Add selected periods (same as footer button)
+
+
+SEARCH BAR
+================================================================================
+
++--------------------------------------+
+| [O] Search periods...                |
++--------------------------------------+
+
+Searches:
+- Period name
+- Tags
+- Notes
+
+
+SELECTION SUMMARY
+================================================================================
+
+No selections:
++--------------------------------------+
+|  Selected: 0                         |
++--------------------------------------+
+
+With selections:
++--------------------------------------+
+|  Selected: 2                         |
+|  Skill Drills (30 min)               |
+|  Cool-down (10 min)                  |
+|  Total: 40 min                       |
++--------------------------------------+
+
+- Shows count
+- Lists selected period names with durations
+- Shows total duration of selections
+
+
+PERIOD CARD (Selectable)
+================================================================================
+
+Unselected:
++--------------------------------------+
+| [ ] Period Name                      |  Empty checkbox
+|     XX min                           |
+|     [Tag1] [Tag2]                    |
++--------------------------------------+
+
+Selected:
++--------------------------------------+
+| [X] Period Name                      |  Checked checkbox
+|     XX min                           |
+|     [Tag1] [Tag2]                    |
++--------------------------------------+
+
+Checkbox styling:
+[ ] = Empty box, gray border
+[X] = Blue fill, white checkmark
+
+
+SECTION HEADERS
+================================================================================
+
+MY PERIODS
++--------------------------------------+
+
+GLOBAL LIBRARY
++--------------------------------------+
+
+Same styling as other list screens:
+- Uppercase, small, gray text
+
+
+FOOTER BUTTON
+================================================================================
+
+No selections:
++--------------------------------------+
+|               [Add Periods]          |  Disabled
++--------------------------------------+
+
+With selections:
++--------------------------------------+
+|            [Add 2 Periods]           |  Enabled, shows count
++--------------------------------------+
+
+Button text updates with selection count
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap [X] -> Close modal (no changes)
+2. Type in search -> Filter periods
+3. Tap period card -> Toggle selection
+4. Tap checkbox -> Toggle selection
+5. Tap [Add X Periods] -> Add selected and close
+
+After adding:
+- Selected periods are added to the plan/template
+- Modal closes
+- Parent screen shows new activities
+
+
+EMPTY STATES
+================================================================================
+
+No periods found (search):
++--------------------------------------+
+|                                      |
+|        No periods found              |
+|                                      |
+|  Try a different search term         |
+|                                      |
++--------------------------------------+
+
+No periods at all:
++--------------------------------------+
+|                                      |
+|        No periods available          |
+|                                      |
+|  Create periods in Period Templates  |
+|                                      |
++--------------------------------------+
+
+
+MULTI-SELECT BEHAVIOR
+================================================================================
+
+- Multiple periods can be selected
+- Selection order is preserved
+- Selected periods added in order selected
+- Duplicate prevention (if period already in plan)
+
+
+================================================================================

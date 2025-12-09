@@ -1,0 +1,217 @@
+name: EAS Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/apps/mobile/**'
+      - 'src/packages/**'
+      - 'pnpm-lock.yaml'
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to build'
+        required: true
+        default: 'ios'
+        type: choice
+        options:
+          - ios
+          - android
+      submit_to_testflight:
+        description: 'Submit iOS build to TestFlight'
+        required: false
+        default: true
+        type: boolean
+      force_build:
+        description: 'Force full native build (skip OTA check)'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  detect-changes:
+    name: 🔍 Detect Changes
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    outputs:
+      needs_native_build: ${{ steps.check.outputs.needs_native_build }}
+      has_mobile_changes: ${{ steps.check.outputs.has_mobile_changes }}
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔍 Check what changed
+        id: check
+        run: |
+          # Get changed files in this push
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          # Check if any mobile files changed
+          if echo "$CHANGED_FILES" | grep -q "src/apps/mobile/\|src/packages/"; then
+            echo "has_mobile_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_mobile_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Files that require a native rebuild
+          NATIVE_PATTERNS=(
+            "src/apps/mobile/app.json"
+            "src/apps/mobile/eas.json"
+            "src/apps/mobile/package.json"
+            "src/apps/mobile/metro.config.js"
+            "src/apps/mobile/babel.config.js"
+            "src/apps/mobile/app.config"
+            "src/apps/mobile/ios/"
+            "src/apps/mobile/android/"
+            "src/apps/mobile/plugins/"
+            "pnpm-lock.yaml"
+          )
+
+          NEEDS_BUILD=false
+          for pattern in "${NATIVE_PATTERNS[@]}"; do
+            if echo "$CHANGED_FILES" | grep -q "$pattern"; then
+              echo "Native change detected: $pattern"
+              NEEDS_BUILD=true
+              break
+            fi
+          done
+
+          echo "needs_native_build=$NEEDS_BUILD" >> $GITHUB_OUTPUT
+
+  ota-update:
+    name: 📡 OTA Update
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_mobile_changes == 'true' && needs.detect-changes.outputs.needs_native_build == 'false'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/apps/mobile
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🔧 Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
+          run_install: false
+
+      - name: 📦 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 📦 Install dependencies
+        run: |
+          cd ../../..
+          pnpm install --frozen-lockfile
+
+      - name: 📡 Push OTA Update
+        run: |
+          echo "🚀 Pushing OTA update (no native changes detected)"
+          eas update --branch development --message "OTA: ${{ github.event.head_commit.message }}" --non-interactive
+
+  development:
+    name: 🏗 Development Build
+    needs: detect-changes
+    if: needs.detect-changes.outputs.needs_native_build == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/apps/mobile
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🔧 Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
+          run_install: false
+
+      - name: 📦 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 📦 Install dependencies
+        run: |
+          cd ../../..
+          pnpm install --frozen-lockfile
+
+      - name: 🚀 Build Development Client (iOS Only)
+        run: |
+          echo "🏗 Native changes detected - running full build"
+          eas build --platform ios --profile development-device --non-interactive
+
+  production:
+    name: 🚢 Production Build & TestFlight
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/apps/mobile
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🔧 Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
+          run_install: false
+
+      - name: 📦 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 📦 Install dependencies
+        run: |
+          cd ../../..
+          pnpm install --frozen-lockfile
+
+      - name: 🚀 Build & Submit to TestFlight
+        if: ${{ inputs.platform == 'ios' && inputs.submit_to_testflight }}
+        run: |
+          echo "🏗 Building iOS production and submitting to TestFlight"
+          eas build --platform ios --profile production --auto-submit --non-interactive
+
+      - name: 🚀 Build iOS Production (No Submit)
+        if: ${{ inputs.platform == 'ios' && !inputs.submit_to_testflight }}
+        run: |
+          echo "🏗 Building iOS production (no TestFlight submission)"
+          eas build --platform ios --profile production --non-interactive
+
+      - name: 🚀 Build Android Production
+        if: ${{ inputs.platform == 'android' }}
+        run: |
+          echo "🏗 Building Android production"
+          eas build --platform android --profile production --non-interactive

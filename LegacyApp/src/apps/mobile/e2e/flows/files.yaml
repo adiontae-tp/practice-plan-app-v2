@@ -1,0 +1,37 @@
+appId: com.teamparcee.practiceplan
+---
+- launchApp:
+    clearState: true
+
+- assertVisible: "Files"
+- tapOn: "Files"
+
+- takeScreenshot: "files_list"
+
+- tapOn: "Add File"
+- inputText:
+    id: "file-name-input"
+    text: "Test File"
+- tapOn: "Save"
+- assertVisible: "Test File"
+- takeScreenshot: "file_created"
+
+- tapOn: "Test File"
+- assertVisible: "Test File"
+- takeScreenshot: "file_read"
+
+- tapOn: "Edit"
+- clearInput:
+    id: "file-name-input"
+- inputText:
+    id: "file-name-input"
+    text: "Updated File"
+- tapOn: "Save"
+- assertVisible: "Updated File"
+- takeScreenshot: "file_updated"
+
+- longPressOn: "Updated File"
+- tapOn: "Delete"
+- tapOn: "Confirm"
+- assertNotVisible: "Updated File"
+- takeScreenshot: "file_deleted"

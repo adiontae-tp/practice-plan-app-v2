@@ -1,0 +1,287 @@
+================================================================================
+PROFILE - WEB/DESKTOP WIREFRAME
+================================================================================
+Route: /(main)/profile (via sidebar: Settings > Profile)
+Component: ProfileDesktop
+Description: Two-column profile layout with photo sidebar
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  PROFILE                                               |
+| Planning|  Manage your account settings                          |
+| Dashbrd |                                                        |
+| Calendar|  +------------------+  +-----------------------------+ |
+| Periods |  | PROFILE PHOTO    |  | PERSONAL INFORMATION        | |
+| Template|  |                  |  +-----------------------------+ |
+|         |  |   +----------+   |  |                             | |
+| Commun. |  |   |          |   |  |  First Name                 | |
+| Announce|  |   |   [  ]   |   |  |  +-------------------------+| |
+|         |  |   |    JS    |   |  |  | John                    || |
+| Manage  |  |   |          |   |  |  +-------------------------+| |
+| Files   |  |   +----------+   |  |                             | |
+| Tags    |  |                  |  |  Last Name                  | |
+| Coaches |  |   John Smith     |  |  +-------------------------+| |
+| Reports |  |   john@email.com |  |  | Smith                   || |
+|         |  |                  |  |  +-------------------------+| |
+| [*]Sett.|  |  [Edit Profile]  |  |                             | |
+| Profile |  +------------------+  |  Email                      | |
+| Team    |  | QUICK INFO       |  |  john@example.com           | |
+| Subscr. |  +------------------+  |  (read-only)                | |
+|         |  |                  |  |                             | |
+|         |  |  Role            |  +-----------------------------+ |
+|         |  |  [Admin]         |  |                             | |
+|         |  |                  |  | ACCOUNT INFORMATION         | |
+|         |  |  Status          |  +-----------------------------+ |
+|         |  |  [Active]        |  |                             | |
+|         |  |                  |  |  User ID                    | |
+|         |  |  Permission      |  |  user_12345abcde            | |
+|         |  |  Full Access     |  |                             | |
+|         |  |                  |  |  Team ID                    | |
+|         |  +------------------+  |  team_abc123xyz             | |
+|         |                        |                             | |
+|         |                        |  Subscription               | |
+|         |                        |  Pro                        | |
+|         |                        |                             | |
+|         |                        |  Member Since               | |
+|         |                        |  March 1, 2024              | |
+|         |                        |                             | |
+|         |                        +-----------------------------+ |
+|         |                        |                             | |
+|         |                        |          [Logout]           | |
+|         |                        |                             | |
+|         |                        +-----------------------------+ |
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+TWO-COLUMN LAYOUT
+================================================================================
+
++------------------+  +--------------------------------+
+|   LEFT COLUMN    |  |        RIGHT COLUMN            |
+|    (w-80)        |  |         (flex-1)               |
+|                  |  |                                |
+|  Profile Photo   |  |  Personal Information          |
+|  Quick Info      |  |  Account Information           |
+|                  |  |  Actions                       |
++------------------+  +--------------------------------+
+
+Left column: Fixed width (320px / w-80)
+Right column: Flexible width (fills remaining space)
+Gap: 24px (gap-6)
+
+
+LEFT COLUMN - PROFILE PHOTO CARD
+================================================================================
+
++------------------+
+|                  |
+|   +----------+   |
+|   |          |   |
+|   |   [  ]   |   |  Avatar (160x160px)
+|   |    JS    |   |  Shows initials if no photo
+|   |          |   |
+|   +----------+   |
+|                  |
+|   John Smith     |  Full name (bold)
+|   john@email.com |  Email (gray)
+|                  |
+|  [Edit Profile]  |  Primary button (view mode)
+|                  |
++------------------+
+
+Edit mode photo options:
++------------------+
+|   +----------+   |
+|   |   [  ]   |   |
+|   +----------+   |
+|                  |
+| [Camera][Gallery]|  Photo action buttons
+|     [Remove]     |
+|                  |
++------------------+
+
+
+LEFT COLUMN - QUICK INFO CARD
+================================================================================
+
++------------------+
+| QUICK INFO       |
++------------------+
+|                  |
+|  Role            |  Label (gray, small)
+|  [Admin]         |  Badge (blue for admin)
+|                  |
+|  Status          |
+|  [Active]        |  Badge (green)
+|                  |
+|  Permission      |
+|  Full Access     |  Text value
+|                  |
++------------------+
+
+
+RIGHT COLUMN - PERSONAL INFO CARD (View Mode)
+================================================================================
+
++--------------------------------+
+| PERSONAL INFORMATION           |
++--------------------------------+
+|                                |
+|  First Name                    |  Label
+|  John                          |  Value
+|                                |
+|  Last Name                     |
+|  Smith                         |
+|                                |
+|  Email                         |
+|  john@example.com              |
+|                                |
++--------------------------------+
+
+
+RIGHT COLUMN - PERSONAL INFO CARD (Edit Mode)
+================================================================================
+
++--------------------------------+
+| PERSONAL INFORMATION           |
++--------------------------------+
+|                                |
+|  First Name                    |
+|  +----------------------------+|
+|  | John                       ||  Editable input
+|  +----------------------------+|
+|                                |
+|  Last Name                     |
+|  +----------------------------+|
+|  | Smith                      ||
+|  +----------------------------+|
+|                                |
+|  Email                         |
+|  john@example.com (read-only)  |  Cannot edit
+|                                |
++--------------------------------+
+
+
+RIGHT COLUMN - ACCOUNT INFO CARD
+================================================================================
+
++--------------------------------+
+| ACCOUNT INFORMATION            |
++--------------------------------+
+|                                |
+|  User ID                       |
+|  user_12345abcde        [Copy] |  Monospace, copy button
+|                                |
+|  Team ID                       |
+|  team_abc123xyz         [Copy] |
+|                                |
+|  Subscription                  |
+|  Pro                           |
+|                                |
+|  Member Since                  |
+|  March 1, 2024                 |
+|                                |
++--------------------------------+
+
+
+EDIT MODE LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  PROFILE                                               |
+|         |  Edit your profile                                     |
+|         |                                                        |
+|         |  +------------------+  +-----------------------------+ |
+|         |  | PROFILE PHOTO    |  | PERSONAL INFORMATION        | |
+|         |  |                  |  +-----------------------------+ |
+|         |  |   +----------+   |  |                             | |
+|         |  |   |   [  ]   |   |  |  First Name                 | |
+|         |  |   +----------+   |  |  +-------------------------+| |
+|         |  |                  |  |  | John                    || |
+|         |  | [Cam][Gal][Rem]  |  |  +-------------------------+| |
+|         |  |                  |  |                             | |
+|         |  +------------------+  |  Last Name                  | |
+|         |                        |  +-------------------------+| |
+|         |                        |  | Smith                   || |
+|         |                        |  +-------------------------+| |
+|         |                        |                             | |
+|         |                        +-----------------------------+ |
+|         |                                                        |
+|         |                        +-----------------------------+ |
+|         |                        |  [Cancel]         [Save]    | |
+|         |                        +-----------------------------+ |
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+LOGOUT BUTTON
+================================================================================
+
++--------------------------------+
+|          [Logout]              |
++--------------------------------+
+
+- Full width in card
+- Red background (#ef4444)
+- White text
+- Shows confirmation before logout
+
+
+LOGOUT CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|  +------------------------------------+  |
+|  |           Log Out?                 |  |
+|  |                                    |  |
+|  |  Are you sure you want to          |  |
+|  |  log out of your account?          |  |
+|  |                                    |  |
+|  |  [Cancel]           [Log Out]      |  |
+|  +------------------------------------+  |
++------------------------------------------+
+
+
+EDIT MODE FOOTER
+================================================================================
+
++--------------------------------+
+|  [Cancel]             [Save]   |
++--------------------------------+
+
+[Cancel] = Discard changes, return to view mode
+[Save] = Save changes, return to view mode
+
+
+INTERACTIONS
+================================================================================
+
+View Mode:
+1. Click [Edit Profile] -> Enter edit mode
+2. Click [Copy] -> Copy ID to clipboard
+3. Click [Logout] -> Show confirmation
+
+Edit Mode:
+1. Edit first/last name fields
+2. Click photo buttons -> Camera/gallery/remove
+3. Click [Save] -> Save and exit edit mode
+4. Click [Cancel] -> Discard and exit edit mode
+
+
+VALIDATION
+================================================================================
+
+First Name: Required, min 1 character
+Last Name: Required, min 1 character
+
+
+================================================================================

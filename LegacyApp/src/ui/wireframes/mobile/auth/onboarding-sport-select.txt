@@ -1,0 +1,218 @@
+================================================================================
+ONBOARDING: SPORT SELECT - MOBILE WIREFRAME
+================================================================================
+Route: /(auth)/onboarding/sport-select.tsx
+Description: Second onboarding step - select sport type
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|                                          |
+|  [<] Back                                | Back button
+|                                          |
+|  Step 2 of 3                             | Progress indicator
+|  [========      ]                        | Progress bar (66%)
+|                                          |
+|                                          |
+|       What sport do you coach?           | Heading
+|                                          |
+|     Select your primary sport            | Description
+|                                          |
+|                                          |
+| +--------------------------------------+ |
+| | [Search] Search sports...            | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| | +----+  +----+  +----+  +----+       | |
+| | |[B] |  |[S] |  |[F] |  |[BB]|       | | Sport icons row 1
+| | |Bask|  |Socc|  |Foot|  |Base|       | |
+| | +----+  +----+  +----+  +----+       | |
+| |                                      | |
+| | +----+  +----+  +----+  +----+       | |
+| | |[SB]|  |[V] |  |[H] |  |[L] |       | | Sport icons row 2
+| | |Soft|  |Voll|  |Hock|  |Lacr|       | |
+| | +----+  +----+  +----+  +----+       | |
+| |                                      | |
+| | +----+  +----+  +----+  +----+       | |
+| | |[T] |  |[TF]|  |[XC]|  |[SW]|       | | Sport icons row 3
+| | |Tenn|  |Trac|  |Cros|  |Swim|       | |
+| | +----+  +----+  +----+  +----+       | |
+| |                                      | |
+| | +----+  +----+  +----+  +----+       | |
+| | |[W] |  |[G] |  |[CH]|  |[D] |       | | Sport icons row 4
+| | |Wres|  |Golf|  |Chee|  |Danc|       | |
+| | +----+  +----+  +----+  +----+       | |
+| |                                      | |
+| | +----+                               | |
+| | |[?] |  Other                        | | Other option
+| | +----+                               | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|  [Back]                    [Continue]    | Footer buttons
++------------------------------------------+
+
+
+PROGRESS INDICATOR
+================================================================================
+
+  Step 2 of 3
+  [========      ]
+
+- 66% filled
+- Shows step 2 of 3
+
+
+HEADING & DESCRIPTION
+================================================================================
+
+  What sport do you coach?     <- Large, bold (24px)
+
+   Select your primary sport    <- Normal, gray (14px)
+
+
+SEARCH BAR
+================================================================================
+
++--------------------------------------+
+| [O] Search sports...                 |
++--------------------------------------+
+
+- Filters sport options
+- Case-insensitive search
+
+
+SPORT GRID
+================================================================================
+
+4 columns of sport options:
+
++----+  +----+  +----+  +----+
+|[B] |  |[S] |  |[F] |  |[BB]|
+|Bask|  |Socc|  |Foot|  |Base|
++----+  +----+  +----+  +----+
+
+Each cell:
+- Icon/emoji representing sport
+- Abbreviated sport name below
+- Tap to select
+
+
+SPORT OPTIONS
+================================================================================
+
+Row 1:
+- [B]  Basketball
+- [S]  Soccer
+- [F]  Football
+- [BB] Baseball
+
+Row 2:
+- [SB] Softball
+- [V]  Volleyball
+- [H]  Hockey
+- [L]  Lacrosse
+
+Row 3:
+- [T]  Tennis
+- [TF] Track & Field
+- [XC] Cross Country
+- [SW] Swimming
+
+Row 4:
+- [W]  Wrestling
+- [G]  Golf
+- [CH] Cheerleading
+- [D]  Dance
+
+Row 5:
+- [?]  Other
+
+
+SPORT CELL STATES
+================================================================================
+
+Unselected:
++------+
+| [B]  |  Gray border
+| Bask |  Normal text
++------+
+
+Selected:
++======+
+| [B]  |  Blue border, blue background (light)
+| Bask |  Bold text
+|  ✓   |  Checkmark overlay
++======+
+
+
+FOOTER BUTTONS
+================================================================================
+
++------------------------------------------+
+|  [Back]                    [Continue]    |
++------------------------------------------+
+
+[Back] = Return to role-select
+[Continue] = Go to team-setup (disabled until selection)
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap [<] Back or [Back] -> Return to role-select
+2. Type in search -> Filter sports
+3. Tap sport cell -> Select that sport
+4. Tap [Continue] -> Navigate to team-setup
+
+
+OTHER SPORT OPTION
+================================================================================
+
+If "Other" is selected:
+
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  SPECIFY SPORT                       | |
+| |  +--------------------------------+  | |
+| |  | e.g., Rugby, Martial Arts     |  | |
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+
+Text input appears to specify the sport
+
+
+SEARCH RESULTS
+================================================================================
+
+When searching "ba":
+
++--------------------------------------+
+| +----+  +----+  +----+              |
+| |[B] |  |[BB]|  |[SB]|              |
+| |Bask|  |Base|  |Soft|              |  Filtered results
+| +----+  +----+  +----+              |
++--------------------------------------+
+
+
+NO RESULTS
+================================================================================
+
++--------------------------------------+
+|                                      |
+|     No sports found for "xyz"        |
+|                                      |
+|     Try "Other" to specify           |
+|     a custom sport                   |
+|                                      |
++--------------------------------------+
+
+
+================================================================================

@@ -1,0 +1,9 @@
+name: Create Production Builds
+
+jobs:
+  build_ios:
+    name: Build iOS
+    type: build
+    params:
+      platform: ios
+      profile: production

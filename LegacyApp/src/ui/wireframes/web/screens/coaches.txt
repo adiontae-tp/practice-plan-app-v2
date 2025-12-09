@@ -1,0 +1,249 @@
+================================================================================
+COACHES - WEB/DESKTOP WIREFRAME
+================================================================================
+Route: /(main)/coaches (via sidebar: Management > Coaches)
+Component: CoachesDesktop
+Description: Table view of team coaches with permissions
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  COACHES                                               |
+| Planning|  3 coaches                                             |
+| Dashbrd |                                                        |
+| Calendar|  +----------------------------------------------------+|
+| Periods |  | [Search by email...]              [+ Invite Coach] ||
+| Template|  +----------------------------------------------------+|
+|         |                                                        |
+| Commun. |  +----------------------------------------------------+|
+| Announce|  | #  |       Email              | Permission | Actions||
+|         |  +----+-------------------------+------------+--------+|
+| [*]Mngmt|  | 1  | john@example.com        |   [Admin]  |  [X]   ||
+| Files   |  +----+-------------------------+------------+--------+|
+| Tags    |  | 2  | jane@example.com        |   [Edit]   |  [X]   ||
+| Coaches |  +----+-------------------------+------------+--------+|
+| Reports |  | 3  | mike@example.com        |   [View]   |  [X]   ||
+|         |  +----+-------------------------+------------+--------+|
+| Settings|                                                        |
+| Profile |                                                        |
+| Team    |                                                        |
+| Subscr. |                                                        |
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+TABLE HEADER
+================================================================================
+
++----------------------------------------------------+
+| [Search by email...]              [+ Invite Coach] |
++----------------------------------------------------+
+
+- Search input for filtering by email
+- Primary action button for inviting coaches
+
+
+TABLE STRUCTURE
+================================================================================
+
++------+---------------------------+------------+--------+
+|  #   |          Email            | Permission | Actions|
++------+---------------------------+------------+--------+
+|  1   | john@example.com          |   [Admin]  |  [X]   |
++------+---------------------------+------------+--------+
+
+Columns:
+- # : Row number (width: 40px)
+- Email: Coach email address (flex-1)
+- Permission: Permission badge (width: 120px, center)
+- Actions: Delete button (width: 80px)
+
+
+PERMISSION BADGES
+================================================================================
+
+[Admin] = Blue background (#356793), white text
+          Full access - can manage everything
+
+[Edit]  = Green background (#22c55e), white text
+          Can create/edit content
+
+[View]  = Gray background (#9ca3af), white text
+          Read-only access
+
+Badge styling:
+- Border radius: 4px
+- Padding: 4px 12px
+- Font size: 11px
+- Font weight: 600
+- Centered in column
+
+
+EXTENDED TABLE (With Status)
+================================================================================
+
++------+---------------------+------------+----------+--------+
+|  #   |        Email        | Permission |  Status  | Actions|
++------+---------------------+------------+----------+--------+
+|  1   | john@example.com    |  [Admin]   | [Active] |  [X]   |
++------+---------------------+------------+----------+--------+
+|  2   | jane@example.com    |  [Edit]    | [Active] |  [X]   |
++------+---------------------+------------+----------+--------+
+|  3   | mike@example.com    |  [View]    | [Invited]|  [X]   |
++------+---------------------+------------+----------+--------+
+
+Status badges:
+[Active]   = Green outline, green text
+[Invited]  = Yellow outline, yellow text
+[Inactive] = Gray outline, gray text
+
+
+EMPTY STATE
+================================================================================
+
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  COACHES                                               |
+|         |  0 coaches                                             |
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  | [Search...]                       [+ Invite Coach] ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  |                                                    ||
+|         |  |                 +--------+                         ||
+|         |  |                 |   []   |                         ||
+|         |  |                 | [    ] |  Users Icon             ||
+|         |  |                 +--------+                         ||
+|         |  |                                                    ||
+|         |  |              No coaches yet                        ||
+|         |  |                                                    ||
+|         |  |      Invite coaches to help manage your team       ||
+|         |  |                                                    ||
+|         |  |            [+ Invite Coach]                        ||
+|         |  |                                                    ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+INVITE COACH MODAL
+================================================================================
+
++------------------------------------------+
+| [X]         Invite Coach                 |
++------------------------------------------+
+|                                          |
+|  Email Address                           |
+|  +------------------------------------+  |
+|  | coach@example.com                  |  |
+|  +------------------------------------+  |
+|                                          |
+|  Permission Level                        |
+|  +------------------------------------+  |
+|  |  [Admin]  [Edit]  [View]           |  |
+|  +------------------------------------+  |
+|                                          |
+|  [Cancel]                [Send Invite]   |
+|                                          |
++------------------------------------------+
+
+
+EDIT COACH MODAL
+================================================================================
+
++------------------------------------------+
+| [X]          Edit Coach                  |
++------------------------------------------+
+|                                          |
+|  Email                                   |
+|  john@example.com                        |
+|                                          |
+|  Permission Level                        |
+|  +------------------------------------+  |
+|  |  [Admin]  [Edit]  [View]           |  |
+|  +------------------------------------+  |
+|                                          |
+|  Status                                  |
+|  +------------------------------------+  |
+|  |  [Active]  [Inactive]              |  |
+|  +------------------------------------+  |
+|                                          |
+|  [Cancel]                   [Save]       |
+|                                          |
++------------------------------------------+
+
+
+DELETE CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|  +------------------------------------+  |
+|  |        Remove Coach?               |  |
+|  |                                    |  |
+|  |  Are you sure you want to remove   |  |
+|  |  john@example.com from the team?   |  |
+|  |                                    |  |
+|  |  They will lose access to all      |  |
+|  |  team content.                     |  |
+|  |                                    |  |
+|  |  [Cancel]           [Remove]       |  |
+|  +------------------------------------+  |
++------------------------------------------+
+
+
+SEARCH FUNCTIONALITY
+================================================================================
+
++------------------------------------------+
+| [O] Search by email...                   |
++------------------------------------------+
+
+- Real-time filtering by email address
+- Can also search by permission level
+
+
+INTERACTIONS
+================================================================================
+
+1. Type in search -> Filter table rows
+2. Click row -> Open edit coach modal
+3. Click [X] delete -> Show confirmation, then remove
+4. Click [+ Invite Coach] -> Open invite modal
+5. Hover row -> Highlight row
+
+
+PERMISSIONS
+================================================================================
+
+Admin users only:
+- See [+ Invite Coach] button
+- See delete [X] buttons
+- Can edit permissions
+- Can remove coaches
+
+Non-admin:
+- This screen not accessible
+
+
+TABLE STYLING
+================================================================================
+
+Header row:
+- Background: Gradient (#356793 to #2d5578)
+- Text: White, bold
+
+Body rows:
+- Background: White
+- Border-bottom: 1px solid #e5e7eb
+- Hover: Light blue background
+
+
+================================================================================

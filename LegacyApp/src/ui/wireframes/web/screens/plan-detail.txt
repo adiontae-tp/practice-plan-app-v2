@@ -1,0 +1,316 @@
+================================================================================
+PLAN DETAIL (PRACTICE EDITOR) - WEB/DESKTOP WIREFRAME
+================================================================================
+Route: /(modals)/plan/[id].tsx or inline view
+Component: PlanDetailDesktop
+Description: Full table-based practice plan editor
+================================================================================
+
+
+VIEW MODE LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  +----------------------------------------------------+|
+| Planning|  |  PRACTICE PLAN                                     ||
+| [*]Dash |  |  Monday, March 15, 2024                            ||
+| Calendar|  |                                                    ||
+| Periods |  |  [clock] 2:00 PM - 3:30 PM (1h 30min)              ||
+| Template|  |  [activities] 4 activities                  [Edit] ||
+|         |  +----------------------------------------------------+|
+| Commun. |                                                        |
+| Announce|  +----------------------------------------------------+|
+|         |  |                    ACTIVITIES                      ||
+| Manage  |  +====================================================+|
+| Files   |  || #  | Activity      | Time          | Dur. | Act. |||
+| Tags    |  |+----+---------------+---------------+------+------+||
+| Coaches |  || 1  | Warm-up       | 2:00 PM       | 15   |      |||
+| Reports |  ||    | [Conditioning]| to 2:15 PM    | min  | [E]  |||
+|         |  |+----+---------------+---------------+------+------+||
+| Settings|  || 2  | Skill Drills  | 2:15 PM       | 30   |      |||
+| Profile |  ||    | [Skills]      | to 2:45 PM    | min  | [E]  |||
+| Team    |  ||    | [Defense]     |               |      |      |||
+| Subscr. |  |+----+---------------+---------------+------+------+||
+|         |  || 3  | Scrimmage     | 2:45 PM       | 35   |      |||
+|         |  ||    | [Game]        | to 3:20 PM    | min  | [E]  |||
+|         |  ||    | Notes: Focus  |               |      |      |||
+|         |  |+----+---------------+---------------+------+------+||
+|         |  || 4  | Cool-down     | 3:20 PM       | 10   |      |||
+|         |  ||    | [Recovery]    | to 3:30 PM    | min  | [E]  |||
+|         |  |+====+===============+===============+======+======+||
+|         |  ||    | TOTAL         |               | 1h   |      |||
+|         |  ||    | PRACTICE TIME |               | 30m  |      |||
+|         |  |+----+---------------+---------------+------+------+||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  |  [PDF]    [Share]                      [Delete]    ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+EDIT MODE LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  |  PRACTICE PLAN                   [Cancel]   [Save] ||
+|         |  |  Monday, March 15, 2024                   [Change] ||
+|         |  |                                                    ||
+|         |  |  [clock] 2:00 PM - 3:30 PM (1h 30min)    [Change] ||
+|         |  |  [activities] 4 activities               [+ Add]  ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  |                    ACTIVITIES                      ||
+|         |  +====================================================+|
+|         |  || #  | Activity      | Time          | Dur. | Act. |||
+|         |  |+----+---------------+---------------+------+------+||
+|         |  ||[=] | Warm-up       | 2:00 PM       | 15   |[^]   |||
+|         |  || 1  | [Conditioning]| to 2:15 PM    | min  |[v]   |||
+|         |  ||    |               |               |      |[X]   |||
+|         |  |+----+---------------+---------------+------+------+||
+|         |  ||[=] | Skill Drills  | 2:15 PM       | 30   |[^]   |||
+|         |  || 2  | [Skills]      | to 2:45 PM    | min  |[v]   |||
+|         |  ||    | [Defense]     |               |      |[X]   |||
+|         |  |+----+---------------+---------------+------+------+||
+|         |  ||[=] | Scrimmage     | 2:45 PM       | 35   |[^]   |||
+|         |  || 3  | [Game]        | to 3:20 PM    | min  |[v]   |||
+|         |  ||    | Notes: Focus  |               |      |[X]   |||
+|         |  |+----+---------------+---------------+------+------+||
+|         |  ||[=] | Cool-down     | 3:20 PM       | 10   |[^]   |||
+|         |  || 4  | [Recovery]    | to 3:30 PM    | min  |[v]   |||
+|         |  ||    |               |               |      |[X]   |||
+|         |  |+====+===============+===============+======+======+||
+|         |  ||    | TOTAL         |               | 1h   |      |||
+|         |  ||    | PRACTICE TIME |               | 30m  |      |||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+HEADER SECTION
+================================================================================
+
+View Mode:
++----------------------------------------------------+
+|  PRACTICE PLAN                                     |
+|  Monday, March 15, 2024                            |
+|                                                    |
+|  [clock] 2:00 PM - 3:30 PM (1h 30min)              |
+|  [activities] 4 activities                  [Edit] |
++----------------------------------------------------+
+
+Edit Mode:
++----------------------------------------------------+
+|  PRACTICE PLAN                   [Cancel]   [Save] |
+|  Monday, March 15, 2024                   [Change] |
+|                                                    |
+|  [clock] 2:00 PM - 3:30 PM (1h 30min)    [Change] |
+|  [activities] 4 activities               [+ Add]  |
++----------------------------------------------------+
+
+
+TABLE STRUCTURE
+================================================================================
+
++======+================+================+=======+=======+
+|  #   |   Activity     |     Time       | Dur.  | Act.  |
++------+----------------+----------------+-------+-------+
+|  1   | Activity Name  | Start time     | XX    | [E]   |
+|      | [Tag1] [Tag2]  | to End time    | min   | or    |
+|      | Notes: text... |                |       | [^][v]|
+|      |                |                |       | [X]   |
++------+----------------+----------------+-------+-------+
+
+Columns:
+- # : Sequence number (width: 40px)
+  - In edit mode: includes drag handle [=]
+- Activity: Name, tags, notes (flex-1, min-w-40)
+- Time: Start and end times (width: 140px)
+- Duration: Time in min/hours (width: 80px)
+- Actions: Edit or reorder/delete (width: 80px)
+
+
+TABLE HEADER ROW
+================================================================================
+
++======+================+================+=======+=======+
+||  #  |   Activity     |     Time       | Dur.  | Act. ||
++======+================+================+=======+=======+
+
+- Gradient background (#356793 to #2d5578)
+- White text, bold
+- All uppercase
+
+
+ACTIVITY ROW - VIEW MODE
+================================================================================
+
++------+----------------+----------------+-------+-------+
+|  1   | Warm-up        | 2:00 PM        | 15    | [E]   |
+|      | [Conditioning] | to 2:15 PM     | min   |       |
++------+----------------+----------------+-------+-------+
+
+Number badge:
+- Circular badge with number
+- Primary color background
+- White text
+
+Tags:
+- Pill-shaped badges
+- Light background with dark text
+
+[E] = Edit button (pencil icon)
+
+
+ACTIVITY ROW - EDIT MODE
+================================================================================
+
++------+----------------+----------------+-------+-------+
+| [=]  | Warm-up        | 2:00 PM        | 15    | [^]   |
+|  1   | [Conditioning] | to 2:15 PM     | min   | [v]   |
+|      |                |                |       | [X]   |
++------+----------------+----------------+-------+-------+
+
+[=] = Drag handle for reordering
+[^] = Move up (chevron up)
+[v] = Move down (chevron down)
+[X] = Delete (trash icon, red)
+
+
+TOTAL ROW
+================================================================================
+
++------+----------------+----------------+-------+-------+
+|      | TOTAL          |                | 1h    |       |
+|      | PRACTICE TIME  |                | 30m   |       |
++------+----------------+----------------+-------+-------+
+
+- Bold text
+- Duration in large blue box
+- Spans across columns
+
+
+EMPTY STATE
+================================================================================
+
++----------------------------------------------------+
+|                    ACTIVITIES                      |
++----------------------------------------------------+
+|                                                    |
+|                 +--------+                         |
+|                 |   []   |                         |
+|                 | [    ] |  Clipboard Icon         |
+|                 +--------+                         |
+|                                                    |
+|           Build Your Practice Plan                 |
+|                                                    |
+|     Add periods from your library or use           |
+|     a template to get started                      |
+|                                                    |
+|    [Add Periods]        [Use Template]             |
+|                                                    |
++----------------------------------------------------+
+
+
+ACTION BUTTONS (View Mode Footer)
+================================================================================
+
++----------------------------------------------------+
+|  [PDF]    [Share]                      [Delete]    |
++----------------------------------------------------+
+
+[PDF] = Generate and view/download PDF
+[Share] = Open share options
+[Delete] = Delete practice (with confirmation)
+
+
+ADD ACTIVITIES (Edit Mode)
+================================================================================
+
+[+ Add] button options:
++---------------------------+
+| Add from Periods          |
++---------------------------+
+| Add Custom Activity       |
++---------------------------+
+| Use Template              |
++---------------------------+
+
+
+DELETE CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|  +------------------------------------+  |
+|  |      Delete Practice?              |  |
+|  |                                    |  |
+|  |  Are you sure you want to delete   |  |
+|  |  this practice plan?               |  |
+|  |                                    |  |
+|  |  Monday, March 15, 2024            |  |
+|  |  2:00 PM - 3:30 PM                 |  |
+|  |                                    |  |
+|  |  This cannot be undone.            |  |
+|  |                                    |  |
+|  |  [Cancel]           [Delete]       |  |
+|  +------------------------------------+  |
++------------------------------------------+
+
+
+REORDER FUNCTIONALITY
+================================================================================
+
+Edit mode enables:
+1. Drag and drop via [=] handle
+2. Click [^] to move activity up
+3. Click [v] to move activity down
+
+Visual feedback:
+- Dragged row has shadow
+- Drop target highlighted
+- Times auto-recalculate
+
+
+INTERACTIONS
+================================================================================
+
+View Mode:
+1. Click [Edit] -> Enter edit mode
+2. Click [E] on row -> Open activity edit modal
+3. Click [PDF] -> Generate PDF
+4. Click [Share] -> Open share dialog
+5. Click [Delete] -> Show confirmation
+
+Edit Mode:
+1. Click [Save] -> Save changes, exit edit mode
+2. Click [Cancel] -> Discard changes, exit edit mode
+3. Click [Change] date -> Open date picker
+4. Click [Change] time -> Open time picker
+5. Click [+ Add] -> Show add options
+6. Drag row or use [^][v] -> Reorder
+7. Click [X] -> Remove activity
+8. Click row -> Edit activity details
+
+
+PERMISSIONS
+================================================================================
+
+canEdit = true:
+- Show [Edit] button
+- Show [Delete] button
+- Can modify activities
+
+canEdit = false:
+- Hide [Edit] button
+- Hide [Delete] button
+- View and export only
+
+
+================================================================================

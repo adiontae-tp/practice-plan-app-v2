@@ -1,0 +1,296 @@
+================================================================================
+SUBSCRIPTION - WEB/DESKTOP WIREFRAME
+================================================================================
+Route: /(main)/subscription (via sidebar: Settings > Subscription)
+Component: SubscriptionDesktop
+Description: Subscription plans with horizontal card layout
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  +----------------------------------------------------+|
+| Planning|  |              SUBSCRIPTION PLANS                    ||
+| Dashbrd |  |       Choose the plan that fits your needs         ||
+| Calendar|  +----------------------------------------------------+|
+| Periods |                                                        |
+| Template|  +----------------------------------------------------+|
+|         |  |  ////////////////////////////////////////////      ||
+| Commun. |  |  //           ACTIVE PLAN                 //      ||
+| Announce|  |  //                                       //      ||
+|         |  |  //    [Shield]    PRO           [Manage] //      ||
+| Manage  |  |  //                                       //      ||
+| Files   |  |  ////////////////////////////////////////////      ||
+| Tags    |  +----------------------------------------------------+|
+| Coaches |                                                        |
+| Reports |  +----------------------------------------------------+|
+|         |  |                                                    ||
+| [*]Sett.|  |  +------------+  +============+  +------------+    ||
+| Profile |  |  |            |  ||           ||  |            |    ||
+| Team    |  |  |    FREE    |  ||   PRO     ||  |   TEAM     |    ||
+| Subscr. |  |  |            |  || POPULAR   ||  |            |    ||
+|         |  |  |   $0/mo    |  ||           ||  |  $24.99/mo |    ||
+|         |  |  |            |  ||  $9.99/mo ||  |            |    ||
+|         |  |  |  Basic     |  ||  [Current]||  |  Advanced  |    ||
+|         |  |  |  features  |  ||           ||  |  features  |    ||
+|         |  |  |            |  ||  Full     ||  |            |    ||
+|         |  |  | View >     |  ||  features ||  |  View >    |    ||
+|         |  |  |            |  ||           ||  |            |    ||
+|         |  |  +------------+  ||  View >   ||  +------------+    ||
+|         |  |                  ||           ||                    ||
+|         |  |                  +============+                     ||
+|         |  |                                                    ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  |    [Restore Purchases]    [Manage Subscription]    ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+HEADER SECTION
+================================================================================
+
++----------------------------------------------------+
+|              SUBSCRIPTION PLANS                    |
+|       Choose the plan that fits your needs         |
++----------------------------------------------------+
+
+- Centered title (large, bold)
+- Centered subtitle (normal, gray)
+
+
+ACTIVE PLAN BANNER
+================================================================================
+
++----------------------------------------------------+
+|  ////////////////////////////////////////////      |
+|  //                                       //      |
+|  //    [Shield]    PRO           [Manage] //      |
+|  //                                       //      |
+|  ////////////////////////////////////////////      |
++----------------------------------------------------+
+
+- Gradient background (#356793 to #4a90c2)
+- Shield checkmark icon (white)
+- Plan name (white, large)
+- [Manage] button (white outline)
+- Only shown if user has active subscription
+
+
+PLAN CARDS - HORIZONTAL LAYOUT
+================================================================================
+
++------------+  +============+  +------------+
+|            |  ||           ||  |            |
+|    FREE    |  ||   PRO     ||  |   TEAM     |
+|            |  || POPULAR   ||  |            |
+|   $0/mo    |  ||           ||  |  $24.99/mo |
+|            |  ||  $9.99/mo ||  |            |
+|  Basic     |  ||  [Current]||  |  Advanced  |
+|  features  |  ||           ||  |  features  |
+|            |  ||  Full     ||  |            |
+| View >     |  ||  features ||  |  View >    |
+|            |  ||           ||  |            |
++------------+  ||  View >   ||  +------------+
+                ||           ||
+                +============+
+
+Layout:
+- Horizontal row (flex-row gap-8)
+- Cards centered in content area
+- "Popular" card has blue border and banner
+
+
+PLAN CARD DETAIL
+================================================================================
+
+Standard Card:
++------------------------+
+|                        |
+|       PLAN NAME        |  Plan name (large, bold)
+|                        |
+|      $XX.XX/month      |  Price (very large)
+|          or            |
+|         Free           |
+|                        |
+|  Short description     |  Description (2-3 lines)
+|  of plan features      |  Min height for alignment
+|                        |
+|      View details >    |  Link with chevron
+|                        |
++------------------------+
+
+Border: Gray (#e5e7eb)
+
+
+Popular Card:
++========================+
+|| /// MOST POPULAR /// ||  Gradient banner
+||                      ||
+||       PRO            ||
+||                      ||
+||     $9.99/month      ||
+||                      ||
+||     [Current]        ||  Green badge (if active)
+||                      ||
+||  Full features for   ||
+||  serious coaches     ||
+||                      ||
+||    View details >    ||
+||                      ||
++========================+
+
+Border: Blue (#356793)
+Banner: Gradient pink/blue
+
+
+CURRENT PLAN BADGE
+================================================================================
+
+[Current]
+
+- Green background (#22c55e)
+- White text
+- Shown on active plan card
+- Positioned under price
+
+
+ACTION LINKS
+================================================================================
+
++----------------------------------------------------+
+|    [Restore Purchases]    [Manage Subscription]    |
++----------------------------------------------------+
+
+- Centered row
+- Link-style buttons
+- [Restore Purchases] = Always visible
+- [Manage Subscription] = Only if subscribed
+
+
+PLAN DETAIL MODAL
+================================================================================
+
++------------------------------------------+
+| [X]              PRO                     |
++------------------------------------------+
+|                                          |
+|            $9.99/month                   |  Large price
+|                                          |
+|  Full features for serious coaches       |  Description
+|  and teams who want to get the most      |
+|  out of their practice planning.         |
+|                                          |
+| +--------------------------------------+ |
+| |  WHAT'S INCLUDED                     | |
+| +--------------------------------------+ |
+| |                                      | |
+| |  [✓] Unlimited practice plans        | |
+| |  [✓] Unlimited templates             | |
+| |  [✓] Unlimited periods               | |
+| |  [✓] Team calendar                   | |
+| |  [✓] PDF export                      | |
+| |  [✓] Share practices                 | |
+| |  [✓] Activity timer                  | |
+| |  [✓] Up to 5 coaches                 | |
+| |  [✓] Priority support                | |
+| |                                      | |
+| |  [✗] Unlimited coaches               | |
+| |  [✗] Custom branding                 | |
+| |  [✗] API access                      | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |         [Upgrade to Pro]             | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+
+Feature icons:
+[✓] = Green checkmark (included)
+[✗] = Gray X (not included)
+
+
+FEATURE LIST STYLING
+================================================================================
+
+Included feature:
+[✓] Feature name and description
+    Green checkmark, normal text
+
+Excluded feature:
+[✗] Feature name
+    Gray X, gray text, strikethrough optional
+
+
+REVENUECAT STATUS BANNER
+================================================================================
+
++----------------------------------------------------+
+| [spinner] Initializing purchases...                |
++----------------------------------------------------+
+
+Or error state:
++----------------------------------------------------+
+| [!] Unable to load subscription info. Tap to retry |
++----------------------------------------------------+
+
+
+INTERACTIONS
+================================================================================
+
+1. Click "View details >" -> Open plan detail modal
+2. Click [Upgrade to X] in modal -> Initiate purchase
+3. Click [Restore Purchases] -> Restore previous purchases
+4. Click [Manage Subscription] -> Open native subscription manager
+5. Click [Manage] in banner -> Open subscription settings
+
+
+PLAN TIERS
+================================================================================
+
+FREE ($0/month):
+- 3 practice plans
+- 2 templates
+- Basic features
+- 1 coach
+
+PRO ($9.99/month) - MOST POPULAR:
+- Unlimited practice plans
+- Unlimited templates
+- All features
+- Up to 5 coaches
+- Priority support
+
+TEAM ($24.99/month):
+- Everything in Pro
+- Unlimited coaches
+- Custom branding
+- API access
+- Dedicated support
+
+
+BUTTON STATES IN MODAL
+================================================================================
+
+Non-subscriber viewing Free:
+[Current Plan] - disabled, gray
+
+Non-subscriber viewing Pro:
+[Subscribe to Pro] - primary, blue
+
+Pro subscriber viewing Team:
+[Upgrade to Team] - primary, blue
+
+Team subscriber viewing Pro:
+[Switch to Pro] - secondary, outline
+
+
+================================================================================

@@ -1,0 +1,230 @@
+================================================================================
+CONTACT DEVELOPER - WEB/DESKTOP WIREFRAME
+================================================================================
+Route: /(main)/contact (via sidebar: Settings > Contact Developer)
+Component: ContactDesktop
+Description: Centered contact form with email action
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  CONTACT DEVELOPER                                     |
+| Planning|                                                        |
+| Dashbrd |  +----------------------------------------------------+|
+| Calendar|  |                                                    ||
+| Periods |  |                 +--------+                         ||
+| Template|  |                 |  [O]   |                         ||
+|         |  |                 | (mail) |  Mail icon in circle    ||
+| Commun. |  |                 +--------+                         ||
+| Announce|  |                                                    ||
+|         |  |               Get in Touch                         ||
+| Manage  |  |                                                    ||
+| Files   |  |      Have feedback, found a bug, or need           ||
+| Tags    |  |      help? We'd love to hear from you!             ||
+| Coaches |  |                                                    ||
+| Reports |  |                                                    ||
+|         |  |  +----------------------------------------------+  ||
+| [*]Sett.|  |  |                                              |  ||
+| Profile |  |  |  [users]  Developer Team                     |  ||
+| Team    |  |  |                                              |  ||
+| Subscr. |  |  |           Parcee Development                 |  ||
+| Contact |  |  |                                              |  ||
+|         |  |  +----------------------------------------------+  ||
+|         |  |                                                    ||
+|         |  |  +----------------------------------------------+  ||
+|         |  |  |            [Send Email]                      |  ||
+|         |  |  +----------------------------------------------+  ||
+|         |  |                                                    ||
+|         |  |           support@practiceplan.app                 ||
+|         |  |                                                    ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  | [i] For fastest response, include your Team ID     ||
+|         |  |     and a description of your issue.               ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+CONTENT CARD
+================================================================================
+
++----------------------------------------------------+
+|                                                    |
+|                 +--------+                         |
+|                 |  [O]   |                         |
+|                 | (mail) |  Mail icon              |
+|                 +--------+                         |
+|                    blue circle bg                  |
+|                                                    |
+|               Get in Touch                         |  Heading (large, bold)
+|                                                    |
+|      Have feedback, found a bug, or need           |  Description
+|      help? We'd love to hear from you!             |  (gray, centered)
+|                                                    |
++----------------------------------------------------+
+
+Max width: max-w-2xl
+Centered in content area
+
+
+DEVELOPER INFO SECTION
+================================================================================
+
++----------------------------------------------+
+|                                              |
+|  [users]  Developer Team                     |  Icon + Label
+|                                              |
+|           Parcee Development                 |  Developer/Team name
+|                                              |
++----------------------------------------------+
+
+- Users/people icon on left
+- "Developer Team" label (small, gray)
+- Developer name (normal, black)
+
+
+EMAIL BUTTON
+================================================================================
+
++----------------------------------------------+
+|            [Send Email]                      |
++----------------------------------------------+
+
+- Primary blue button (#356793)
+- Full width within card
+- Mail icon optional
+- Opens default email client
+
+
+EMAIL ADDRESS DISPLAY
+================================================================================
+
+         support@practiceplan.app
+
+- Small gray text
+- Centered below button
+- Clickable (also opens email)
+
+
+INFO BOX
+================================================================================
+
++----------------------------------------------------+
+| [i] For fastest response, include your Team ID     |
+|     and a description of your issue.               |
++----------------------------------------------------+
+
+- Light blue background
+- Info icon [i]
+- Helpful tip text
+- Full width at bottom of card
+
+
+CLICK EMAIL ACTION
+================================================================================
+
+Clicking [Send Email] or email address:
+- Opens default email client
+- Pre-fills: To: support@practiceplan.app
+- Optional: Pre-fill subject with "Practice Plan App Support"
+
+
+ALTERNATIVE: CONTACT FORM (Optional)
+================================================================================
+
+If implementing in-app contact form:
+
++----------------------------------------------------+
+|                                                    |
+|  Subject                                           |
+|  +------------------------------------------------+|
+|  | Brief description...                           ||
+|  +------------------------------------------------+|
+|                                                    |
+|  Message                                           |
+|  +------------------------------------------------+|
+|  |                                                ||
+|  | Describe your feedback or issue...             ||
+|  |                                                ||
+|  |                                                ||
+|  +------------------------------------------------+|
+|                                                    |
+|  Contact Type                                      |
+|  [Feedback]  [Bug Report]  [Support]  [Other]     |
+|                                                    |
+|  [  ] Include device information                   |
+|                                                    |
+|  [Cancel]                         [Send Message]   |
+|                                                    |
++----------------------------------------------------+
+
+
+SOCIAL LINKS (Optional)
+================================================================================
+
++----------------------------------------------+
+|                                              |
+|  OTHER WAYS TO REACH US                      |
+|                                              |
+|  [twitter] @PracticePlanApp                  |
+|  [github]  github.com/practiceplan          |
+|                                              |
++----------------------------------------------+
+
+
+INTERACTIONS
+================================================================================
+
+1. Click [Send Email] -> Opens email client
+2. Click email address -> Opens email client
+3. Click social links -> Opens respective platform
+
+
+CONTENT WIDTH
+================================================================================
+
+- Card max width: max-w-2xl (672px)
+- Centered horizontally
+- Responsive padding
+
+
+STYLING
+================================================================================
+
+Mail icon circle:
+- Size: 64x64px
+- Background: Light blue
+- Icon: Mail icon, primary blue
+
+Heading:
+- Font size: 24px
+- Font weight: Bold
+- Color: Dark gray
+
+Description:
+- Font size: 16px
+- Color: Medium gray
+- Centered text
+
+Button:
+- Background: #356793
+- Text: White
+- Border radius: 8px
+- Padding: 12px 24px
+
+Info box:
+- Background: Light blue (#e0f2fe)
+- Border: 1px solid blue (#93c5fd)
+- Border radius: 8px
+- Padding: 16px
+
+
+================================================================================

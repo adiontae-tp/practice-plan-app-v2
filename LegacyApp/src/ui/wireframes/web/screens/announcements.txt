@@ -1,0 +1,222 @@
+================================================================================
+ANNOUNCEMENTS - WEB/DESKTOP WIREFRAME
+================================================================================
+Route: /(main)/announcements (via sidebar: Communication > Announcements)
+Component: AnnouncementsDesktop
+Description: Card-based announcement list with priorities
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  +----------------------------------------------------+|
+| Planning|  |  ANNOUNCEMENTS              [+ New Announcement]   ||
+| Dashbrd |  +----------------------------------------------------+|
+| Calendar|                                                        |
+| Periods |  +----------------------------------------------------+|
+| Template|  | +------------------------------------------------+ ||
+|         |  | |[*] Server Maintenance Tonight           [HIGH] | ||
+| [*]Comm.|  | |                                                | ||
+| Announce|  | | The system will be down for scheduled          | ||
+|         |  | | maintenance from 2:00 AM to 4:00 AM EST...     | ||
+| Manage  |  | |                                                | ||
+| Files   |  | | John Smith • 2 hours ago                       | ||
+| Tags    |  | +------------------------------------------------+ ||
+| Coaches |  |                                                    ||
+| Reports |  | +------------------------------------------------+ ||
+|         |  | |    Practice Schedule Update             [MED]  | ||
+| Settings|  | |                                                | ||
+| Profile |  | | Please note that Thursday's practice has       | ||
+| Team    |  | | been moved to 4:00 PM due to facility...       | ||
+| Subscr. |  | |                                                | ||
+|         |  | | Jane Doe • 1 day ago                           | ||
+|         |  | +------------------------------------------------+ ||
+|         |  |                                                    ||
+|         |  | +------------------------------------------------+ ||
+|         |  | |    Welcome New Team Members!             [LOW] | ||
+|         |  | |                                                | ||
+|         |  | | We're excited to welcome three new members     | ||
+|         |  | | to our team. Please join us in...              | ||
+|         |  | |                                                | ||
+|         |  | | John Smith • 3 days ago                        | ||
+|         |  | +------------------------------------------------+ ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+HEADER SECTION
+================================================================================
+
++----------------------------------------------------+
+|  ANNOUNCEMENTS              [+ New Announcement]   |
++----------------------------------------------------+
+
+- Title on left
+- [+ New Announcement] button on right (admin only)
+
+
+ANNOUNCEMENT CARD
+================================================================================
+
+Unread announcement:
++--------------------------------------------------+
+| [*] Announcement Title                    [HIGH] |  Blue dot + Priority
+|                                                  |
+| Preview text of the announcement message that    |  3 lines max
+| continues here and may be truncated if it's      |
+| too long to display fully...                     |
+|                                                  |
+| Author Name • 2 hours ago                        |  Metadata
++--------------------------------------------------+
+
+Read announcement:
++--------------------------------------------------+
+|     Announcement Title                     [MED] |  No dot, normal weight
+|                                                  |
+| Preview text of the announcement message...      |
+|                                                  |
+| Author Name • 1 day ago                          |
++--------------------------------------------------+
+
+
+UNREAD INDICATOR
+================================================================================
+
+[*] = Blue dot (8px)
+- Position: Left of title
+- Color: #356793 (primary blue)
+- Only shown for unread announcements
+
+
+PRIORITY BADGES
+================================================================================
+
+[HIGH] = Red background (#ef4444), white text
+[MED]  = Pink background (#ef7b8f), white text
+[LOW]  = Gray background (#9ca3af), white text
+
+Badge styling:
+- Border radius: 4px
+- Padding: 4px 12px
+- Font size: 11px
+- Font weight: 600
+- Uppercase text
+
+
+TIMESTAMP FORMAT
+================================================================================
+
+- Just now: "just now"
+- < 1 hour: "X minutes ago"
+- < 24 hours: "X hours ago"
+- < 7 days: "X days ago"
+- < 4 weeks: "X weeks ago"
+- > 4 weeks: "MMM D, YYYY"
+
+
+CARD LAYOUT DETAIL
+================================================================================
+
++--------------------------------------------------+
+|                                                  |
+|  [*]  Title Text Here                    [BADGE] |  Row 1: Dot + Title + Badge
+|                                                  |
+|  Message preview text that can span up to        |  Row 2-4: Message (3 lines)
+|  three lines and then gets truncated with        |
+|  an ellipsis if it continues further...          |
+|                                                  |
+|  Author Name • Relative Timestamp                |  Row 5: Metadata
+|                                                  |
++--------------------------------------------------+
+
+Card styling:
+- Background: White
+- Border radius: 8px
+- Shadow: subtle drop shadow
+- Padding: 20px
+- Margin bottom: 16px
+- Max width: max-w-5xl
+
+
+EMPTY STATE
+================================================================================
+
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  |  ANNOUNCEMENTS              [+ New Announcement]   ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  |                                                    ||
+|         |  |                 +--------+                         ||
+|         |  |                 |   []   |                         ||
+|         |  |                 | [    ] |  Megaphone Icon         ||
+|         |  |                 +--------+                         ||
+|         |  |                                                    ||
+|         |  |           No announcements yet                     ||
+|         |  |                                                    ||
+|         |  |       Create one to get started                    ||
+|         |  |                                                    ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+CARD STATES
+================================================================================
+
+Default:
+- White background
+- Normal shadow
+
+Hover:
+- Slightly elevated shadow
+- Cursor pointer
+
+Unread:
+- Title: Bold font weight
+- Blue dot visible
+
+Read:
+- Title: Normal font weight
+- No dot
+
+
+INTERACTIONS
+================================================================================
+
+1. Click card -> Open announcement-detail modal
+   - Marks as read if unread
+2. Click [+ New Announcement] -> Open announcement-create modal
+3. Hover card -> Elevate card slightly
+
+
+PERMISSIONS
+================================================================================
+
+Admin users:
+- See [+ New Announcement] button
+- Can create/edit/delete announcements
+
+Non-admin users:
+- No button visible
+- View-only access
+- Can mark as read
+
+
+CONTENT AREA WIDTH
+================================================================================
+
+- Max width: max-w-5xl (1024px)
+- Centered in content area
+- Responsive padding
+
+
+================================================================================

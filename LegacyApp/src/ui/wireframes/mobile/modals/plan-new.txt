@@ -1,0 +1,308 @@
+================================================================================
+CREATE PRACTICE PLAN - MOBILE MODAL WIREFRAME
+================================================================================
+Route: /(modals)/plan/new.tsx
+Component: PlanDetailMobile (create mode)
+Description: Modal for creating a new practice plan
+================================================================================
+
+
+MAIN LAYOUT - SCHEDULE SELECTION
+================================================================================
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  bg: #356793  |  text: #ffffff           |
+|  [X]          New Practice        [trash]|
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  SCHEDULE TYPE                       | |
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  | [Single Practice] [Recurring] |  | | Toggle
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  DATE                                | |
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  | March 15, 2024             [v]|  | | Date picker trigger
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  TIME                                | |
+| +--------------------------------------+ |
+| |  Start Time                          | |
+| |  +--------------------------------+  | |
+| |  | 2:00 PM                    [v]|  | | Time picker trigger
+| |  +--------------------------------+  | |
+| |                                      | |
+| |  End Time                            | |
+| |  +--------------------------------+  | |
+| |  | 3:30 PM                    [v]|  | |
+| |  +--------------------------------+  | |
+| |                                      | |
+| |  Duration: 1h 30min                  | | Calculated
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  BUILD YOUR PRACTICE PLAN            | |
+| +--------------------------------------+ |
+| |                                      | |
+| |           +--------+                 | |
+| |           |   []   |                 | |
+| |           | [    ] |  Clipboard      | |
+| |           +--------+                 | |
+| |                                      | |
+| |     Add activities to your plan      | |
+| |                                      | |
+| |  [Add Periods]    [Use Template]     | | Two buttons
+| |                                      | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Create"        |
+|  [Cancel]                   [Create]     |
++------------------------------------------+
+
+
+WITH ACTIVITIES ADDED
+================================================================================
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]          New Practice        [trash]|
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  March 15, 2024                [Edit]| |
+| |  2:00 PM - 3:30 PM (1h 30min)        | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  ACTIVITIES                    [Add] | |
+| +--------------------------------------+ |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [=] Warm-up                      | | | [=] drag handle
+| | |     2:00 PM - 2:15 PM   15 min   | | |
+| | |     [Conditioning]               | | |
+| | |                         [^][v][X]| | | Reorder/delete
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [=] Drills                       | | |
+| | |     2:15 PM - 2:45 PM   30 min   | | |
+| | |     [Skills] [Defense]           | | |
+| | |                         [^][v][X]| | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [=] Scrimmage                    | | |
+| | |     2:45 PM - 3:20 PM   35 min   | | |
+| | |     [Game]                       | | |
+| | |     Notes: Focus on transitions  | | |
+| | |                         [^][v][X]| | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | [=] Cool-down                    | | |
+| | |     3:20 PM - 3:30 PM   10 min   | | |
+| | |     [Recovery]                   | | |
+| | |                         [^][v][X]| | |
+| | +----------------------------------+ | |
+| |                                      | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Create"        |
+|  [Cancel]                   [Create]     |
++------------------------------------------+
+
+
+MODAL HEADER
+================================================================================
+
++------------------------------------------+
+|  [X]          New Practice        [trash]|
++------------------------------------------+
+
+[X] = Close modal (with confirmation if changes)
+[trash] = Delete/discard (hidden for new, shown for edit)
+
+Title: "New Practice" for create mode
+
+
+SCHEDULE TYPE TOGGLE
+================================================================================
+
++--------------------------------+
+| [Single Practice] [Recurring]  |
++--------------------------------+
+
+Single Practice: One-time practice
+Recurring: Create multiple practices (future enhancement)
+
+
+DATE PICKER TRIGGER
+================================================================================
+
++--------------------------------+
+| March 15, 2024             [v] |
++--------------------------------+
+
+Tap -> Opens date-picker modal
+Shows selected date in readable format
+
+
+TIME PICKER TRIGGERS
+================================================================================
+
+Start Time:
++--------------------------------+
+| 2:00 PM                    [v] |
++--------------------------------+
+
+End Time:
++--------------------------------+
+| 3:30 PM                    [v] |
++--------------------------------+
+
+Tap -> Opens time-picker modal
+Duration auto-calculated: "Duration: 1h 30min"
+
+
+EMPTY STATE (No Activities)
+================================================================================
+
++--------------------------------------+
+|  BUILD YOUR PRACTICE PLAN            |
++--------------------------------------+
+|                                      |
+|           +--------+                 |
+|           |   []   |                 |
+|           | [    ] |                 |
+|           +--------+                 |
+|                                      |
+|     Add activities to your plan      |
+|                                      |
+|  [Add Periods]    [Use Template]     |
+|                                      |
++--------------------------------------+
+
+[Add Periods] -> Opens period-selector modal
+[Use Template] -> Opens template-selector modal
+
+
+ACTIVITY CARD (In List)
+================================================================================
+
++--------------------------------------+
+| [=] Activity Name                    |  [=] = drag handle
+|     HH:MM AM - HH:MM PM   XX min     |  Time range + duration
+|     [Tag1] [Tag2]                    |  Tags
+|     Notes: Note text here...         |  Notes (if any)
+|                           [^][v][X]  |  Reorder up/down, delete
++--------------------------------------+
+
+Tap card -> Opens activity-instance-edit modal
+[^] = Move up
+[v] = Move down
+[X] = Delete activity
+
+
+ADD ACTIVITIES BUTTON
+================================================================================
+
++--------------------------------------+
+|  ACTIVITIES                    [Add] |
++--------------------------------------+
+
+[Add] button options (action sheet):
++---------------------------+
+| Add from Periods          |  -> period-selector modal
++---------------------------+
+| Add Custom Activity       |  -> activity modal
++---------------------------+
+| Cancel                    |
++---------------------------+
+
+
+FOOTER BUTTONS (TPFooterButtons)
+================================================================================
+
+Uses: TPFooterButtons component from @/components/tp
+
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Create"        |
+|  [Cancel]                   [Create]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleCancel}
+- onSave={handleCreate}
+- saveLabel="Create"
+- saveDisabled={!isValid}
+- loading={isCreating}
+
+[Cancel] = Discard and close (with confirmation)
+[Create] = Save new practice plan
+
+Button states:
+- [Create] disabled if no date/time set (saveDisabled prop)
+- [Create] enabled once schedule is set
+- Shows spinner when loading=true
+
+
+VALIDATION
+================================================================================
+
+Required:
+- Date must be selected
+- Start time must be set
+- End time must be after start time
+
+Optional:
+- Activities (can create empty plan)
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap [X] -> Close modal (confirm if unsaved changes)
+2. Tap date field -> Opens date-picker modal
+3. Tap time field -> Opens time-picker modal
+4. Tap [Add Periods] -> Opens period-selector modal
+5. Tap [Use Template] -> Opens template-selector modal
+6. Tap activity card -> Opens activity-instance-edit modal
+7. Drag activity [=] -> Reorder activities
+8. Tap [^]/[v] -> Move activity up/down
+9. Tap [X] on activity -> Remove activity
+10. Tap [Cancel] -> Discard and close
+11. Tap [Create] -> Save practice plan
+
+
+CONFIRMATION DIALOGS
+================================================================================
+
+Unsaved changes:
++------------------------------------------+
+|  +------------------------------------+  |
+|  |      Discard Changes?              |  |
+|  |                                    |  |
+|  |  You have unsaved changes.         |  |
+|  |  Are you sure you want to leave?   |  |
+|  |                                    |  |
+|  |  [Keep Editing]    [Discard]       |  |
+|  +------------------------------------+  |
++------------------------------------------+
+
+
+================================================================================

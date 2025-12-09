@@ -1,0 +1,37 @@
+appId: com.teamparcee.practiceplan
+---
+- launchApp:
+    clearState: true
+
+- assertVisible: "Coaches"
+- tapOn: "Coaches"
+
+- takeScreenshot: "coaches_list"
+
+- tapOn: "Add Coach"
+- inputText:
+    id: "coach-name-input"
+    text: "Test Coach"
+- tapOn: "Save"
+- assertVisible: "Test Coach"
+- takeScreenshot: "coach_created"
+
+- tapOn: "Test Coach"
+- assertVisible: "Test Coach"
+- takeScreenshot: "coach_read"
+
+- tapOn: "Edit"
+- clearInput:
+    id: "coach-name-input"
+- inputText:
+    id: "coach-name-input"
+    text: "Updated Coach"
+- tapOn: "Save"
+- assertVisible: "Updated Coach"
+- takeScreenshot: "coach_updated"
+
+- longPressOn: "Updated Coach"
+- tapOn: "Delete"
+- tapOn: "Confirm"
+- assertNotVisible: "Updated Coach"
+- takeScreenshot: "coach_deleted"

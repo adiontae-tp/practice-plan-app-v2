@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "QNS86FH9WM.com.parcee.practiceplan",
+        "paths": ["*"]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["QNS86FH9WM.com.parcee.practiceplan"]
+  }
+}

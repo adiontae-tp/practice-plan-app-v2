@@ -1,0 +1,229 @@
+================================================================================
+LOGIN - MOBILE WIREFRAME
+================================================================================
+Route: /(auth)/login.tsx
+Description: User login screen
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|                                          |
+|                                          |
+|              +----------+                |
+|              |          |                |
+|              |  [LOGO]  |                | App logo
+|              |          |                |
+|              +----------+                |
+|                                          |
+|            Welcome Back                  | Heading
+|                                          |
+|    Let's get started by filling out      | Subheading
+|         the form below.                  |
+|                                          |
+| +--------------------------------------+ |
+| |  EMAIL                               | |
+| |  +--------------------------------+  | |
+| |  | email@example.com              |  | |
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  PASSWORD                            | |
+| |  +--------------------------------+  | |
+| |  | ••••••••                   [O] |  | | [O] = show/hide
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |            [Sign In]                 | | Blue button
+| +--------------------------------------+ |
+|                                          |
+|           Forgot Password?               | Link
+|                                          |
+|              ----OR----                  | Divider
+|                                          |
+|      Don't have an account?              |
+|           Create one                     | Link
+|                                          |
+|                                          |
+|  Terms & Conditions  |  Privacy Policy   | Footer links
+|                                          |
++------------------------------------------+
+
+
+LOGO SECTION
+================================================================================
+
++----------+
+|          |
+|  [LOGO]  |  App logo image
+|          |
++----------+
+
+- Centered at top
+- Appropriate size for mobile (e.g., 100x100)
+- May animate on load
+
+
+HEADING & SUBHEADING
+================================================================================
+
+        Welcome Back           <- Large, bold (24px)
+
+Let's get started by filling   <- Smaller, gray (14px)
+    out the form below.
+
+
+EMAIL INPUT
+================================================================================
+
++--------------------------------------+
+|  EMAIL                               |
+|  +--------------------------------+  |
+|  | email@example.com              |  |
+|  +--------------------------------+  |
++--------------------------------------+
+
+- Label: "EMAIL"
+- Input type: email
+- Placeholder: "email@example.com"
+- Keyboard: email type
+
+
+PASSWORD INPUT
+================================================================================
+
++--------------------------------------+
+|  PASSWORD                            |
+|  +--------------------------------+  |
+|  | ••••••••                   [O] |  |
+|  +--------------------------------+  |
++--------------------------------------+
+
+- Label: "PASSWORD"
+- Input type: password (dots shown)
+- [O] = Toggle visibility (eye icon)
+- Keyboard: default
+
+
+SIGN IN BUTTON
+================================================================================
+
++--------------------------------------+
+|            [Sign In]                 |
++--------------------------------------+
+
+- Full width
+- Primary color (#356793)
+- White text
+- Rounded corners
+- Disabled state while submitting
+
+
+FORGOT PASSWORD LINK
+================================================================================
+
+       Forgot Password?
+
+- Centered link
+- Taps navigate to /(auth)/forgot-password
+
+
+DIVIDER
+================================================================================
+
+         ----OR----
+
+- Horizontal line with "OR" text
+- Separates login from registration link
+
+
+CREATE ACCOUNT LINK
+================================================================================
+
+  Don't have an account?
+       Create one           <- Blue link
+
+- Centered text
+- "Create one" is tappable link
+- Navigates to /(auth)/register
+
+
+FOOTER LINKS
+================================================================================
+
+Terms & Conditions  |  Privacy Policy
+
+- Small text at bottom
+- Links to respective pages
+- Separated by pipe character
+
+
+ERROR STATES
+================================================================================
+
+Invalid credentials:
++--------------------------------------+
+| [!] Invalid email or password        |  Red banner
++--------------------------------------+
+
+Field error:
++--------------------------------------+
+|  EMAIL                               |
+|  +--------------------------------+  |
+|  |                                |  |  Red border
+|  +--------------------------------+  |
+|  [!] Please enter a valid email      |  Red error text
++--------------------------------------+
+
+
+LOADING STATE
+================================================================================
+
++--------------------------------------+
+|         [Signing In...]              |  Spinner + text
++--------------------------------------+
+
+- Button shows spinner
+- Inputs disabled
+- Prevents double submission
+
+
+INTERACTIONS
+================================================================================
+
+1. Enter email -> Updates email state
+2. Enter password -> Updates password state
+3. Tap [O] eye icon -> Toggles password visibility
+4. Tap [Sign In] -> Validates and submits
+5. Tap "Forgot Password?" -> Navigate to forgot-password
+6. Tap "Create one" -> Navigate to register
+7. Tap footer links -> Navigate to terms/privacy
+
+
+VALIDATION
+================================================================================
+
+Email:
+- Required
+- Must be valid email format
+
+Password:
+- Required
+- Min 6 characters (or per Firebase config)
+
+
+SUCCESS BEHAVIOR
+================================================================================
+
+On successful login:
+1. Firebase auth state updates
+2. App redirects based on user state:
+   - Has team -> /(main)/(tabs)
+   - No team -> /(auth)/onboarding/role-select
+
+
+================================================================================

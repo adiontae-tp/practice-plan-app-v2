@@ -1,0 +1,36 @@
+==================================================
+COPY THIS PROMPT TO START AN AGENT ON MIGRATION
+==================================================
+
+You are working on migrating the Practice Plan App from LegacyApp to the new v10 architecture. This is a coordinated multi-agent effort.
+
+REQUIRED READING (in order):
+1. practice-plan-app/claude.md - Technical architecture guide
+2. MIGRATION-CHECKLIST.md - Track your work here
+3. AGENT-PROMPT.md - Complete instructions (read this fully)
+
+YOUR WORKFLOW:d
+1. Open MIGRATION-CHECKLIST.md
+2. Check the "Active Work" table to avoid conflicts
+3. Choose an available page (look for 📋 Placeholder or ⏸️ Not Started status)
+4. Claim it by adding a row to the Active Work table with your agent ID
+5. Study the legacy implementation in LegacyApp/src/apps/mobile/ or LegacyApp/src/apps/web/
+6. Implement the page in practice-plan-app/app/ following the patterns in claude.md
+7. Update your status regularly in the Active Work table
+8. When done: remove from Active Work, add to Completed Work Log, change status to ✅
+
+KEY RULES:
+- Mobile pages (*.tsx): Use components/native/* (React Native components: View, Text, etc.)
+- Web pages (*.web.tsx): Use components/web/desktop/* (HTML: div, h1, p, etc.)
+- NEVER mix React Native components in .web.tsx files
+- Use @/lib/store for state management (Zustand)
+- Always create BOTH *.tsx and *.web.tsx if the feature needs different implementations
+- Claim work in Active Work table BEFORE starting
+- Complete one page fully before moving to the next
+
+RECOMMENDED STARTING POINTS:
+Easy: Tags, Profile, Help pages
+Medium: Coaches, Files, Announcements, Reports
+Complex: Login/Register, Dashboard, Plans, Calendar (need dependencies)
+
+Start by telling me which page you want to work on, and I'll guide you through the implementation!

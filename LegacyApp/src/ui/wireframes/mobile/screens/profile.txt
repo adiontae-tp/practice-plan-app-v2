@@ -1,0 +1,333 @@
+================================================================================
+PROFILE - MOBILE WIREFRAME
+================================================================================
+Route: /(main)/(menu)/profile.tsx
+Component: ProfileMobile
+Description: User profile and account settings
+================================================================================
+
+
+VIEW MODE (Default)
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [<] Menu           Profile              |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |            PROFILE PHOTO             | |
+| |                                      | |
+| |            +----------+              | |
+| |            |          |              | |
+| |            |   [  ]   |  Avatar      | |
+| |            |    JS    |  (initials)  | |
+| |            |          |              | |
+| |            +----------+              | |
+| |                                      | |
+| |          [Edit Profile]              | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  PERSONAL INFORMATION                | |
+| +--------------------------------------+ |
+| |  First Name                          | |
+| |  John                                | |
+| |                                      | |
+| |  Last Name                           | |
+| |  Smith                               | |
+| |                                      | |
+| |  Email                               | |
+| |  john.smith@example.com              | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  ACCOUNT INFORMATION                 | |
+| +--------------------------------------+ |
+| |  Role                                | |
+| |  Admin                               | |
+| |                                      | |
+| |  Subscription Status                 | |
+| |  Active                              | |
+| |                                      | |
+| |  Subscription Tier                   | |
+| |  Pro                                 | |
+| |                                      | |
+| |  Team ID                             | |
+| |  team_abc123xyz                      | |
+| |                                      | |
+| |  Permission Level                    | |
+| |  Full Access                         | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  NOTIFICATION SETTINGS               | |
+| +--------------------------------------+ |
+| |                                      | |
+| |  Announcement Notifications    [ON]  | | Toggle switch
+| |  Receive push notifications for      | |
+| |  new team announcements              | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  APP INFORMATION                     | |
+| +--------------------------------------+ |
+| |  Version: 1.0.0                      | |
+| |  Build: PPV9                         | |
+| |  User ID: user_12345abcde            | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |            [Logout]                  | | Red button
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+
+
+EDIT MODE
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [X]            Edit Profile             |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |            PROFILE PHOTO             | |
+| |                                      | |
+| |            +----------+              | |
+| |            |          |              | |
+| |            |   [  ]   |              | |
+| |            |    JS    |              | |
+| |            |          |              | |
+| |            +----------+              | |
+| |                                      | |
+| |  [Camera]  [Gallery]  [Remove]       | | Photo options
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  PERSONAL INFORMATION                | |
+| +--------------------------------------+ |
+| |  First Name                          | |
+| |  +--------------------------------+  | |
+| |  | John                           |  | | Editable input
+| |  +--------------------------------+  | |
+| |                                      | |
+| |  Last Name                           | |
+| |  +--------------------------------+  | |
+| |  | Smith                          |  | |
+| |  +--------------------------------+  | |
+| |                                      | |
+| |  Email                               | |
+| |  john.smith@example.com (read-only)  | | Cannot change email
+| +--------------------------------------+ |
+|                                          |
+| (Account Info section hidden in edit)    |
+| (Notification settings remain visible)   |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Save"          |
+|  [Cancel]                     [Save]     |
++------------------------------------------+
+
+
+PROFILE PHOTO SECTION
+================================================================================
+
+View Mode:
++--------------------------------------+
+|            +----------+              |
+|            |          |              |
+|            |   [  ]   |  Large avatar|
+|            |    JS    |  (96x96)     |
+|            |          |              |
+|            +----------+              |
+|                                      |
+|          [Edit Profile]              |
++--------------------------------------+
+
+Edit Mode with photo options:
++--------------------------------------+
+|            +----------+              |
+|            |   [  ]   |              |
+|            +----------+              |
+|                                      |
+|  [Camera]  [Gallery]  [Remove]       |
++--------------------------------------+
+
+[Camera] = Take new photo
+[Gallery] = Choose from gallery
+[Remove] = Remove current photo
+
+
+PERSONAL INFO CARD
+================================================================================
+
+View Mode:
++--------------------------------------+
+|  PERSONAL INFORMATION                |
++--------------------------------------+
+|  First Name                          |  Label (gray, small)
+|  John                                |  Value (black, normal)
+|                                      |
+|  Last Name                           |
+|  Smith                               |
+|                                      |
+|  Email                               |
+|  john.smith@example.com              |
++--------------------------------------+
+
+Edit Mode:
++--------------------------------------+
+|  PERSONAL INFORMATION                |
++--------------------------------------+
+|  First Name                          |
+|  +--------------------------------+  |
+|  | John                           |  |  Text input
+|  +--------------------------------+  |
+|                                      |
+|  Last Name                           |
+|  +--------------------------------+  |
+|  | Smith                          |  |
+|  +--------------------------------+  |
++--------------------------------------+
+
+
+ACCOUNT INFO CARD
+================================================================================
+
++--------------------------------------+
+|  ACCOUNT INFORMATION                 |
++--------------------------------------+
+|  Role                                |
+|  Admin                    [Badge]    |  Blue badge for admin
+|                                      |
+|  Subscription Status                 |
+|  Active                   [Green]    |  Green indicator
+|                                      |
+|  Subscription Tier                   |
+|  Pro                                 |
+|                                      |
+|  Team ID                             |
+|  team_abc123xyz           [Copy]     |  Copy button
+|                                      |
+|  Permission Level                    |
+|  Full Access                         |
++--------------------------------------+
+
+All fields are read-only (display only)
+
+
+NOTIFICATION SETTINGS CARD
+================================================================================
+
++--------------------------------------+
+|  NOTIFICATION SETTINGS               |
++--------------------------------------+
+|                                      |
+|  Announcement Notifications    [===] |  Toggle ON
+|  Receive push notifications for      |
+|  new team announcements              |  Description text
+|                                      |
++--------------------------------------+
+
+Toggle states:
+[===] = ON (blue/green)
+[   ] = OFF (gray)
+
+
+APP INFO CARD
+================================================================================
+
++--------------------------------------+
+|  APP INFORMATION                     |
++--------------------------------------+
+|  Version: 1.0.0                      |
+|  Build: PPV9                         |
+|  User ID: user_12345abcde            |  Monospace font
++--------------------------------------+
+
+User ID can be copied (tap to copy)
+
+
+LOGOUT BUTTON
+================================================================================
+
++--------------------------------------+
+|            [Logout]                  |
++--------------------------------------+
+
+- Full-width button
+- Red background (#ef4444)
+- White text
+- Shows confirmation dialog
+
+
+LOGOUT CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|                                          |
+|  +------------------------------------+  |
+|  |           Log Out?                 |  |
+|  |                                    |  |
+|  |  Are you sure you want to          |  |
+|  |  log out of your account?          |  |
+|  |                                    |  |
+|  |  [Cancel]           [Log Out]      |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+
+
+EDIT MODE FOOTER (TPFooterButtons)
+================================================================================
+
+Uses: TPFooterButtons component from @/components/tp
+
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Save"          |
+|  [Cancel]                     [Save]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleCancelEdit}
+- onSave={handleSave}
+- saveLabel="Save"
+- saveDisabled={!hasChanges}
+- loading={isSaving}
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap [Edit Profile] -> Enters edit mode (opens as modal or inline edit)
+2. Tap [Save] in TPFooterButtons -> Saves changes, exits edit mode
+3. Tap [Cancel] in TPFooterButtons -> Discards changes, exits edit mode
+4. Tap photo option -> Camera/gallery/remove action
+5. Toggle notification -> Updates preference
+6. Tap [Logout] -> Shows confirmation, logs out
+7. Tap User ID/Team ID -> Copies to clipboard
+8. Tap [<] back -> Returns to Menu
+
+
+VALIDATION (Edit Mode)
+================================================================================
+
+First Name:
+- Required
+- Min 1 character
+
+Last Name:
+- Required
+- Min 1 character
+
+Shows error messages below inputs if invalid
+
+
+================================================================================

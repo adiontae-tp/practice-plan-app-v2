@@ -1,0 +1,226 @@
+================================================================================
+MENU TAB - MOBILE WIREFRAME
+================================================================================
+Route: /(main)/(tabs)/menu.tsx
+Component: MenuMobile
+Description: Navigation hub to all app sections
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [Menu]             Menu                 |
++------------------------------------------+
+|                                          |
+| PLANNING                                 | Section header
+| +--------------------------------------+ |
+| | [icon]  Period Templates             | |
+| |         Create reusable periods      | |
+| +--------------------------------------+ |
+| | [icon]  Practice Templates           | |
+| |         Save and reuse plans         | |
+| +--------------------------------------+ |
+|                                          |
+| COMMUNICATION                            |
+| +--------------------------------------+ |
+| | [icon]  Announcements          [!]   | | Unread indicator
+| |         Team messages & updates      | |
+| +--------------------------------------+ |
+|                                          |
+| MANAGEMENT                               |
+| +--------------------------------------+ |
+| | [icon]  Files                        | |
+| |         Documents & attachments      | |
+| +--------------------------------------+ |
+| | [icon]  Tags                         | |
+| |         Organize activities          | |
+| +--------------------------------------+ |
+| | [icon]  Coaches            [Admin]   | | Admin badge
+| |         Manage team members          | |
+| +--------------------------------------+ |
+| | [icon]  Reports                      | |
+| |         Analytics & insights         | |
+| +--------------------------------------+ |
+|                                          |
+| ACCOUNT                                  |
+| +--------------------------------------+ |
+| | [icon]  Profile                      | |
+| |         Your account settings        | |
+| +--------------------------------------+ |
+| | [icon]  Team Settings      [Admin]   | |
+| |         Team configuration           | |
+| +--------------------------------------+ |
+| | [icon]  Subscription                 | |
+| |         Manage your plan             | |
+| +--------------------------------------+ |
+| | [icon]  Contact Developer            | |
+| |         Feedback & support           | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  Version 1.0.0 (PPV9)                | | App version info
+| |  Updated: Mar 15, 2024               | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|  +----------+----------+----------+      |
+|  | Practice | Calendar |   Menu   |      |
++------------------------------------------+
+
+
+MENU ITEM CARD DETAIL
+================================================================================
+
+Standard Item:
++--------------------------------------+
+| [O]  Title                           |
+|      Description text here           |
++--------------------------------------+
+
+With Badge:
++--------------------------------------+
+| [O]  Title                   [Badge] |
+|      Description text here           |
++--------------------------------------+
+
+Badge types:
+- [!] = Unread indicator (blue dot or number)
+- [Admin] = Admin only feature (gray badge)
+
+
+SECTION HEADERS
+================================================================================
+
+PLANNING                <- Section name
++--------------------------------------+
+| Menu items...                        |
++--------------------------------------+
+
+Style:
+- Text: uppercase, small (11px)
+- Color: #999 (gray)
+- Font: Outfit SemiBold
+- Margin: top 16px, bottom 8px
+
+
+MENU ITEMS WITH ICONS
+================================================================================
+
+PLANNING Section:
++--------------------------------------+
+| [clipboard]  Period Templates        |
+|              Create reusable periods |
++--------------------------------------+
+| [file-text]  Practice Templates      |
+|              Save and reuse plans    |
++--------------------------------------+
+
+COMMUNICATION Section:
++--------------------------------------+
+| [megaphone]  Announcements     [!]   |
+|              Team messages & updates |
++--------------------------------------+
+
+MANAGEMENT Section:
++--------------------------------------+
+| [folder]     Files                   |
+|              Documents & attachments |
++--------------------------------------+
+| [tag]        Tags                    |
+|              Organize activities     |
++--------------------------------------+
+| [users]      Coaches         [Admin] |
+|              Manage team members     |
++--------------------------------------+
+| [bar-chart]  Reports                 |
+|              Analytics & insights    |
++--------------------------------------+
+
+ACCOUNT Section:
++--------------------------------------+
+| [user]       Profile                 |
+|              Your account settings   |
++--------------------------------------+
+| [settings]   Team Settings   [Admin] |
+|              Team configuration      |
++--------------------------------------+
+| [credit-card] Subscription           |
+|              Manage your plan        |
++--------------------------------------+
+| [mail]       Contact Developer       |
+|              Feedback & support      |
++--------------------------------------+
+
+
+NAVIGATION ROUTES
+================================================================================
+
+Menu Item              -> Route
+-----------               -----
+Period Templates      -> /(main)/(menu)/periods
+Practice Templates    -> /(main)/(menu)/templates
+Announcements         -> /(main)/(menu)/announcements
+Files                 -> /(main)/(menu)/files
+Tags                  -> /(main)/(menu)/tags
+Coaches               -> /(main)/(menu)/coaches
+Reports               -> /(main)/(menu)/reports
+Profile               -> /(main)/(menu)/profile
+Team Settings         -> /(main)/(menu)/team
+Subscription          -> /(main)/(menu)/subscription
+Contact Developer     -> /(main)/(menu)/contact
+
+
+ADMIN-ONLY ITEMS
+================================================================================
+
+Items with [Admin] badge:
+- Coaches
+- Team Settings
+
+Behavior for non-admin users:
+Option 1: Hide the items entirely
+Option 2: Show items but grayed out with "Admin Only" badge
+
+
+VERSION INFO CARD
+================================================================================
+
++--------------------------------------+
+|  Version 1.0.0 (PPV9)                |
+|  Updated: Mar 15, 2024 10:30 AM      |
++--------------------------------------+
+
+- Shown at bottom of menu
+- Lighter text color (#999)
+- Smaller font size
+- Includes: Version, Build, Update timestamp
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap menu item -> Navigate to corresponding screen
+2. Items push onto stack with back button to Menu
+
+
+UNREAD INDICATORS
+================================================================================
+
+Announcements with unread:
++--------------------------------------+
+| [megaphone]  Announcements     (3)   | <- Number badge
+|              Team messages & updates |
++--------------------------------------+
+
+Or with dot:
++--------------------------------------+
+| [megaphone]  Announcements      [*]  | <- Blue dot
+|              Team messages & updates |
++--------------------------------------+
+
+
+================================================================================

@@ -1,0 +1,268 @@
+================================================================================
+CREATE ANNOUNCEMENT - MOBILE MODAL WIREFRAME
+================================================================================
+Route: /(modals)/announcement-create.tsx
+Description: Modal for creating a new team announcement
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]         New Announcement            |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  TITLE                               | |
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  | Announcement title...          |  | | Text input
+| |  +--------------------------------+  | |
+| |                            (0/100)   | | Character count
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  MESSAGE                             | |
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  |                                |  | |
+| |  | Write your announcement        |  | |
+| |  | message here...                |  | | Multiline textarea
+| |  |                                |  | |
+| |  |                                |  | |
+| |  |                                |  | |
+| |  |                                |  | |
+| |  +--------------------------------+  | |
+| |                            (0/500)   | | Character count
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  PRIORITY                            | |
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  |  [Low]  [Medium]  [High]       |  | | Toggle group
+| |  +--------------------------------+  | |
+| |                                      | |
+| |  Low: General updates                | | Description
+| |  Medium: Important information       | |
+| |  High: Urgent, requires attention    | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Post"          |
+|  [Cancel]                     [Post]     |
++------------------------------------------+
+
+
+HEADER
+================================================================================
+
++------------------------------------------+
+|  [X]         New Announcement            |
++------------------------------------------+
+
+[X] = Close modal (with confirmation if content)
+"New Announcement" = Title
+
+
+FOOTER BUTTONS (TPFooterButtons)
+================================================================================
+
+Uses: TPFooterButtons component from @/components/tp
+
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Post"          |
+|  [Cancel]                     [Post]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleClose}
+- onSave={handlePost}
+- saveLabel="Post"
+- saveDisabled={!title.trim() || !message.trim()}
+- loading={isPosting}
+
+[Cancel] = Discard and close (with confirmation if content)
+[Post] = Publish announcement
+
+
+TITLE INPUT
+================================================================================
+
++--------------------------------------+
+|  TITLE                               |
++--------------------------------------+
+|  +--------------------------------+  |
+|  | Announcement title...          |  |
+|  +--------------------------------+  |
+|                            (0/100)   |
++--------------------------------------+
+
+- Single line text input
+- Placeholder: "Announcement title..."
+- Auto-focus on open
+- Max 100 characters
+- Character counter on right
+
+
+MESSAGE INPUT
+================================================================================
+
++--------------------------------------+
+|  MESSAGE                             |
++--------------------------------------+
+|  +--------------------------------+  |
+|  |                                |  |
+|  | Write your announcement        |  |
+|  | message here...                |  |
+|  |                                |  |
+|  |                                |  |
+|  |                                |  |
+|  |                                |  |
+|  +--------------------------------+  |
+|                            (0/500)   |
++--------------------------------------+
+
+- Multiline textarea (6+ lines visible)
+- Placeholder: "Write your announcement message here..."
+- Max 500 characters
+- Character counter updates as typing
+
+
+PRIORITY SELECTOR
+================================================================================
+
++--------------------------------------+
+|  PRIORITY                            |
++--------------------------------------+
+|  +--------------------------------+  |
+|  |  [Low]  [Medium]  [High]       |  |
+|  +--------------------------------+  |
+|                                      |
+|  Low: General updates                |
+|  Medium: Important information       |
+|  High: Urgent, requires attention    |
++--------------------------------------+
+
+Toggle button group:
+- Single selection required
+- Default: Medium
+- Selected state: blue background, white text
+- Unselected state: gray outline, gray text
+
+Priority descriptions shown below selector
+
+
+BUTTON STATES
+================================================================================
+
+[Post] button disabled when:
+- Title is empty
+- Message is empty
+
+[Post] button enabled when:
+- Title has content (min 1 char)
+- Message has content (min 1 char)
+- Priority is selected (always has default)
+
+
+VALIDATION
+================================================================================
+
+Title:
+- Required
+- Min 1 character
+- Max 100 characters
+
+Message:
+- Required
+- Min 1 character
+- Max 500 characters
+
+Priority:
+- Required (default: Medium)
+
+
+UNSAVED CHANGES CONFIRMATION
+================================================================================
+
+If [Cancel] tapped with content:
+
++------------------------------------------+
+|  +------------------------------------+  |
+|  |      Discard Announcement?         |  |
+|  |                                    |  |
+|  |  You have unsaved changes.         |  |
+|  |  Are you sure you want to discard  |  |
+|  |  this announcement?                |  |
+|  |                                    |  |
+|  |  [Keep Editing]    [Discard]       |  |
+|  +------------------------------------+  |
++------------------------------------------+
+
+
+POSTING STATE
+================================================================================
+
+While posting:
+
++------------------------------------------+
+|  [Cancel]   New Announcement  [Posting..]|
++------------------------------------------+
+
+- [Post] button shows "Posting..." with spinner
+- Button disabled during posting
+- Form inputs disabled
+
+
+SUCCESS BEHAVIOR
+================================================================================
+
+On successful post:
+1. Modal closes
+2. Returns to announcements list
+3. New announcement appears at top
+4. Toast/notification: "Announcement posted"
+
+
+ERROR STATE
+================================================================================
+
+If posting fails:
+
++------------------------------------------+
+|  +------------------------------------+  |
+|  |  [!] Unable to post                |  |
+|  |                                    |  |
+|  |  Please check your connection      |  |
+|  |  and try again.                    |  |
+|  |                                    |  |
+|  |  [Try Again]                       |  |
+|  +------------------------------------+  |
++------------------------------------------+
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap [Cancel] -> Close (confirm if has content)
+2. Type in title -> Updates title, character count
+3. Type in message -> Updates message, character count
+4. Tap priority button -> Selects that priority
+5. Tap [Post] -> Validates and posts announcement
+
+
+CHARACTER COUNT STYLING
+================================================================================
+
+Normal: Gray text "(45/100)"
+Near limit (>80%): Orange text "(92/100)"
+At limit: Red text "(100/100)"
+
+
+================================================================================

@@ -1,0 +1,280 @@
+================================================================================
+ONBOARDING: TEAM SETUP - MOBILE WIREFRAME
+================================================================================
+Route: /(auth)/onboarding/team-setup.tsx
+Description: Final onboarding step - create or join team
+================================================================================
+
+
+MAIN LAYOUT (Create Team)
+================================================================================
+
++------------------------------------------+
+|                                          |
+|  [<] Back                                | Back button
+|                                          |
+|  Step 3 of 3                             | Progress indicator
+|  [============]                          | Progress bar (100%)
+|                                          |
+|                                          |
+|         Set up your team                 | Heading
+|                                          |
+|    Create a new team or join an          | Description
+|            existing one                  |
+|                                          |
+|                                          |
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  | [Create New Team] [Join Team]  |  | | Toggle
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  TEAM NAME                           | |
+| |  +--------------------------------+  | |
+| |  | Springfield Eagles             |  | |
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  SPORT                               | |
+| |  +--------------------------------+  | |
+| |  | Basketball               (set) |  | | From previous step
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+|                                          |
+|                                          |
++------------------------------------------+
+|               [Create Team]              | Footer button
++------------------------------------------+
+
+
+JOIN TEAM LAYOUT
+================================================================================
+
++------------------------------------------+
+|                                          |
+|  [<] Back                                |
+|                                          |
+|  Step 3 of 3                             |
+|  [============]                          |
+|                                          |
+|                                          |
+|         Set up your team                 |
+|                                          |
+|    Create a new team or join an          |
+|            existing one                  |
+|                                          |
+|                                          |
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  | [Create New Team] [Join Team]  |  | | Join selected
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  TEAM INVITE CODE                    | |
+| |  +--------------------------------+  | |
+| |  | Enter 6-digit code             |  | |
+| |  +--------------------------------+  | |
+| |                                      | |
+| |  Ask your head coach for the         | |
+| |  invite code to join their team.     | |
+| +--------------------------------------+ |
+|                                          |
+|                                          |
+|                                          |
++------------------------------------------+
+|                [Join Team]               | Footer button
++------------------------------------------+
+
+
+PROGRESS INDICATOR
+================================================================================
+
+  Step 3 of 3
+  [============]
+
+- 100% filled (final step)
+
+
+CREATE/JOIN TOGGLE
+================================================================================
+
++----------------------------------+
+| [Create New Team] [Join Team]    |
++----------------------------------+
+
+Two-option toggle:
+- Create New Team: Start a new team (default for Head Coach)
+- Join Team: Join existing team (default for Assistant Coach)
+
+Based on role selected in step 1:
+- Head Coach -> Create New Team selected
+- Assistant Coach -> Join Team selected
+
+
+TEAM NAME INPUT (Create Mode)
+================================================================================
+
++--------------------------------------+
+|  TEAM NAME                           |
+|  +--------------------------------+  |
+|  | Springfield Eagles             |  |
+|  +--------------------------------+  |
++--------------------------------------+
+
+- Required for creating team
+- Placeholder: "Enter team name"
+
+
+SPORT DISPLAY (Create Mode)
+================================================================================
+
++--------------------------------------+
+|  SPORT                               |
+|  +--------------------------------+  |
+|  | Basketball               (set) |  |
+|  +--------------------------------+  |
++--------------------------------------+
+
+- Shows sport from previous step
+- Read-only (set in step 2)
+- "(set)" or checkmark indicates it's configured
+
+
+INVITE CODE INPUT (Join Mode)
+================================================================================
+
++--------------------------------------+
+|  TEAM INVITE CODE                    |
+|  +--------------------------------+  |
+|  | Enter 6-digit code             |  |
+|  +--------------------------------+  |
+|                                      |
+|  Ask your head coach for the         |
+|  invite code to join their team.     |
++--------------------------------------+
+
+- 6-character alphanumeric code
+- Uppercase auto-formatting
+- Helper text explains how to get code
+
+
+FOOTER BUTTONS
+================================================================================
+
+Create mode:
++--------------------------------------+
+|           [Create Team]              |
++--------------------------------------+
+
+Join mode:
++--------------------------------------+
+|            [Join Team]               |
++--------------------------------------+
+
+
+VALIDATION
+================================================================================
+
+Create Team:
+- Team name required (min 2 characters)
+- Sport must be set (from step 2)
+
+Join Team:
+- Invite code required
+- Must be valid/active code
+
+
+ERROR STATES
+================================================================================
+
+Invalid team name:
++--------------------------------------+
+|  TEAM NAME                           |
+|  +--------------------------------+  |
+|  |                                |  |  Red border
+|  +--------------------------------+  |
+|  [!] Please enter a team name        |
++--------------------------------------+
+
+Invalid invite code:
++--------------------------------------+
+|  TEAM INVITE CODE                    |
+|  +--------------------------------+  |
+|  | ABC123                         |  |  Red border
+|  +--------------------------------+  |
+|  [!] Invalid or expired invite code  |
++--------------------------------------+
+
+
+LOADING STATE
+================================================================================
+
+Creating:
++--------------------------------------+
+|        [Creating Team...]            |  Spinner
++--------------------------------------+
+
+Joining:
++--------------------------------------+
+|         [Joining Team...]            |  Spinner
++--------------------------------------+
+
+
+SUCCESS - CREATE TEAM
+================================================================================
+
+On successful team creation:
+1. Team document created in Firestore
+2. User document updated with teamRef
+3. User set as admin
+4. Navigate to /(main)/(tabs)
+
+
+SUCCESS - JOIN TEAM
+================================================================================
+
+On successful join:
+1. User added to team
+2. User document updated with teamRef
+3. Permissions set based on invite
+4. Navigate to /(main)/(tabs)
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap [<] Back -> Return to sport-select
+2. Toggle Create/Join -> Switch form mode
+3. Enter team name -> Updates state (create mode)
+4. Enter invite code -> Updates state (join mode)
+5. Tap [Create Team] / [Join Team] -> Submit
+
+
+TEAM CREATION FLOW
+================================================================================
+
+1. Validate team name
+2. Create team document in Firestore
+3. Set user as team admin
+4. Update user document with teamRef
+5. Set up default data (optional)
+6. Navigate to main app
+
+
+TEAM JOIN FLOW
+================================================================================
+
+1. Validate invite code
+2. Look up team by invite code
+3. Verify code is active/valid
+4. Add user to team
+5. Set user permissions
+6. Update user document with teamRef
+7. Navigate to main app
+
+
+================================================================================

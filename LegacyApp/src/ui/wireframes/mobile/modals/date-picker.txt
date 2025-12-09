@@ -1,0 +1,191 @@
+================================================================================
+DATE PICKER - MOBILE MODAL WIREFRAME
+================================================================================
+Route: /(modals)/date-picker.tsx
+Description: Modal for selecting a date
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]         Select Date                 |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  SELECTED DATE                       | |
+| |  Friday, March 15, 2024              | | Full date format
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  [<]      March 2024      [>]        | | Month navigation
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| | Sun  Mon  Tue  Wed  Thu  Fri  Sat    | |
+| +--------------------------------------+ |
+| |                     1    2    3    4 | |
+| |  5    6    7    8    9   10   11     | |
+| | 12   13   14  [15]  16   17   18     | | [15] = selected
+| | 19   20   21   22   23   24   25     | |
+| | 26   27   28   29   30   31          | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|  [Cancel]                    [Done]      |
++------------------------------------------+
+
+
+HEADER
+================================================================================
+
++------------------------------------------+
+|  [X]         Select Date                 |
++------------------------------------------+
+
+[X] = Close without selection
+"Select Date" = Title (may be customized via parameter)
+
+
+SELECTED DATE DISPLAY
+================================================================================
+
++--------------------------------------+
+|  SELECTED DATE                       |
+|  Friday, March 15, 2024              |
++--------------------------------------+
+
+- Shows currently selected date
+- Full format: Day of week, Month Day, Year
+- Updates as user taps different dates
+
+
+MONTH NAVIGATION
+================================================================================
+
++--------------------------------------+
+|  [<]      March 2024      [>]        |
++--------------------------------------+
+
+[<] = Previous month
+Month Year = Current displayed month
+[>] = Next month
+
+Swipe left/right also navigates months
+
+
+CALENDAR GRID
+================================================================================
+
++--------------------------------------+
+| Sun  Mon  Tue  Wed  Thu  Fri  Sat    |  Day headers
++--------------------------------------+
+|                     1    2    3    4 |
+|  5    6    7    8    9   10   11     |
+| 12   13   14  [15]  16   17   18     |
+| 19   20   21   22   23   24   25     |
+| 26   27   28   29   30   31          |
++--------------------------------------+
+
+
+DAY CELL STATES
+================================================================================
+
+Default day:
++----+
+| 15 |  Normal text, white/transparent background
++----+
+
+Today:
++----+
+|(15)|  Text with underline or ring, not filled
++----+
+
+Selected:
++----+
+|[15]|  Blue background, white text, circular
++----+
+
+Today + Selected:
++----+
+|[15]|  Blue background, white text
++----+
+
+Disabled (past/out of range):
++----+
+| 15 |  Gray text, not tappable
++----+
+
+Other month (visible in grid):
++----+
+| 28 |  Very light gray text
++----+
+
+
+MIN/MAX DATE CONSTRAINTS
+================================================================================
+
+If minDate is set:
+- Days before minDate shown as disabled (gray)
+- Not tappable
+
+If maxDate is set:
+- Days after maxDate shown as disabled (gray)
+- Not tappable
+
+
+FOOTER BUTTONS
+================================================================================
+
++------------------------------------------+
+|  [Cancel]                    [Done]      |
++------------------------------------------+
+
+[Cancel] = Close without applying selection
+[Done] = Apply selected date and close
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap [X] -> Close without changes
+2. Tap [<] -> Previous month
+3. Tap [>] -> Next month
+4. Swipe left -> Next month
+5. Swipe right -> Previous month
+6. Tap day -> Select that day
+7. Tap [Cancel] -> Close without changes
+8. Tap [Done] -> Apply selection and close
+
+
+PARAMETER OPTIONS
+================================================================================
+
+Props that can be passed:
+- label: Custom title (default: "Select Date")
+- initialDate: Pre-selected date
+- minDate: Minimum selectable date
+- maxDate: Maximum selectable date
+
+
+COMPACT VARIANT (Optional)
+================================================================================
+
+For inline use or bottom sheets:
+
++--------------------------------------+
+| [<]     March 2024     [>]           |
++--------------------------------------+
+| S   M   T   W   T   F   S            |
+| -   -   -   -   -   1   2            |
+| 3   4   5   6   7   8   9            |
+| 10  11  12  13  14 [15] 16           |
+| 17  18  19  20  21  22  23           |
+| 24  25  26  27  28  29  30           |
+| 31  -   -   -   -   -   -            |
++--------------------------------------+
+
+
+================================================================================

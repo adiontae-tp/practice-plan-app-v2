@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "vercel": {
+      "type": "http",
+      "url": "https://mcp.vercel.com"
+    },
+    "expo-mcp": {
+      "type": "http",
+      "url": "https://mcp.expo.dev/mcp"
+    }
+  }
+}

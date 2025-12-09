@@ -1,0 +1,80 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // ============================================================================
+    // HELPER FUNCTIONS
+    // ============================================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isTeamMember(teamId) {
+      return isAuthenticated() &&
+        exists(/databases/(default)/documents/teams/$(teamId)/coaches/$(request.auth.uid));
+    }
+
+    function isTeamCoach(teamId) {
+      let coachDoc = firestore.get(/databases/(default)/documents/teams/$(teamId)/coaches/$(request.auth.uid));
+      return coachDoc != null && coachDoc.data.permission in ['admin', 'edit'];
+    }
+
+    // ============================================================================
+    // USER PROFILE PHOTOS
+    // ============================================================================
+
+    match /users/{userId}/profile_{timestamp} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && request.auth.uid == userId;
+      allow delete: if isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // ============================================================================
+    // TEAM LOGOS
+    // ============================================================================
+
+    match /teams/{teamId}/logo_{timestamp} {
+      allow read: if isTeamMember(teamId);
+      allow write: if isTeamCoach(teamId);
+      allow delete: if isTeamCoach(teamId);
+    }
+
+    // ============================================================================
+    // TEAM FONTS
+    // ============================================================================
+
+    match /teams/{teamId}/font_{timestamp} {
+      allow read: if isTeamMember(teamId);
+      allow write: if isTeamCoach(teamId);
+      allow delete: if isTeamCoach(teamId);
+    }
+
+    // ============================================================================
+    // TEAM FILES (Main files)
+    // ============================================================================
+
+    match /teams/{teamId}/files/{fileName} {
+      // Team members can read files
+      allow read: if isTeamMember(teamId);
+      // Coaches with edit permission can upload/update files
+      allow write: if isTeamCoach(teamId);
+      // Coaches with edit permission can delete files
+      allow delete: if isTeamCoach(teamId);
+    }
+
+    // ============================================================================
+    // TEAM FILE VERSIONS
+    // ============================================================================
+
+    match /teams/{teamId}/files/{fileId}/versions/{versionFile} {
+      // Team members can read file versions
+      allow read: if isTeamMember(teamId);
+      // Coaches with edit permission can upload new versions
+      allow write: if isTeamCoach(teamId);
+      // Coaches with edit permission can delete versions
+      allow delete: if isTeamCoach(teamId);
+    }
+  }
+}

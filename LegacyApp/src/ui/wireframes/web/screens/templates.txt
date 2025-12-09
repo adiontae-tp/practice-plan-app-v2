@@ -1,0 +1,191 @@
+================================================================================
+PRACTICE TEMPLATES - WEB/DESKTOP WIREFRAME
+================================================================================
+Route: /(main)/templates (via sidebar: Planning > Practice Templates)
+Component: TemplatesDesktop
+Description: Table view of practice templates with search and CRUD
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  PRACTICE TEMPLATES                                    |
+| Planning|  4 practice templates                                  |
+| Dashbrd |                                                        |
+| Calendar|  +----------------------------------------------------+|
+| Periods |  | [Search by name or tag...]       [+ New Template]  ||
+| [*]Temp |  +----------------------------------------------------+|
+|         |                                                        |
+| Commun. |  +----------------------------------------------------+|
+| Announce|  | #  | Name              | Duration | Activities| Tags||
+|         |  +----+-------------------+----------+-----------+-----+|
+| Manage  |  | 1  | Monday Practice   |  1h 30m  |     6     |Cond||
+| Files   |  |    |                   |          |           |Skil||
+| Tags    |  +----+-------------------+----------+-----------+-----+|
+| Coaches |  | 2  | Quick Skills      |  45 min  |     3     |Skil||
+| Reports |  |    |                   |          |           |Dril||
+|         |  +----+-------------------+----------+-----------+-----+|
+| Settings|  | 3  | Game Day Prep     |  1h      |     4     |Warm||
+| Profile |  |    |                   |          |           |Revi||
+| Team    |  +----+-------------------+----------+-----------+-----+|
+| Subscr. |  | 4  | Light Recovery    |  30 min  |     2     |Reco||
+|         |  |    |                   |          |           |Stre||
+|         |  +----+-------------------+----------+-----------+-----+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+TABLE HEADER
+================================================================================
+
++----------------------------------------------------+
+| [Search by name or tag...]       [+ New Template]  |
++----------------------------------------------------+
+
+- Search input with placeholder
+- Primary action button on right
+
+
+TABLE STRUCTURE
+================================================================================
+
++------+--------------------+----------+------------+--------+--------+
+|  #   |       Name         | Duration | Activities |  Tags  | Actions|
++------+--------------------+----------+------------+--------+--------+
+|  1   | Monday Practice    |  1h 30m  |     6      | Cond.  |  [X]   |
+|      |                    |          |            | Skills |        |
++------+--------------------+----------+------------+--------+--------+
+
+Columns:
+- # : Row number (width: 40px)
+- Name: Template name (flex-1)
+- Duration: Total time formatted (width: 120px, center)
+- Activities: Count number (width: 120px, center)
+- Tags: Comma-separated (flex-1)
+- Actions: Delete button (width: 80px)
+
+
+COLUMN DETAILS
+================================================================================
+
+Duration format:
+- Under 60 min: "45 min"
+- 60+ min: "1h 30m" or "2h"
+
+Activities:
+- Simple count number
+- Centered in column
+
+Tags display:
+- Comma-separated list
+- Truncate with "..." if too long
+
+
+EMPTY STATE
+================================================================================
+
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  PRACTICE TEMPLATES                                    |
+|         |  0 practice templates                                  |
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  | [Search...]                      [+ New Template]  ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  |                                                    ||
+|         |  |                 +--------+                         ||
+|         |  |                 |   []   |                         ||
+|         |  |                 | [    ] |  Clipboard Icon         ||
+|         |  |                 +--------+                         ||
+|         |  |                                                    ||
+|         |  |         No practice templates yet                  ||
+|         |  |                                                    ||
+|         |  |     Create your first template to get started!     ||
+|         |  |                                                    ||
+|         |  |            [+ Create Template]                     ||
+|         |  |                                                    ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+ROW ACTIONS
+================================================================================
+
+Click row -> Opens Template detail modal
+[X] Delete -> Shows confirmation dialog
+
+
+DELETE CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|  +------------------------------------+  |
+|  |       Delete Template?             |  |
+|  |                                    |  |
+|  |  Are you sure you want to delete   |  |
+|  |  "Monday Practice"?                |  |
+|  |                                    |  |
+|  |  This cannot be undone.            |  |
+|  |                                    |  |
+|  |  [Cancel]           [Delete]       |  |
+|  +------------------------------------+  |
++------------------------------------------+
+
+
+SEARCH FUNCTIONALITY
+================================================================================
+
++------------------------------------------+
+| [O] Search by name or tag...             |
++------------------------------------------+
+
+- Real-time filtering
+- Searches: template name, tags
+
+
+INTERACTIONS
+================================================================================
+
+1. Type in search -> Filter table rows
+2. Click row -> Open template detail modal
+3. Click [X] delete -> Show confirmation, then delete
+4. Click [+ New Template] -> Open template create modal
+5. Hover row -> Highlight row
+
+
+PERMISSIONS
+================================================================================
+
+canEdit = true:
+- Show [+ New Template] button
+- Show delete [X] buttons
+- Allow editing templates
+
+canEdit = false:
+- Hide [+ New Template] button
+- Hide delete buttons
+- View-only mode
+
+
+TABLE STYLING
+================================================================================
+
+Header row:
+- Background: Gradient (#356793 to #2d5578)
+- Text: White, bold
+
+Body rows:
+- Background: White
+- Border-bottom: 1px solid #e5e7eb
+- Hover: Light blue background
+
+
+================================================================================

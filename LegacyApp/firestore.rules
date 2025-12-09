@@ -1,0 +1,238 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============================================================================
+    // HELPER FUNCTIONS
+    // ============================================================================
+
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Check if user is the owner of the document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Get user's team reference
+    function getUserTeamRef() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.teamRef;
+    }
+
+    // Check if user belongs to a specific team
+    // Note: We check if the user has a coach document in the team's coaches subcollection
+    // The coach document has a userId field that matches the authenticated user's UID
+    function belongsToTeam(teamId) {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/teams/$(teamId)/coaches/$(request.auth.uid));
+    }
+
+    // Check if user is a coach on the team with edit permissions
+    function isTeamCoach(teamId) {
+      let coachDoc = get(/databases/$(database)/documents/teams/$(teamId)/coaches/$(request.auth.uid));
+      return coachDoc != null && coachDoc.data.permission in ['admin', 'edit'];
+    }
+
+    // Check if user is a team admin
+    function isTeamAdmin(teamId) {
+      let coachDoc = get(/databases/$(database)/documents/teams/$(teamId)/coaches/$(request.auth.uid));
+      return coachDoc != null && coachDoc.data.permission == 'admin';
+    }
+
+    // ============================================================================
+    // MAIL COLLECTION (Firebase Send Email Extension)
+    // ============================================================================
+
+    // Mail collection - users can create emails, only extension can read/update
+    match /mail/{mailId} {
+      // Authenticated users can create mail documents
+      allow create: if isAuthenticated();
+      // Only allow reading own emails (based on a field) - optional
+      allow read: if false; // Extension handles this server-side
+      // No client updates or deletes allowed
+      allow update, delete: if false;
+    }
+
+    // ============================================================================
+    // EMAIL TEMPLATES (Optional - for Handlebars templates)
+    // ============================================================================
+
+    match /email_templates/{templateId} {
+      // Only admins can manage email templates
+      allow read: if isAuthenticated();
+      allow write: if false; // Manage via Firebase Console or admin SDK
+    }
+
+    // ============================================================================
+    // USERS COLLECTION
+    // ============================================================================
+
+    match /users/{userId} {
+      // Users can read their own document
+      allow read: if isOwner(userId);
+      // Users can create/update their own document
+      allow create, update: if isOwner(userId);
+      // No deletes from client
+      allow delete: if false;
+
+      // User's teams subcollection (synced by Cloud Functions)
+      match /teams/{teamId} {
+        allow read: if isOwner(userId);
+        allow write: if false; // Managed by Cloud Functions
+      }
+
+      // User's RevenueCat data (synced by extension)
+      match /revenuecat/{docId} {
+        allow read: if isOwner(userId);
+        allow write: if false; // Managed by RevenueCat extension
+      }
+    }
+
+    // ============================================================================
+    // TEAMS COLLECTION
+    // ============================================================================
+
+    match /teams/{teamId} {
+      // Team members can read team data
+      allow read: if belongsToTeam(teamId);
+      // Only team admins can update team settings
+      allow update: if isTeamAdmin(teamId);
+      // Team creation handled by Cloud Functions
+      allow create, delete: if false;
+
+      // Team members subcollection
+      match /members/{memberId} {
+        allow read: if belongsToTeam(teamId);
+        allow write: if false; // Managed by Cloud Functions
+      }
+
+      // Coaches subcollection
+      match /coaches/{coachId} {
+        allow read: if belongsToTeam(teamId);
+        allow create, update: if isTeamAdmin(teamId);
+        allow delete: if isTeamAdmin(teamId);
+      }
+
+      // Plans subcollection
+      match /plans/{planId} {
+        allow read: if belongsToTeam(teamId);
+        allow create, update: if isTeamCoach(teamId);
+        allow delete: if isTeamCoach(teamId);
+      }
+
+      // Periods subcollection
+      match /periods/{periodId} {
+        allow read: if belongsToTeam(teamId);
+        allow create, update: if isTeamCoach(teamId);
+        allow delete: if isTeamCoach(teamId);
+      }
+
+      // Templates subcollection
+      match /templates/{templateId} {
+        allow read: if belongsToTeam(teamId);
+        allow create, update: if isTeamCoach(teamId);
+        allow delete: if isTeamCoach(teamId);
+      }
+
+      // Tags subcollection
+      match /tags/{tagId} {
+        allow read: if belongsToTeam(teamId);
+        allow create, update: if isTeamAdmin(teamId);
+        allow delete: if isTeamAdmin(teamId);
+      }
+
+      // Files subcollection
+      match /files/{fileId} {
+        allow read: if belongsToTeam(teamId);
+        allow create, update: if isTeamCoach(teamId);
+        allow delete: if isTeamCoach(teamId);
+
+        // File versions subcollection
+        match /versions/{versionId} {
+          allow read: if belongsToTeam(teamId);
+          allow create, update: if isTeamCoach(teamId);
+          allow delete: if isTeamCoach(teamId);
+        }
+
+        // File shares subcollection
+        match /shares/{shareId} {
+          // Anyone can read shares (for public sharing via link)
+          allow read: if true;
+          // Only team coaches can create shares
+          allow create: if isTeamCoach(teamId);
+          // Only the creator can update/delete their shares
+          allow update, delete: if isAuthenticated() &&
+            resource.data.createdBy == request.auth.uid;
+        }
+      }
+
+      // Folders subcollection
+      match /folders/{folderId} {
+        allow read: if belongsToTeam(teamId);
+        allow create, update: if isTeamCoach(teamId);
+        allow delete: if isTeamCoach(teamId);
+      }
+
+      // Announcements subcollection
+      match /announcements/{announcementId} {
+        allow read: if belongsToTeam(teamId);
+        allow create, update: if isTeamCoach(teamId);
+        allow delete: if isTeamCoach(teamId);
+      }
+    }
+
+    // ============================================================================
+    // SHARED PLANS (Public access via token)
+    // ============================================================================
+
+    match /shared_plans/{shareToken} {
+      // Anyone with the token can read
+      allow read: if true;
+      // Only authenticated users can create shares
+      allow create: if isAuthenticated();
+      // Only the creator can update/delete
+      allow update, delete: if isAuthenticated() &&
+        resource.data.createdBy == request.auth.uid;
+    }
+
+    // ============================================================================
+    // FILE SHARES (Public access via token)
+    // ============================================================================
+
+    match /file_shares/{shareId} {
+      // Anyone with the share ID can read
+      allow read: if true;
+      // Only authenticated users can create shares
+      allow create: if isAuthenticated();
+      // Only the creator can update/delete
+      allow update, delete: if isAuthenticated() &&
+        resource.data.createdBy == request.auth.uid;
+    }
+
+    // ============================================================================
+    // PENDING COACH INVITES
+    // ============================================================================
+
+    match /pending_coach_invites/{email} {
+      // Allow reading to check if invite exists
+      allow read: if isAuthenticated();
+      // Team admins can create invites
+      allow create: if isAuthenticated();
+      // Only the invited user or team admin can delete
+      allow delete: if isAuthenticated();
+      allow update: if false;
+    }
+
+    // ============================================================================
+    // REVENUECAT EVENTS (Webhook data)
+    // ============================================================================
+
+    match /revenuecat_events/{eventId} {
+      // No client access - managed by webhook/Cloud Functions
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@ppa/subscription",
+  "version": "1.0.0",
+  "description": "Subscription management and feature gating for Practice Plan App",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.18.3",
+  "dependencies": {
+    "@ppa/interfaces": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "@types/react": "*"
+  }
+}

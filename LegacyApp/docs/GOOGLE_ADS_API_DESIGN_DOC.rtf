@@ -1,0 +1,117 @@
+{\rtf1\ansi\deff0
+{\fonttbl{\f0\fswiss Helvetica;}}
+{\colortbl;\red0\green0\blue0;}
+
+\f0\fs24
+
+{\b\fs32 Google Ads API - Tool Design Documentation\par}
+\par
+
+{\b 1. TOOL OVERVIEW\par}
+\par
+Tool Name: Practice Plan App - Marketing Automation\par
+Company: Practice Plan App\par
+Contact Email: adiontae.gerron@gmail.com\par
+Website: https://practiceplan.app\par
+\par
+Purpose: Internal marketing automation tool to manage Google Ads campaigns for Practice Plan App, a mobile and web application for sports coaches.\par
+\par
+Tool Type: Internal tool (for own business use only)\par
+\par
+
+{\b 2. INTENDED USE OF GOOGLE ADS API\par}
+\par
+Primary Use Cases:\par
+\par
+1. Campaign Management\par
+   - Create and manage Search, App, and Display campaigns\par
+   - Update campaign budgets and bidding strategies\par
+   - Pause/enable campaigns based on performance\par
+\par
+2. Ad Creation\par
+   - Create responsive search ads with multiple headlines/descriptions\par
+   - Create app install campaign assets\par
+   - Update ad copy for A/B testing\par
+\par
+3. Reporting\par
+   - Pull campaign performance metrics (impressions, clicks, conversions)\par
+   - Generate daily/weekly performance reports\par
+   - Monitor cost per install and cost per signup\par
+\par
+4. Keyword Management\par
+   - Add/remove keywords from ad groups\par
+   - Update keyword bids\par
+   - Add negative keywords\par
+\par
+
+{\b 3. TARGET ACCOUNTS\par}
+\par
+Manager Account ID: 729-722-5248\par
+Client Account ID: 652-714-3219\par
+\par
+Account Relationship: This tool will only be used to manage our own Google Ads account(s) for marketing Practice Plan App. We do not provide services to third-party advertisers.\par
+\par
+
+{\b 4. TECHNICAL IMPLEMENTATION\par}
+\par
+Architecture:\par
+- Backend: Node.js / TypeScript\par
+- API Client: google-ads-api npm package\par
+- Authentication: OAuth 2.0 with refresh tokens\par
+- Hosting: Vercel / Firebase Functions\par
+\par
+API Operations Used:\par
+- GoogleAdsService.Search - Reporting queries\par
+- GoogleAdsService.Mutate - Create/update resources\par
+- CampaignService - Campaign management\par
+- AdGroupService - Ad group management\par
+- AdGroupAdService - Ad creation\par
+- KeywordService - Keyword management\par
+\par
+Estimated API Usage:\par
+- Daily operations: Less than 1,000 (well under Basic limit of 15,000)\par
+- Primary usage: Campaign creation, performance reporting\par
+\par
+
+{\b 5. DATA HANDLING\par}
+\par
+Data Storage:\par
+- API credentials stored securely in environment variables\par
+- Performance data stored in Firebase Firestore\par
+- No customer PII is collected or stored\par
+\par
+Data Retention:\par
+- Performance metrics retained for analytics purposes\par
+- No Google Ads customer data shared with third parties\par
+\par
+
+{\b 6. USER INTERFACE\par}
+\par
+Since this is an internal tool, the interface is a simple admin dashboard with:\par
+\par
+1. Campaign Overview - List of active campaigns with key metrics\par
+2. Create Campaign - Form to create new campaigns using predefined templates\par
+3. Performance Reports - Charts showing spend, installs, and ROAS\par
+\par
+
+{\b 7. COMPLIANCE\par}
+\par
+Terms of Service:\par
+- We agree to comply with Google Ads API Terms and Conditions\par
+- We agree to comply with Google Ads policies\par
+\par
+Data Use:\par
+- API data used solely for managing our own advertising\par
+- No reselling or redistribution of Google Ads data\par
+\par
+
+{\b 8. CONTACT INFORMATION\par}
+\par
+Primary Contact: Adiontae Gerron\par
+Email: adiontae.gerron@gmail.com\par
+Phone: 729-722-5248\par
+\par
+\par
+Document Version: 1.0\par
+Date: December 2024\par
+}

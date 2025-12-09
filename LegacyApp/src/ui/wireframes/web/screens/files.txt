@@ -1,0 +1,269 @@
+================================================================================
+FILES - WEB/DESKTOP WIREFRAME
+================================================================================
+Route: /(main)/files (via sidebar: Management > Files)
+Component: FilesDesktop
+Description: Table view of team files with metadata
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  FILES                                                 |
+| Planning|  5 files                                               |
+| Dashbrd |                                                        |
+| Calendar|  +----------------------------------------------------+|
+| Periods |  | [Search by name, description...]    [+ Upload File] ||
+| Template|  +----------------------------------------------------+|
+|         |                                                        |
+| Commun. |  +----------------------------------------------------+|
+| Announce|  | Name             | Category | Uploaded | Date | Size||
+|         |  +------------------+----------+----------+------+-----+|
+| [*]Mngmt|  | Practice         | Document | John S.  | Mar  | 2.4 ||
+| Files   |  | Playbook.pdf     |          |          | 15   | MB  ||
+| Tags    |  +------------------+----------+----------+------+-----+|
+| Coaches |  | Team Photo.jpg   | Image    | Jane D.  | Mar  | 1.2 ||
+| Reports |  |                  |          |          | 10   | MB  ||
+|         |  +------------------+----------+----------+------+-----+|
+| Settings|  | Training         | Document | John S.  | Mar  | 156 ||
+| Profile |  | Schedule.docx    |          |          | 8    | KB  ||
+| Team    |  +------------------+----------+----------+------+-----+|
+| Subscr. |  | Player           | Spreadsh.| Mike J.  | Mar  | 89  ||
+|         |  | Stats.xlsx       |          |          | 5    | KB  ||
+|         |  +------------------+----------+----------+------+-----+|
+|         |  | Game             | Video    | Jane D.  | Mar  | 45.6||
+|         |  | Highlights.mp4   |          |          | 1    | MB  ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+TABLE HEADER
+================================================================================
+
++----------------------------------------------------+
+| [Search by name, description...]    [+ Upload File] |
++----------------------------------------------------+
+
+- Search input filters files
+- Upload button opens file picker/modal
+
+
+TABLE STRUCTURE
+================================================================================
+
++------------------+----------+------------+--------+--------+--------+
+|      Name        | Category | Uploaded By|  Date  |  Size  | Actions|
++------------------+----------+------------+--------+--------+--------+
+| Practice         | Document | John S.    | Mar 15 | 2.4 MB |  [X]   |
+| Playbook.pdf     |          |            |        |        |        |
++------------------+----------+------------+--------+--------+--------+
+
+Columns:
+- Name: File name (flex-1)
+- Category: File type category (width: 120px, center)
+- Uploaded By: User name abbreviated (width: 150px)
+- Date: Upload date formatted (width: 120px)
+- Size: File size formatted (width: 100px, center)
+- Actions: Delete button (width: 80px)
+
+
+COLUMN DETAILS
+================================================================================
+
+Name:
+- Full filename with extension
+- Truncate with "..." if too long
+
+Category:
+- Document (PDF, DOC, DOCX, TXT)
+- Image (JPG, PNG, GIF, etc.)
+- Spreadsheet (XLS, XLSX, CSV)
+- Video (MP4, MOV, etc.)
+- Audio (MP3, WAV, etc.)
+- Archive (ZIP, RAR, etc.)
+- Other
+
+Uploaded By:
+- First name + Last initial
+- Example: "John S."
+
+Date:
+- Format: "MMM DD" for current year
+- Format: "MMM DD, YYYY" for other years
+
+Size:
+- < 1 KB: "X B"
+- < 1 MB: "X.X KB"
+- < 1 GB: "X.X MB"
+- >= 1 GB: "X.X GB"
+
+
+EMPTY STATE
+================================================================================
+
++------------------------------------------------------------------+
+| SIDEBAR |                                                        |
+|         |  FILES                                                 |
+|         |  0 files                                               |
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  | [Search...]                        [+ Upload File] ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
+|         |  +----------------------------------------------------+|
+|         |  |                                                    ||
+|         |  |                 +--------+                         ||
+|         |  |                 |   []   |                         ||
+|         |  |                 | [    ] |  Folder Icon            ||
+|         |  |                 +--------+                         ||
+|         |  |                                                    ||
+|         |  |               No files yet                         ||
+|         |  |                                                    ||
+|         |  |      Upload your first file to get started!        ||
+|         |  |                                                    ||
+|         |  |             [+ Upload File]                        ||
+|         |  |                                                    ||
+|         |  +----------------------------------------------------+|
+|         |                                                        |
++---------+--------------------------------------------------------+
+
+
+ROW CLICK ACTION
+================================================================================
+
+Clicking a row:
+- Opens file in new tab/viewer (if viewable)
+- Or downloads file (if not viewable)
+- Or opens file detail modal
+
+
+FILE DETAIL MODAL (Optional)
+================================================================================
+
++------------------------------------------+
+| [X]         File Details                 |
++------------------------------------------+
+|                                          |
+|  +------------------------------------+  |
+|  |                                    |  |
+|  |         [FILE ICON]                |  |
+|  |                                    |  |
+|  |    Practice Playbook.pdf           |  |
+|  |                                    |  |
+|  +------------------------------------+  |
+|                                          |
+|  File Name: Practice Playbook.pdf        |
+|  Category: Document                      |
+|  Size: 2.4 MB                            |
+|  Uploaded By: John Smith                 |
+|  Uploaded: March 15, 2024                |
+|                                          |
+|  +------------------------------------+  |
+|  | [Open]  [Download]  [Share] [Delete]| |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+
+
+UPLOAD FILE MODAL
+================================================================================
+
++------------------------------------------+
+| [X]         Upload File                  |
++------------------------------------------+
+|                                          |
+|  +------------------------------------+  |
+|  |                                    |  |
+|  |      Drag and drop files here      |  |
+|  |              or                    |  |
+|  |       [Browse Files]               |  |
+|  |                                    |  |
+|  +------------------------------------+  |
+|                                          |
+|  Category                                |
+|  +------------------------------------+  |
+|  | Document                        [v]|  |
+|  +------------------------------------+  |
+|                                          |
+|  Description (optional)                  |
+|  +------------------------------------+  |
+|  |                                    |  |
+|  +------------------------------------+  |
+|                                          |
+|  [Cancel]                  [Upload]      |
+|                                          |
++------------------------------------------+
+
+
+DELETE CONFIRMATION
+================================================================================
+
++------------------------------------------+
+|  +------------------------------------+  |
+|  |         Delete File?               |  |
+|  |                                    |  |
+|  |  Are you sure you want to delete   |  |
+|  |  "Practice Playbook.pdf"?          |  |
+|  |                                    |  |
+|  |  This cannot be undone.            |  |
+|  |                                    |  |
+|  |  [Cancel]           [Delete]       |  |
+|  +------------------------------------+  |
++------------------------------------------+
+
+
+SEARCH FUNCTIONALITY
+================================================================================
+
++------------------------------------------+
+| [O] Search by name, description, category|
++------------------------------------------+
+
+- Real-time filtering
+- Searches: file name, description, category
+
+
+INTERACTIONS
+================================================================================
+
+1. Type in search -> Filter table rows
+2. Click row -> Open/download file or show detail
+3. Click [X] delete -> Show confirmation, then delete
+4. Click [+ Upload File] -> Open upload modal
+5. Hover row -> Highlight row
+
+
+PERMISSIONS
+================================================================================
+
+canEdit = true:
+- Show [+ Upload File] button
+- Show delete [X] buttons
+- Can upload and delete files
+
+canEdit = false:
+- Hide [+ Upload File] button
+- Hide delete buttons
+- Can view and download only
+
+
+TABLE STYLING
+================================================================================
+
+Header row:
+- Background: Gradient (#356793 to #2d5578)
+- Text: White, bold
+
+Body rows:
+- Background: White
+- Border-bottom: 1px solid #e5e7eb
+- Hover: Light blue background
+
+
+================================================================================

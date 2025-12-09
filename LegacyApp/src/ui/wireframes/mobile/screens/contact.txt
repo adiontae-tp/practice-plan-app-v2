@@ -1,0 +1,263 @@
+================================================================================
+CONTACT DEVELOPER - MOBILE WIREFRAME
+================================================================================
+Route: /(main)/(menu)/contact.tsx
+Component: ContactMobile
+Description: Feedback and support contact form
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [<] Menu      Contact Developer         |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| |  GET IN TOUCH                        | |
+| |                                      | |
+| |  Have feedback, found a bug, or      | |
+| |  need help? We'd love to hear        | |
+| |  from you!                           | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  CONTACT TYPE                        | |
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  | [Feedback] [Bug] [Support] [?]|  | | Toggle group
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  SUBJECT                             | |
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  | Brief description...           |  | | Text input
+| |  +--------------------------------+  | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  MESSAGE                             | |
+| +--------------------------------------+ |
+| |  +--------------------------------+  | |
+| |  |                                |  | |
+| |  | Tell us more about your        |  | |
+| |  | feedback or issue...           |  | | Multiline textarea
+| |  |                                |  | |
+| |  |                                |  | |
+| |  |                                |  | |
+| |  +--------------------------------+  | |
+| |                           (0/1000)   | | Character count
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  INCLUDE DEVICE INFO                 | |
+| |                                [ON]  | | Toggle (default ON)
+| |                                      | |
+| |  Helps us troubleshoot issues        | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |            [Send Message]            | | Blue button
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |  OTHER WAYS TO REACH US              | |
+| +--------------------------------------+ |
+| |                                      | |
+| |  [mail] support@practiceplan.app     | |
+| |                                      | |
+| |  [twitter] @PracticePlanApp          | |
+| |                                      | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+
+
+CONTACT TYPE SELECTOR
+================================================================================
+
++--------------------------------------+
+|  [Feedback] [Bug] [Support] [Other]  |
++--------------------------------------+
+
+Toggle button group:
+- Single selection required
+- Selected: blue background, white text
+- Unselected: gray outline, gray text
+
+Types:
+- Feedback: General feedback and suggestions
+- Bug: Report a bug or issue
+- Support: Need help with something
+- Other: Anything else
+
+
+SUBJECT INPUT
+================================================================================
+
++--------------------------------------+
+|  SUBJECT                             |
++--------------------------------------+
+|  +--------------------------------+  |
+|  | Brief description...           |  |
+|  +--------------------------------+  |
++--------------------------------------+
+
+- Single line text input
+- Placeholder: "Brief description..."
+- Required field
+- Max 100 characters
+
+
+MESSAGE INPUT
+================================================================================
+
++--------------------------------------+
+|  MESSAGE                             |
++--------------------------------------+
+|  +--------------------------------+  |
+|  |                                |  |
+|  | Tell us more about your        |  |
+|  | feedback or issue...           |  |
+|  |                                |  |
+|  |                                |  |
+|  |                                |  |
+|  +--------------------------------+  |
+|                           (0/1000)   |
++--------------------------------------+
+
+- Multiline textarea (6+ lines)
+- Placeholder: "Tell us more..."
+- Required field
+- Max 1000 characters
+- Character count shown
+
+
+DEVICE INFO TOGGLE
+================================================================================
+
++--------------------------------------+
+|  INCLUDE DEVICE INFO                 |
+|                                [ON]  |
+|                                      |
+|  Helps us troubleshoot issues        |
++--------------------------------------+
+
+When ON, includes:
+- Device model
+- OS version
+- App version
+- Build number
+- User ID (anonymized or with consent)
+
+Toggle default: ON
+
+
+SUCCESS STATE
+================================================================================
+
+After sending:
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  [<] Menu      Contact Developer         |
++------------------------------------------+
+|                                          |
+|                                          |
+|              +--------+                  |
+|              |   [✓]  |                  |
+|              +--------+                  |
+|                                          |
+|          Message Sent!                   |
+|                                          |
+|   Thank you for your feedback.           |
+|   We'll get back to you soon.            |
+|                                          |
+|         [Send Another Message]           |
+|                                          |
+|                                          |
++------------------------------------------+
+
+
+ERROR STATE
+================================================================================
+
++------------------------------------------+
+|                                          |
+|  +------------------------------------+  |
+|  | [!] Unable to send message         |  |
+|  |                                    |  |
+|  | Please check your connection       |  |
+|  | and try again.                     |  |
+|  |                                    |  |
+|  |  [Try Again]                       |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+
+
+VALIDATION
+================================================================================
+
+Required fields:
+- Contact Type (must select one)
+- Subject (min 5 characters)
+- Message (min 20 characters)
+
+Error display:
++--------------------------------------+
+|  SUBJECT                             |
++--------------------------------------+
+|  +--------------------------------+  |
+|  |                                |  |
+|  +--------------------------------+  |
+|  [!] Subject is required             |  Error message (red)
++--------------------------------------+
+
+
+OTHER CONTACT OPTIONS
+================================================================================
+
++--------------------------------------+
+|  OTHER WAYS TO REACH US              |
++--------------------------------------+
+|                                      |
+|  [mail] support@practiceplan.app     |  -> Opens email client
+|                                      |
+|  [twitter] @PracticePlanApp          |  -> Opens Twitter/X
+|                                      |
++--------------------------------------+
+
+Tapping email: Opens default mail app with address
+Tapping social: Opens app or browser
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap contact type -> Selects that type
+2. Type in subject -> Updates subject field
+3. Type in message -> Updates message, shows char count
+4. Toggle device info -> Enables/disables inclusion
+5. Tap [Send Message] -> Validates and sends
+6. Tap email/social -> Opens respective app
+7. Tap [<] back -> Returns to Menu (confirms if unsaved)
+
+
+SENDING STATE
+================================================================================
+
+While sending:
++--------------------------------------+
+|       [spinner] Sending...           |
++--------------------------------------+
+
+Button disabled, shows spinner
+
+
+================================================================================

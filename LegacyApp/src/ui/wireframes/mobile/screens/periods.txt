@@ -1,0 +1,305 @@
+================================================================================
+PERIOD TEMPLATES - MOBILE WIREFRAME
+================================================================================
+Route: /(main)/(menu)/periods.tsx
+Component: PeriodsMobile
+Description: List of reusable period templates
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  bg: #356793  |  text: #ffffff           |
+|  [<] Menu     Period Templates           |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | [Search icon] Search by name, tag... | | Search bar
+| +--------------------------------------+ |
+|                                          |
+| MY PERIODS                               | Section header
+| +--------------------------------------+ |
+| | +----------------------------------+ | |
+| | | Warm-up                    [N]   | | | [N] = has notes
+| | | 15 min                           | | |
+| | | [Conditioning] [Stretch]    [X]  | | | [X] = delete
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | Skill Drills                     | | |
+| | | 30 min                           | | |
+| | | [Offense] [Defense]         [X]  | | |
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | Cool Down                        | | |
+| | | 10 min                           | | |
+| | | [Recovery]                  [X]  | | |
+| | +----------------------------------+ | |
+| +--------------------------------------+ |
+|                                          |
+| GLOBAL LIBRARY                           | Section header
+| +--------------------------------------+ |
+| | +----------------------------------+ | |
+| | | Basic Warm-up          [Global]  | | | Global badge
+| | | 15 min                           | | |
+| | | [Conditioning]                   | | | No delete for global
+| | +----------------------------------+ | |
+| |                                      | |
+| | +----------------------------------+ | |
+| | | Team Huddle            [Global]  | | |
+| | | 5 min                            | | |
+| | | [Communication]                  | | |
+| | +----------------------------------+ | |
+| +--------------------------------------+ |
+|                                          |
++------------------------------------------+
+|                            +----------+  |
+|                            |    +     |  | FAB
+|                            +----------+  |
++------------------------------------------+
+
+
+EMPTY STATE
+================================================================================
+
++------------------------------------------+
+|            HEADER BAR                    |
+|  [<] Menu     Period Templates           |
++------------------------------------------+
+|                                          |
+| +--------------------------------------+ |
+| | [Search icon] Search by name, tag... | |
+| +--------------------------------------+ |
+|                                          |
+|                                          |
+|              +--------+                  |
+|              |   []   |                  |
+|              | [    ] |  Clipboard Icon  |
+|              +--------+                  |
+|                                          |
+|        No period templates yet           |
+|                                          |
+|     Create your first period template!   |
+|                                          |
+|                                          |
++------------------------------------------+
+|                            +----------+  |
+|                            |    +     |  | FAB
+|                            +----------+  |
++------------------------------------------+
+
+
+PERIOD CARD DETAIL
+================================================================================
+
+My Period (editable):
++--------------------------------------+
+| Period Name                    [N]   |  [N] = FileText icon (has notes)
+| XX min                               |
+| [Tag1] [Tag2] [Tag3]            [X]  |  [X] = Trash icon (delete)
++--------------------------------------+
+
+Global Period (read-only):
++--------------------------------------+
+| Period Name                [Global]  |  Gray badge
+| XX min                               |
+| [Tag1] [Tag2]                        |  No delete button
++--------------------------------------+
+
+Card styling:
+- Background: white
+- Border radius: 8px
+- Shadow: subtle drop shadow
+- Padding: 16px
+- Margin bottom: 12px
+
+
+TAG DISPLAY
+================================================================================
+
+Tags shown inline:
+[Tag1] [Tag2] [Tag3]
+
+Tag styling:
+- Background: light color (varies by tag)
+- Text: darker matching color
+- Border radius: 4px (pill shape)
+- Padding: 4px 8px
+- Font size: 12px
+
+If more than 3 tags:
+[Tag1] [Tag2] [+2]  <- "+2" indicates 2 more
+
+
+SEARCH FUNCTIONALITY
+================================================================================
+
++--------------------------------------+
+| [O] Search by name, tag, or notes... |
++--------------------------------------+
+
+- Filters both "My Periods" and "Global Library"
+- Real-time filtering as user types
+- Searches: name, tags, notes content
+
+
+SECTION HEADERS
+================================================================================
+
+MY PERIODS
++--------------------------------------+
+
+GLOBAL LIBRARY
++--------------------------------------+
+
+Style:
+- Text: uppercase, small (11px)
+- Color: #666 (gray)
+- Font weight: 600
+- Margin: top 16px, bottom 8px
+
+
+DELETE CONFIRMATION
+================================================================================
+
+When tapping [X] delete button:
+
++------------------------------------------+
+|                                          |
+|  +------------------------------------+  |
+|  |        Delete Period?              |  |
+|  |                                    |  |
+|  |  Are you sure you want to delete   |  |
+|  |  "Warm-up"? This cannot be undone. |  |
+|  |                                    |  |
+|  |  [Cancel]           [Delete]       |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+
+[Delete] button: Red background
+
+
+CREATE PERIOD MODAL (FAB Action)
+================================================================================
+
+Tap FAB (+) -> Opens period modal (Expo Router modal):
+
+Route: /(modals)/period/new.tsx
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]         Create Period               |
++------------------------------------------+
+|                                          |
+|  Period Name                             |
+|  +------------------------------------+  |
+|  |                                    |  |
+|  +------------------------------------+  |
+|                                          |
+|  Duration (minutes)                      |
+|  +------------------------------------+  |
+|  | 15                                 |  |
+|  +------------------------------------+  |
+|                                          |
+|  Tags                                    |
+|  +------------------------------------+  |
+|  | [Conditioning] [+]                 |  |
+|  +------------------------------------+  |
+|                                          |
+|  Notes (optional)                        |
+|  +------------------------------------+  |
+|  |                                    |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Create"        |
+|  [Cancel]                   [Create]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleClose}
+- onSave={handleCreate}
+- saveLabel="Create"
+- saveDisabled={!name.trim() || !duration}
+- loading={isCreating}
+
+
+EDIT PERIOD MODAL (Tap Card)
+================================================================================
+
+Tap period card -> Opens period modal for editing:
+
+Route: /(modals)/period/[id].tsx
+
++------------------------------------------+
+|            MODAL HEADER                  |
+|  [X]          Edit Period                |
++------------------------------------------+
+|                                          |
+|  Period Name                             |
+|  +------------------------------------+  |
+|  | Warm-up                            |  |
+|  +------------------------------------+  |
+|                                          |
+|  Duration (minutes)                      |
+|  +------------------------------------+  |
+|  | 15                                 |  |
+|  +------------------------------------+  |
+|                                          |
+|  Tags                                    |
+|  +------------------------------------+  |
+|  | [Conditioning] [Stretch] [+]       |  |
+|  +------------------------------------+  |
+|                                          |
+|  Notes (optional)                        |
+|  +------------------------------------+  |
+|  | Start with light jogging...        |  |
+|  +------------------------------------+  |
+|                                          |
++------------------------------------------+
+|  TPFooterButtons                         |
+|  mode="edit" | saveLabel="Save"          |
+|  [Cancel]                     [Save]     |
++------------------------------------------+
+
+Props:
+- mode="edit"
+- onCancel={handleClose}
+- onSave={handleSave}
+- saveLabel="Save"
+- saveDisabled={!hasChanges}
+- loading={isSaving}
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap period card -> Opens period modal for viewing/editing
+2. Tap [X] delete -> Shows delete confirmation (TPAlert)
+3. Tap FAB (+) -> Opens period modal for creating new
+4. Type in search -> Filters list in real-time
+5. Tap [<] back -> Returns to Menu tab
+
+
+PERMISSIONS
+================================================================================
+
+canEdit = true:
+- Show FAB button
+- Show delete buttons on user periods
+- Allow editing periods
+
+canEdit = false:
+- Hide FAB button
+- Hide delete buttons
+- View-only mode
+
+
+================================================================================

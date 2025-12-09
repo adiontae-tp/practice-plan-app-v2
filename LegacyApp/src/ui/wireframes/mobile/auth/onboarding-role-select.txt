@@ -1,0 +1,174 @@
+================================================================================
+ONBOARDING: ROLE SELECT - MOBILE WIREFRAME
+================================================================================
+Route: /(auth)/onboarding/role-select.tsx
+Description: First onboarding step - select user role
+================================================================================
+
+
+MAIN LAYOUT
+================================================================================
+
++------------------------------------------+
+|                                          |
+|  Step 1 of 3                             | Progress indicator
+|  [====          ]                        | Progress bar
+|                                          |
+|                                          |
+|          What's your role?               | Heading
+|                                          |
+|     This helps us personalize your       | Description
+|              experience                  |
+|                                          |
+|                                          |
+| +--------------------------------------+ |
+| |                                      | |
+| |     +------------------------+       | |
+| |     |         [O]            |       | |
+| |     |       HEAD COACH       |       | | Large card option
+| |     |                        |       | |
+| |     | I manage the team and  |       | |
+| |     | create practice plans  |       | |
+| |     +------------------------+       | |
+| |                                      | |
+| +--------------------------------------+ |
+|                                          |
+| +--------------------------------------+ |
+| |                                      | |
+| |     +------------------------+       | |
+| |     |         [O]            |       | |
+| |     |    ASSISTANT COACH     |       | | Large card option
+| |     |                        |       | |
+| |     | I help run practices   |       | |
+| |     | and support the team   |       | |
+| |     +------------------------+       | |
+| |                                      | |
+| +--------------------------------------+ |
+|                                          |
+|                                          |
++------------------------------------------+
+|                          [Continue]      | Footer button
++------------------------------------------+
+
+
+PROGRESS INDICATOR
+================================================================================
+
+  Step 1 of 3
+  [====          ]
+
+- Shows current step number
+- Progress bar fills based on step
+- Step 1: 33%, Step 2: 66%, Step 3: 100%
+
+
+HEADING & DESCRIPTION
+================================================================================
+
+      What's your role?        <- Large, bold (24px)
+
+ This helps us personalize     <- Normal, gray (14px)
+      your experience
+
+
+ROLE SELECTION CARDS
+================================================================================
+
+HEAD COACH (Selected):
++--------------------------------------+
+|  +=================================+ |
+|  ||          [clipboard]          || |  Icon
+|  ||                               || |
+|  ||         HEAD COACH            || |  Role name (bold)
+|  ||                               || |
+|  ||   I manage the team and       || |  Description
+|  ||   create practice plans       || |
+|  ||                               || |
+|  ||              [✓]              || |  Checkmark when selected
+|  +=================================+ |
++--------------------------------------+
+
+Blue border when selected
+Checkmark shown when selected
+
+
+ASSISTANT COACH (Unselected):
++--------------------------------------+
+|  +--------------------------------+  |
+|  |          [users]               |  |  Icon
+|  |                                |  |
+|  |      ASSISTANT COACH           |  |  Role name
+|  |                                |  |
+|  |    I help run practices        |  |  Description
+|  |    and support the team        |  |
+|  |                                |  |
+|  +--------------------------------+  |
++--------------------------------------+
+
+Gray border when unselected
+No checkmark
+
+
+ROLE CARD STATES
+================================================================================
+
+Unselected:
+- Gray border
+- Normal text color
+- No checkmark
+
+Selected:
+- Blue border (#356793)
+- Blue icon
+- Checkmark visible
+- Slight elevation/shadow
+
+
+CONTINUE BUTTON
+================================================================================
+
++------------------------------------------+
+|                          [Continue]      |
++------------------------------------------+
+
+- Right-aligned in footer
+- Primary color
+- Disabled until role selected
+- Navigates to next step
+
+
+INTERACTIONS
+================================================================================
+
+1. Tap role card -> Select that role
+2. Tap [Continue] -> Navigate to sport-select
+3. Only one role can be selected at a time
+
+
+ROLE DEFINITIONS
+================================================================================
+
+HEAD COACH:
+- Full admin access
+- Can create/edit all content
+- Can manage team settings
+- Can invite other coaches
+- Subscription owner
+
+ASSISTANT COACH:
+- Limited access based on permissions
+- Can view and possibly edit practices
+- Cannot manage team settings
+- Invited by head coach
+
+
+NEXT STEP
+================================================================================
+
+After selecting role and tapping Continue:
+-> Navigate to /(auth)/onboarding/sport-select
+
+Role is stored temporarily until onboarding completes
+
+
+================================================================================

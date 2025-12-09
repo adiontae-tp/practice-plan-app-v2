@@ -1,0 +1,415 @@
+================================================================================
+WEB/DESKTOP ROOT LAYOUT WIREFRAME
+================================================================================
+Source: legacy/src/app/(main)/_layout.tsx (isDesktop branch)
+        legacy/src/components/navigation/TopHeader.tsx
+        legacy/src/components/navigation/AppSidebar.tsx
+Framework: Expo + React Native + Gluestack UI (responsive)
+Breakpoint: >= 768px
+--------------------------------------------------------------------------------
+
+LOADING STATE (While auth/fonts initialize)
++------------------------------------------------------------------+
+|                                                                  |
+|                                                                  |
+|                                                                  |
+|                         [SPINNER]                                |
+|                      (ActivityIndicator)                         |
+|                       color: #356793                             |
+|                                                                  |
+|                                                                  |
+|                                                                  |
++------------------------------------------------------------------+
+Background: #e0e0e0
+
+
+================================================================================
+DESKTOP MAIN LAYOUT (app/(main)/_layout.tsx - isDesktop)
+================================================================================
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
+|  bg: #356793  |  text: #ffffff  |  full width                    |
+|  +------------------------------------------------------------+  |
+|  | [Logo]              [Team Name]              [User Menu]   |  |
+|  +------------------------------------------------------------+  |
++------------------------------------------------------------------+
+| SIDEBAR      |                CONTENT AREA                       |
+| bg: #ffffff  |                bg: #e0e0e0                        |
+|              |  +----------------------------------------------+ |
+| +----------+ |  | UNREAD ANNOUNCEMENT BANNER (conditional)     | |
+| | Planning | |  +----------------------------------------------+ |
+| +----------+ |  |                                              | |
+| | Dashboard| |  |                                              | |
+| | Calendar | |  |                                              | |
+| | Periods  | |  |                                              | |
+| | Templates| |  |               SLOT CONTENT                   | |
+| +----------+ |  |                                              | |
+|              |  |          (Screen renders here)               | |
+| +----------+ |  |                                              | |
+| | Communic.| |  |                                              | |
+| +----------+ |  |                                              | |
+| | Announce.| |  |                                              | |
+| +----------+ |  |                                              | |
+|              |  |                                              | |
+| +----------+ |  |                                              | |
+| | Managemt | |  |                                              | |
+| +----------+ |  |                                              | |
+| | Files    | |  |                                              | |
+| | Tags     | |  |                                              | |
+| | Coaches  | |  |                                              | |
+| | Reports  | |  |                                              | |
+| +----------+ |  |                                              | |
+|              |  |                                              | |
+| +----------+ |  |                                              | |
+| | Settings | |  |                                              | |
+| +----------+ |  |                                              | |
+| | Profile  | |  |                                              | |
+| | Team     | |  +----------------------------------------------+ |
+| | Subscript| |                                                   |
+| +----------+ |                                                   |
++--------------+---------------------------------------------------+
+
+
+================================================================================
+TOP HEADER DETAIL
+================================================================================
+
++------------------------------------------------------------------+
+|  +--------+  +------------------+              +----------------+ |
+|  |  LOGO  |  |   Team Name      |              | [Avatar] User  | |
+|  | (icon) |  |   dropdown       |              |    dropdown    | |
+|  +--------+  +------------------+              +----------------+ |
++------------------------------------------------------------------+
+
+Height: ~56px
+Background: #356793
+Text: #ffffff
+
+
+================================================================================
+SIDEBAR DETAIL
+================================================================================
+
+Width: ~240px
+Background: #ffffff
+
++------------------+
+|                  |
+|  PLANNING        |  <- Section header (gray, uppercase, small)
+|  +-------------+ |
+|  | [icon] Dash | |  <- Nav item (hover: bg highlight)
+|  +-------------+ |
+|  | [icon] Cal  | |
+|  +-------------+ |
+|  | [icon] Per  | |
+|  +-------------+ |
+|  | [icon] Temp | |
+|  +-------------+ |
+|                  |
+|  COMMUNICATION   |
+|  +-------------+ |
+|  | [icon] Ann  | |
+|  +-------------+ |
+|                  |
+|  MANAGEMENT      |
+|  +-------------+ |
+|  | [icon] File | |
+|  +-------------+ |
+|  | [icon] Tags | |
+|  +-------------+ |
+|  | [icon] Coac | |
+|  +-------------+ |
+|  | [icon] Rep  | |
+|  +-------------+ |
+|                  |
+|  SETTINGS        |
+|  +-------------+ |
+|  | [icon] Prof | |
+|  +-------------+ |
+|  | [icon] Team | |
+|  +-------------+ |
+|  | [icon] Subs | |
+|  +-------------+ |
+|                  |
++------------------+
+
+Active item: bg highlight, text #356793
+Inactive item: text #666
+
+
+================================================================================
+SIDEBAR NAVIGATION SECTIONS
+================================================================================
+
+PLANNING
+├── Dashboard (Practice)
+├── Calendar
+├── Period Templates
+└── Practice Templates
+
+COMMUNICATION
+└── Announcements
+
+MANAGEMENT
+├── Files
+├── Tags
+├── Coaches
+└── Reports
+
+SETTINGS
+├── Profile
+├── Team Settings
+└── Subscription
+
+
+================================================================================
+COLOR SCHEME
+================================================================================
+
+Primary Blue:     #356793  (header, active items)
+Background:       #e0e0e0  (content area)
+Sidebar:          #ffffff  (sidebar bg)
+Text Primary:     #333333
+Text Secondary:   #666666
+Section Header:   #999999
+Secondary Pink:   #ef7b8f  (accents)
+
+
+================================================================================
+TYPOGRAPHY
+================================================================================
+
+Font Family: Outfit
+- Regular: Outfit_400Regular
+- SemiBold: Outfit_600SemiBold
+- Bold: Outfit_700Bold
+
+Header: fontSize 18, fontWeight 600
+Sidebar Section: fontSize 11, fontWeight 600, uppercase
+Sidebar Item: fontSize 14, fontWeight 400
+
+
+================================================================================
+RESPONSIVE BEHAVIOR
+================================================================================
+
+Breakpoint: 768px
+
+< 768px (Mobile):
+- Hide sidebar
+- Show bottom tab bar
+- Stack navigation with headers
+
+>= 768px (Desktop):
+- Show top header (full width)
+- Show left sidebar
+- Content area with Slot
+- No tab bar
+
+
+================================================================================
+NAVIGATION MAPPING (Mobile -> Desktop)
+================================================================================
+
+Mobile Tab/Route          Desktop Sidebar Location
+-----------------         ------------------------
+Practice (tab)        ->  Planning > Dashboard
+Calendar (tab)        ->  Planning > Calendar
+Menu (tab)            ->  (sidebar replaces menu)
+
+(menu)/periods        ->  Planning > Period Templates
+(menu)/templates      ->  Planning > Practice Templates
+(menu)/announcements  ->  Communication > Announcements
+(menu)/files          ->  Management > Files
+(menu)/tags           ->  Management > Tags
+(menu)/coaches        ->  Management > Coaches
+(menu)/reports        ->  Management > Reports
+(menu)/profile        ->  Settings > Profile
+(menu)/team           ->  Settings > Team Settings
+(menu)/subscription   ->  Settings > Subscription
+(menu)/contact        ->  Settings > Contact Developer
+
+
+================================================================================
+NAVIGATION FLOW DIAGRAM
+================================================================================
+
+                              +------------------+
+                              |   APP LAUNCH     |
+                              +--------+---------+
+                                       |
+                              +--------v---------+
+                              |  _layout.tsx     |
+                              |  (Root Stack)    |
+                              +--------+---------+
+                                       |
+                              +--------v---------+
+                              |   index.tsx      |
+                              |  (Auth Router)   |
+                              +--------+---------+
+                                       |
+           +---------------------------+---------------------------+
+           |                           |                           |
+           v                           v                           v
++----------+----------+    +-----------+-----------+    +----------+----------+
+|  No Firebase User   |    |  No Team (New User)   |    | Authenticated User  |
++----------+----------+    +-----------+-----------+    +----------+----------+
+           |                           |                           |
+           v                           v                           v
++----------+----------+    +-----------+-----------+    +----------+----------+
+|    (auth)/login     |    | (auth)/onboarding/    |    |  (main) Desktop     |
++---------------------+    |    role-select        |    |      Layout         |
+                           +-----------+-----------+    +----------+----------+
+                                       |                           |
+                                       v                           |
+                           +-----------+-----------+               |
+                           | (auth)/onboarding/    |               |
+                           |    sport-select       |               |
+                           +-----------+-----------+               |
+                                       |                           |
+                                       v                           |
+                           +-----------+-----------+               |
+                           | (auth)/onboarding/    |               |
+                           |    team-setup         |               |
+                           +-----------+-----------+               |
+                                       |                           |
+                                       +------------->-------------+
+
+
+================================================================================
+DESKTOP LAYOUT NAVIGATION DIAGRAM
+================================================================================
+
++-----------------------------------------------------------------------------+
+|                              TOP HEADER                                     |
+|  [Logo]            [Team Selector]                    [User Menu]           |
++-----------------------------------------------------------------------------+
+|              |                                                              |
+|   SIDEBAR    |                     CONTENT AREA                             |
+|              |                                                              |
+| +---------+  |  +--------------------------------------------------------+  |
+| | PLANNING|  |  |              UNREAD ANNOUNCEMENT BANNER                |  |
+| +---------+  |  +--------------------------------------------------------+  |
+| |Dashboard|---->|                                                        |  |
+| |Calendar |---->|                                                        |  |
+| |Periods  |---->|                    SLOT CONTENT                        |  |
+| |Templates|---->|                                                        |  |
+| +---------+  |  |           (Selected screen renders here)               |  |
+|              |  |                                                        |  |
+| +---------+  |  |  Screens share the same content area.                  |  |
+| | COMMUN. |  |  |  Sidebar navigation changes content.                   |  |
+| +---------+  |  |                                                        |  |
+| |Announce.|---->|  No stack navigation on desktop -                      |  |
+| +---------+  |  |  all screens render in the same Slot.                  |  |
+|              |  |                                                        |  |
+| +---------+  |  |                                                        |  |
+| | MANAGE  |  |  |                                                        |  |
+| +---------+  |  |                                                        |  |
+| |Files    |---->|                                                        |  |
+| |Tags     |---->|                                                        |  |
+| |Coaches  |---->|                                                        |  |
+| |Reports  |---->|                                                        |  |
+| +---------+  |  |                                                        |  |
+|              |  |                                                        |  |
+| +---------+  |  |                                                        |  |
+| | SETTINGS|  |  |                                                        |  |
+| +---------+  |  |                                                        |  |
+| |Profile  |---->|                                                        |  |
+| |Team     |---->|                                                        |  |
+| |Subscript|---->|                                                        |  |
+| |Contact  |---->+--------------------------------------------------------+  |
+| +---------+  |                                                              |
++--------------+--------------------------------------------------------------+
+
+
+================================================================================
+MODAL NAVIGATION (Same as Mobile)
+================================================================================
+
+Desktop uses the same modal system as mobile.
+Modals appear as overlays on top of the main content.
+
++------------------------------------------------------------------+
+|                         TOP HEADER                               |
++------------------------------------------------------------------+
+| SIDEBAR |                CONTENT AREA                            |
+|         |  +--------------------------------------------------+  |
+|         |  |                                                  |  |
+|         |  |     +----------------------------------+         |  |
+|         |  |     |                                  |         |  |
+|         |  |     |         MODAL OVERLAY            |         |  |
+|         |  |     |    (presentation: 'modal')       |         |  |
+|         |  |     |                                  |         |  |
+|         |  |     |   - plan/new, plan/[id]          |         |  |
+|         |  |     |   - template/new, template/[id]  |         |  |
+|         |  |     |   - period, activity             |         |  |
+|         |  |     |   - announcements CRUD           |         |  |
+|         |  |     |   - tag, coach, file             |         |  |
+|         |  |     |   - date-picker, time-picker     |         |  |
+|         |  |     |   - period-selector              |         |  |
+|         |  |     |   - template-selector            |         |  |
+|         |  |     |   - plan-detail (subscription)   |         |  |
+|         |  |     |                                  |         |  |
+|         |  |     +----------------------------------+         |  |
+|         |  |                                                  |  |
+|         |  +--------------------------------------------------+  |
++---------+--------------------------------------------------------+
+
+
+================================================================================
+SCREEN REFERENCE INDEX
+================================================================================
+
+SIDEBAR SCREENS (Desktop equivalents):
+  Planning Section:
+    - practice.txt        Dashboard/Practice View
+    - calendar.txt        Calendar View
+    - periods.txt         Period Templates
+    - templates.txt       Practice Templates
+
+  Communication Section:
+    - announcements.txt   Announcements
+
+  Management Section:
+    - files.txt           Files
+    - tags.txt            Tags
+    - coaches.txt         Coaches
+    - reports.txt         Reports
+
+  Settings Section:
+    - profile.txt         User Profile
+    - team.txt            Team Settings
+    - subscription.txt    Subscription
+    - contact.txt         Contact Developer
+
+AUTH SCREENS (Full page, no sidebar):
+  - login.txt
+  - register.txt
+  - forgot-password.txt
+  - onboarding/role-select.txt
+  - onboarding/sport-select.txt
+  - onboarding/team-setup.txt
+
+MODAL SCREENS (Overlay on content):
+  - plan-new.txt
+  - plan-edit.txt
+  - template-new.txt
+  - template-edit.txt
+  - period.txt
+  - activity.txt
+  - activity-instance.txt
+  - announcement-create.txt
+  - announcement-detail.txt
+  - announcement-edit.txt
+  - tag.txt
+  - coach.txt
+  - file.txt
+  - date-picker.txt
+  - time-picker.txt
+  - period-selector.txt
+  - template-selector.txt
+  - subscription-detail.txt
+
+
+================================================================================
